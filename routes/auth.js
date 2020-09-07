@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const Patient = require('../models/patients');
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
+const { isLoggedIn, isNotLoggedIn,parseError } = require('./middlewares/middlewares');
  
 //JSON-WEB-TOKEN을 사용한 로그인 처리!
 // const jwt = require('jsonwebtoken');
@@ -70,7 +70,8 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
         }
         if(!user){
             //localStrategy에서 정의한 message 를 info로 받아오는 것 !!
-            return res.render('login',{message:info.message});
+            req.flash('errors',info.message);
+            return res.redirect('/login');
         }
         return req.login(user,(loginError)=>{
             if(loginError){

@@ -9,6 +9,7 @@ const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const passport = require('passport');
 const connect = require('./models');
+const flash = require('connect-flash');
 
 const nunjucks = require('nunjucks');
 
@@ -44,7 +45,7 @@ app.use(session({
       secure:false,
   },
 }));
-
+app.use(flash());
 //로그인 인증
 app.use(passport.initialize());
 app.use(passport.session());
