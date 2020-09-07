@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const Patients = require('../models/patients');
-
+ 
 module.exports = () => {
   passport.use(new LocalStrategy({
     usernameField: 'p_id',

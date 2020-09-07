@@ -4,7 +4,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const Patient = require('../models/patients');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
-
+ 
 //JSON-WEB-TOKEN을 사용한 로그인 처리!
 // const jwt = require('jsonwebtoken');
 // const { verifyToken } = require('./middlewares/middlewares');

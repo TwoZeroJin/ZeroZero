@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+ 
 const { Schema } = mongoose;
 const patientSchema = new Schema({
   p_id: {

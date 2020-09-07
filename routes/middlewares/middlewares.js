@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+ 
 // exports.verifyToken = (req,res,next)=>{
 //   try{
 //       //verify 메서드로 토큰이 유효한지 확인 !

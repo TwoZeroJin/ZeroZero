@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Patient = require('../models/patients');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
-
+ 
 // 기본 경로('/'), 메인 페이지에 갈 때, 로그인한 회원의 정보를 넘겨줌
 router.use((req,res,next) =>{
     res.locals.user = req.user;
