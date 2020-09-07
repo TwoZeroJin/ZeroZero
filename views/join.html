@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join FORM</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+    <form method="post" action="/auth/join">
+        <fieldset>
+          <legend>사용자 등록(모두 작성해주세요)</legend>
+          <div><input type="text" name="p_id" id="p_id" required>아이디&nbsp;&nbsp;<span style="color:red; font-size:10px">{{message}}</span></div>
+          <div><input type="password" name="password" id="password" required>비밀번호&nbsp;&nbsp;<span style="color:red; font-size:10px">{{noPass}}</span></div>
+          <div><input type="password" name="rePass" id="rePass" required>비밀번호 확인&nbsp;&nbsp;<span style="color:red; font-size:10px">{{equalPass}}</span></div>
+          <div><input type="text" name="name" id="name" required/>이름</div>
+          <div><input type="text" name="birth" id="birth" required/>생년월일</div>
+          <div><input type="text" name="ph_no" id="ph_no" required placeholder="-없이 입력해주세요"/>폰번</div>
+          <div><input type="text" name="addr" id="addr" required placeholder="ex)조선시 한양구 한강동"/>주소</div>
+          <div><input type="email" name="email" id="email" required />이멜</div>
+          <div><input id="gender" name="gender" type="radio" value="M" checked>남자
+              <input id="gender" name="gender"type="radio" value="F">여자
+            </div>
+          <input type="submit" onclick="" value="가입"/>
+        </fieldset>
+      </form>
+      <a href="/"><button>메인으로</button></a>
+</body>
+</html>

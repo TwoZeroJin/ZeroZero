@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#3867D6;}
+	.st1{fill:#A5B1C2;}
+	.st2{fill:#DFDFDD;}
+	.st3{fill:#CECECC;}
+	.st4{fill:#4B6584;}
+	.st5{fill:#4B7BEC;}
+	.st6{fill:#2D98DA;}
+</style>
+<path class="st0" d="M48,152h384c13.3,0,24,10.7,24,24v288c0,13.3-10.7,24-24,24H48c-13.3,0-24-10.7-24-24V176
+	C24,162.7,34.7,152,48,152z"/>
+<path class="st1" d="M48,120h384c13.3,0,24,10.7,24,24v288c0,13.3-10.7,24-24,24H48c-13.3,0-24-10.7-24-24V144
+	C24,130.7,34.7,120,48,120z"/>
+<path class="st2" d="M48,424h344l64-64V112c0-13.3-10.7-24-24-24H48c-13.3,0-24,10.7-24,24v288C24,413.3,34.7,424,48,424z"/>
+<path class="st3" d="M456,360h-40c-13.3,0-24,10.7-24,24v40L456,360z"/>
+<g>
+	<path class="st3" d="M424,192v-16H56v16h72v32H56v16h72v32H56v16h72v32H56v16h72v32H56v16h304v-16h-24v-32h32v16h16v-16h40v-16h-40
+		v-32h40v-16h-40v-32h40v-16h-40v-32H424z M240,224v-32h32v32H240z M272,240v32h-32v-32H272z M224,224h-32v-32h32V224z M224,240v32
+		h-32v-32H224z M224,288v32h-32v-32H224z M224,336v32h-32v-32H224z M240,336h32v32h-32V336z M240,320v-32h32v32H240z M288,288h32v32
+		h-32V288z M288,272v-32h32v32H288z M288,224v-32h32v32H288z M144,192h32v32h-32V192z M144,240h32v32h-32V240z M144,288h32v32h-32
+		V288z M144,336h32v32h-32V336z M320,368h-32v-32h32V368z M368,320h-32v-32h32V320z M368,272h-32v-32h32V272z M368,224h-32v-32h32
+		V224z"/>
+	<path class="st3" d="M72,160h16v-16h16v-16H88v-16H72v16H56v16h16V160z"/>
+	<path class="st3" d="M120,112h16v16h-16V112z"/>
+	<path class="st3" d="M152,112h64v16h-64V112z"/>
+	<path class="st3" d="M120,144h96v16h-96V144z"/>
+</g>
+<path class="st0" d="M384,24c-57.4,0-104,46.6-104,104c0,21.4,6.6,42.3,18.9,59.8L280,232l44.2-18.9c47,33,111.9,21.7,144.9-25.2
+	S490.8,76,443.8,42.9C426.3,30.6,405.4,24,384,24z"/>
+<path class="st2" d="M440,112h-40V72h-32v40h-40v32h40v40h32v-40h40V112z"/>
+<rect x="-142.8" y="52.3" class="st0" width="99.9" height="115.7"/>
+<rect x="-142.8" y="-87.4" class="st4" width="99.9" height="115.7"/>
+<rect x="-262.7" y="-87.4" class="st1" width="99.9" height="115.7"/>
+<rect x="-142.8" y="192" class="st5" width="99.9" height="116"/>
+<rect x="-142.8" y="342.8" class="st6" width="99.9" height="121.4"/>
+</svg>
