@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 //몽구스를 이용한 몽고디비 연결
 connect();
 
+
 //미들 웨어 정리
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname,'public')));
