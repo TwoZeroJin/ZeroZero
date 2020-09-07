@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+
+    <meta name="msapplication-TileColor" content="#3867d6" />
+
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/all.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <div class="opener-holder">
+              <a href="#" class="nav-opener"><span></span></a>
+            </div>
+          {% if user %}
+              <p>반갑습니다! {{user.name}} 님!! ㅎㅎ</p>
+              <a href="/mypage">내 정보</a>
+              <a href="/auth/logout">로그아웃</a>
+          {% else %}
+            <a href="/login" class="btn btn-primary rounded">로그인</a>
+            <a href="/join" class="btn btn-primary rounded">회원가입</a>
+          {% endif %}
+            <div class="nav-drop">
+              <ul>
+                <li class="active visible-sm visible-xs">
+                  <a href="#">Home</a>
+                </li>
+                <li><a href="aboutus.html">소개</a></li>
+                <li><a href="healthtopic.html">의학정보</a></li>
+                <li><a href="qna.html">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="visual">
+        <div class="container">
+          <div class="text-block">
+            <div class="heading-holder">
+              <h2>아무때나 만나는 내 손 안의 닥터</h2>
+            </div>
+            <p class="tagline">지금 바로 상담 가능한 의사를 만나보세요.</p>
+          </div>
+        </div>
+        <img src="images/main-banner.jpg" alt="" class="bg-stretch" />
+      </section>
+      <section class="main">
+        <div class="container">
+          <a href="checkup.html">
+            <button class="btn-a">예진표 작성하기</button>
+          </a>
+          <div class="row" style="margin-top: 100px">
+            <div class="text-box col-md-offset-1 col-md-10">
+              <h3>비대면 진료 서비스, 아만닥</h3>
+              <p>
+                아만닥은 의료진 네트워크를 구성해 지속적인 관리가 필요한
+                고객에게 <span id="highlight">원격의료서비스</span>를
+                제공합니다. <br />
+                일반진료부터 소아, 산부인과 등 다양한 진료 과목을 이용하실 수
+                있으며, 웹사이트를 통해 진료를 신청할 수 있습니다. <br /><br />
+                이후 보유하고 계신 보험, 성별 등을 고려해 가장 적합한 의료진을
+                배정해드립니다.
+                <span id="highlight"> 대기시간은 10분 </span> 정도이며, 진료 후
+                의료진이 환자의 전자건강기록을 업로드하거나 전문의에게 이관하는
+                과정을 거쳐 서비스가 이루어집니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="area">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <h2 class="visible-xs visible-sm text-primary">
+                누구에게 필요한 서비스일까요?
+              </h2>
+              <ul class="visual-list">
+                <li>
+                  <div class="img-holder">
+                    <img
+                      src="images/medical-appointment.svg"
+                      width="110"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text-holder">
+                    <h3>
+                      당뇨병과 같은 만성질환에 정기적인 검진이 필요한 경우
+                    </h3>
+                    <p>
+                      Aenean cursus imperdiet nisl id fermentum. Aliquam
+                      pharetra dui laoreet vulputate dignissim. Sed id metus id
+                      quam auctor molestie eget ut augue.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-holder">
+                    <img
+                      class="pull-left"
+                      src="images/doctor.svg"
+                      width="110"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text-holder">
+                    <h3>어떤 전문의를 찾아야 할 지 몰라 자문이 필요한 경우</h3>
+                    <p>
+                      Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus
+                      felis odio, ut volutpat massa placerat ac. Curabitur
+                      dapibus iaculis mi gravida luctus. Aliquam erat volutpat.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="img-holder">
+                    <img src="images/stethoscope.svg" width="110" alt="" />
+                  </div>
+                  <div class="text-holder">
+                    <h3>감기, 요로 감염 등 비응급 상황</h3>
+                    <p>
+                      Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus
+                      felis odio, ut volutpat massa placerat ac. Curabitur
+                      dapibus iaculis mi gravida luctus. Aliquam erat volutpat.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-7">
+              <div class="slide-holder">
+                <h2 class="hidden-xs hidden-sm text-primary">
+                  누구에게 필요한 서비스일까요?
+                </h2>
+                <div class="img-slide scroll-trigger">
+                  <img
+                    src="images/about-image-01.png"
+                    height="624"
+                    width="1184"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="main">
+        <div class="container">
+          <div class="block-holder">
+            <div class="block-frame">
+              <div class="cycle-gallery">
+                <div class="mask">
+                  <div class="slideset">
+                    <div class="slide">
+                      <div class="img-box">
+                        <div class="img-holder">
+                          <img
+                            src="images/user-01.jpg"
+                            height="85"
+                            width="85"
+                            alt=""
+                          />
+                        </div>
+                        <div class="text-holder">
+                          <h3>김신</h3>
+                          <a href="#">@DoctorS</a>
+                        </div>
+                      </div>
+                      <p>
+                        <a href="#">@Pixelbuddha</a> Suspendisse sodales sem
+                        est, in scelerisque felis scelerisque in. Aenean
+                        faucibus mollis risus. Praesent sit amet erat eget eros.
+                      </p>
+                      <em class="date">2 hours ago</em>
+                    </div>
+                    <div class="slide">
+                      <div class="img-box">
+                        <div class="img-holder">
+                          <img
+                            src="images/user-02.jpg"
+                            height="85"
+                            width="85"
+                            alt=""
+                          />
+                        </div>
+                        <div class="text-holder">
+                          <h3>유나얼</h3>
+                          <a href="#">@rrace</a>
+                        </div>
+                      </div>
+                      <p>
+                        <a href="#">@PSD2HTML</a> 언택트 시대에 걸맞는 안전하고
+                        확실한 서비스라고 생각합니다.
+                      </p>
+                      <em class="date">5 hours ago</em>
+                    </div>
+                    <div class="slide">
+                      <div class="img-box">
+                        <div class="img-holder">
+                          <img
+                            src="images/user-03.jpg"
+                            height="85"
+                            width="85"
+                            alt=""
+                          />
+                        </div>
+                        <div class="text-holder">
+                          <h3>조승우</h3>
+                          <a href="#">@swzzang</a>
+                        </div>
+                      </div>
+                      <p>
+                        <a href="#">@codrops</a> 일이 바빠서 병원 갈 시간 조차
+                        없었는데, <br />
+                        아만닥덕분에 건강하게 유지할 수 있는 거 같습니다.
+                      </p>
+                      <em class="date">1 day ago</em>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn-prev" href="#"
+                  ><i class="glyphicon glyphicon-menu-left"></i
+                ></a>
+                <a class="btn-next" href="#"
+                  ><i class="glyphicon glyphicon-menu-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="area">
+        <div class="container">
+          <div class="subscribe">
+            <h3>뉴스레터 구독하기</h3>
+            <form class="form-inline">
+              <button type="submit" class="btn btn-primary rounded">
+                신청
+              </button>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control rounded"
+                  id="exampleInputEmail2"
+                  placeholder="Email..."
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="main">
+        <div class="container">
+          <div class="content">
+            <div class="row">
+              <div class="col-md-4">
+                <h3>의학정보</h3>
+                <h4>
+                  Fully Available: Live Preview Support for Multiple Browsers
+                </h4>
+                <p>
+                  Morbi faucibus ante ipsum, a tincidunt libero posuere et.
+                  Etiam tempor tortor at odio condimentum, sit amet fringilla
+                  ligula maximus. Mauris venenatis nisl nisi, et dictum dui
+                  aliquet nec. Sed erat, nec aliquam vel, aliquam ac felis.
+                </p>
+                <h4>Improved Support for Typing</h4>
+                <p>
+                  Nulla purus quam, pulvinar sed ante et, feugiat maximus velit.
+                  Donec eu elit mauris.
+                </p>
+                <h4>Improved Stability</h4>
+                <p>
+                  Proin id ligula eget massa tincidunt molestie. Morbi urna
+                  lectus, molestie vel quam vel, iaculis fermentum nunc. Morbi
+                  imperdiet, leo in interdum pretium.
+                </p>
+                <div class="btn-holder">
+                  <a href="#" class="btn btn-link">Go to Release Log</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h3>공지사항</h3>
+                <h4><a href="#">Custom Themes 1.1</a></h4>
+                <p>
+                  Etiam viverra vulputate diam, pulvinar cursus augue egestas
+                  ullamcorper.
+                </p>
+                <h4><a href="#">Filter Forge</a></h4>
+                <p>Nulla purus quam, pulvinar sed et, feugiat maximus velit.</p>
+                <h4><a href="#">WebZap</a></h4>
+                <p>
+                  Morbi imperdiet, leo in interdum pretium, elit eros dapibus
+                  velit, eu posuere quam diam vitae orci. Suspendisse interdum
+                  accumsan magna vitae commodo.
+                </p>
+                <h4><a href="#">Renamy</a></h4>
+                <p>
+                  Vivamus consectetur suscipit elit, ut lacinia diam elementum
+                  et.
+                </p>
+                <div class="btn-holder">
+                  <a href="#" class="btn btn-link">Go to Marketplace</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h3>게시판</h3>
+                <h4>
+                  <a href="#">Morbi imperdiet, leo in interdum pretium.</a>
+                </h4>
+                <time class="date" datetime="2015-02-18"
+                  >February 18, 2015</time
+                >
+                <h4>
+                  <a href="#"
+                    >Donec orci ante, porta vel nulla quis, aliquet hendrerit
+                    leo.</a
+                  >
+                </h4>
+                <time class="date" datetime="2015-02-12"
+                  >February 12, 2015</time
+                >
+                <h4><a href="#">Suspendisse egestas vulputate luctus.</a></h4>
+                <time class="date" datetime="2015-02-06">February 6, 2015</time>
+                <h4>
+                  <a href="#"
+                    >Quisque varius ante lorem, eget pretium purus hendrerit a
+                    egestas.
+                  </a>
+                </h4>
+                <time class="date" datetime="2015-02-02">February 2, 2015</time>
+                <h4><a href="#">Phasellus in augue risus. </a></h4>
+                <time class="date" datetime="2015-01-23">January 23, 2015</time>
+                <div class="btn-holder">
+                  <a href="#" class="btn btn-link">Go to Blog</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer id="footer">
+        <div class="container">
+          <div class="footer-holder">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="logo">
+                  <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
+                </div>
+                <p>아무때나 만나는 내 손 안의 닥터</p>
+              </div>
+              <div class="col-md-2">
+                <h4>Navigation</h4>
+                <ul>
+                  <li><a href="index.html">메인페이지</a></li>
+                  <li><a href="aboutus.html">소개</a></li>
+                  <li><a href="healthtopic.html">의학정보</a></li>
+                  <li><a href="qna.html">게시판</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <div class="text-holder">
+                  <strong class="phone"
+                    ><a href="tel:0282821111">02 8282 1111</a></strong
+                  >
+                  <span class="available">고객상담시간 : 12PM - 18PM</span>
+                  <h4>아만닥</h4>
+                  <address>
+                    아만빌딩 10F, <br />
+                    서울특별시 종로구 종로 55 종로 55
+                  </address>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-frame">
+                  <h4>Info</h4>
+                  <p>
+                    Wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex commodo
+                    consequat. Autem vel hendrerit iriure dolor in hendrerit.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+  </body>
+</html>
