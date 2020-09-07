@@ -26,7 +26,6 @@ nunjucks.configure('views',{
   express:app,
   watch:true,
 });
-
 //몽구스를 이용한 몽고디비 연결
 connect();
 
