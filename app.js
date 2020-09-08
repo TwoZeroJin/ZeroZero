@@ -3,10 +3,12 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const methodOverride = require('method-override');
 const port = process.env.PORT || 5000 ;
 const path = require('path');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
+const stepRouter = require('./routes/step');
 const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
@@ -40,6 +42,8 @@ app.use(session({
   },
 }));
 app.use(flash());
+app.use(methodOverride('_method'));
+
 //로그인 인증
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,6 +56,7 @@ app.use((req,res,next) =>{
 //라우팅
 app.use('/',indexRouter);
 app.use('/auth',authRouter);
+app.use('/question', stepRouter);
 
 //에러 처리
 app.use((req, res, next) => {
