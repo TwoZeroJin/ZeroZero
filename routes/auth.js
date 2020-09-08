@@ -15,23 +15,19 @@ router.post('/join',isNotLoggedIn,async (req,res,next)=>{
     try{
         const exUser = await Patient.findOne({p_id:p_id});
         if(exUser){
-            return res.render('join',{
-                message:"이미 존재하는 아이디입니다."
-            });
+            req.flash('message','이미 존재하는 아이디입니다.');
+            return res.redirect('/join');
             //.test함수로 해당 매개변수를 테스트! 6자 이상 영어대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{6,}$/.test(p_id)){
-            return res.render('join',{
-                message:"6자 이상, 숫자와 대소문자만 됩니다."
-            });
+            req.flash('message','6자 이상, 숫자와 영문자만 됩니다.')
+            return res.redirect('/join');
             //8자~16자 사이 영어 대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
-            return res.render('join',{
-                noPass:"8-16자,숫자와 대소문자만 됩니다."
-            });
+            req.flash('noPass','8-16자 사이, 숫자와 영문자만 됩니다.')
+            return res.redirect('/join');
         }else if(password != rePass){
-            return res.render('join',{
-                equalPass:"패스워드가 일치하는지 확인하세요."
-            });
+            req.flash('rePass','패스워드가 일치하는지 확인하세요.');
+            return res.redirect('/join');
         }
         const hash = await bcrypt.hash(password, 12)
         await Patient.create({
@@ -70,7 +66,8 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
         }
         if(!user){
             //localStrategy에서 정의한 message 를 info로 받아오는 것 !!
-            return res.render('login',{message:info.message});
+            req.flash('message',info.message);
+            return res.redirect('/login');
         }
         return req.login(user,(loginError)=>{
             if(loginError){
