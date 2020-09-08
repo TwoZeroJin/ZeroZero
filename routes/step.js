@@ -11,6 +11,7 @@ router.use((req,res,next) =>{
 
 router.get('/step1', function(req, res) {
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
+        console.log(step1);
         res.render('question/step1', {step1: step1});            //뷰로 보내기
    });     
 });

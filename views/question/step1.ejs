@@ -97,7 +97,8 @@
                 <div>
                     <label for="smoke">흡연:</label>
                     <select id="smoke" name="smoke_cnt">
-                        <option value='' selected>하루기준</option>
+                        <option value='' selected>--하루기준--</option>
+                        <option value=''>해당없음</option>
                         <option value='1갑 미만'>1갑 미만</option>
                         <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
                         <option value='2갑이상'>2갑 이상</option>
@@ -108,7 +109,7 @@
                 </div>
             </form>
 
-            <% } %>
+            <% } else { %>
             <!-- 작성한 내용이 있을 경우! / Update -->
                 <h3>*<%= user.name%>기존에 작성한 내용입니다. </h3>
                 <form action="/question/step1_update?_method=put" method="post">
@@ -139,33 +140,113 @@
                     <div>
                         <label for="drink">음주:</label>
                         <select id="drink" name="drink_week">
-                            <option value='' selected>--일주일 기준--</option>
-                            <option value='해당없음'>해당없음</option>
+                          <!-- 주량 select 관련 switch 문 -->
+                          <% switch(step1.drink_week) {
+                            case "해당없음" : %>
+                            <option value=''></option>--일주일 기준--</option>
+                            <option value='해당없음' selected >해당없음</option>
                             <option value='1회~3회'>1회 ~ 3회</option>
                             <option value='4회~6회'>4회 ~ 6회</option>
                             <option value='7회이상'>7회 이상</option>
+                            <% break;
+                          case "1회~3회" : %>
+                            <option value=''></option>--일주일 기준--</option>
+                            <option value='해당없음' >해당없음</option>
+                            <option value='1회~3회' selected >1회 ~ 3회</option>
+                            <option value='4회~6회'>4회 ~ 6회</option>
+                            <option value='7회이상'>7회 이상</option>
+                            <% break;
+                          case "4회~6회" : %>
+                          <option value=''></option>--일주일 기준--</option>
+                            <option value='해당없음' >해당없음</option>
+                            <option value='1회~3회' >1회 ~ 3회</option>
+                            <option value='4회~6회'selected >4회 ~ 6회</option>
+                            <option value='7회이상'>7회 이상</option>
+                            <% break;
+                          case "7회이상" : %>
+                          <option value=''></option>--일주일 기준--</option>
+                            <option value='해당없음' >해당없음</option>
+                            <option value='1회~3회' >1회 ~ 3회</option>
+                            <option value='4회~6회'>4회 ~ 6회</option>
+                            <option value='7회이상'selected >7회 이상</option>
+                            <% break;
+                          } %>
                         </select>
+
                         <select id="drink" name="drink_cnt">
-                            <option value='' selected>--소주기준--</option>
-                            <option value='해당없음'>해당없음</option>
+                          <!-- 소주기준 select 관련 switch 문 -->
+                          <% switch(step1.drink_cnt) {
+                            case "해당없음" : %>
+                            <option value=''>--소주기준--</option>
+                            <option value='해당없음' selected>해당없음</option>
                             <option value='1병미만'>1병 미만</option>
                             <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
                             <option value='2병이상'>2병 이상</option>
+                            <% break;
+                          case "1병미만" : %>
+                            <option value=''>--소주기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1병미만' selected >1병 미만</option>
+                            <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                            <option value='2병이상'>2병 이상</option>
+                            <% break;
+                          case "1병이상 ~ 2병미만" : %>
+                            <option value=''>--소주기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1병미만'>1병 미만</option>
+                            <option value='1병이상 ~ 2병미만' selected >1병 이상 ~ 2병미만</option>
+                            <option value='2병이상'>2병 이상</option>
+                            <% break;
+                          case "2병이상" : %>
+                           <option value=''>--소주기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1병미만'>1병 미만</option>
+                            <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                            <option value='2병이상' selected >2병 이상</option>
+                            <% break;
+                          } %>
                         </select>
                     </div>
                     <div>
                         <label for="smoke">흡연:</label>
                         <select id="smoke" name="smoke_cnt">
-                            <option value='' selected>하루기준</option>
+                          <!-- 흡연 select 관련 switch 문 -->
+                          <% switch(step1.smoke_cnt) {
+                            case "해당없음" : %>
+                            <option value=''>--하루기준--</option>
+                            <option value='해당없음' selected >해당없음</option>
                             <option value='1갑 미만'>1갑 미만</option>
                             <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
                             <option value='2갑이상'>2갑 이상</option>
-                        </select>
+                            <% break;
+                          case "1갑 미만" : %>
+                            <option value=''>--하루기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1갑 미만' selected >1갑 미만</option>
+                            <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                            <option value='2갑이상'>2갑 이상</option>
+                            <% break;
+                          case "1갑이상 ~ 2갑미만" : %>
+                            <option value=''>--하루기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1갑 미만'>1갑 미만</option>
+                            <option value='1갑이상 ~ 2갑미만' selected >1갑 이상~2갑미만</option>
+                            <option value='2갑이상'>2갑 이상</option>
+                            <% break;
+                          case "2갑이상" : %>
+                          <option value=''>--하루기준--</option>
+                            <option value='해당없음'>해당없음</option>
+                            <option value='1갑 미만'>1갑 미만</option>
+                            <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                            <option value='2갑이상' selected >2갑 이상</option>
+                            <% break;
+                          } %>
                     </div>
                     <div>
                         <button type="submit">Step2로 가기</button>
                     </div>
                 </form>
+              <% } %>
             </div>
           </div>
         </div>
