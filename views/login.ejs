@@ -60,7 +60,9 @@
                   <legend>로그인</legend>
                   <div><input type="text" name="p_id">아이디</div>
                   <div><input type="password" name="password">비밀번호</div>
-                  <p><span style="color:red; font-size:10px">{{message}}</span></p>
+                  <% if(message) {%>
+                    <p><span style="color:red; font-size:10px"><%=message%></span></p>
+                  <% }%>
                   <button type="submit">로그인</button>
                 </form>
                 </fieldset>
@@ -83,10 +85,10 @@
               <div class="col-md-2">
                 <h4>Navigation</h4>
                 <ul>
-                  <li><a href="index.html">메인페이지</a></li>
-                  <li><a href="aboutus.html">소개</a></li>
-                  <li><a href="healthtopic.html">의학정보</a></li>
-                  <li><a href="qna.html">게시판</a></li>
+                  <li><a href="/">메인페이지</a></li>
+                  <li><a href="/aboutus">소개</a></li>
+                  <li><a href="/healthtopic">의학정보</a></li>
+                  <li><a href="/qna">게시판</a></li>
                 </ul>
               </div>
               <div class="col-md-3">

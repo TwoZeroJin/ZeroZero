@@ -8,7 +8,10 @@ const path = require('path');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const passport = require('passport');
+const qnaRouter = require('./routes/qna');
+const methodOverride = require('method-override');
 const connect = require('./models');
+const flash = require('connect-flash');
 
 dotenv.config();
 
@@ -38,12 +41,16 @@ app.use(session({
       secure:false,
   },
 }));
+app.use(methodOverride('_method'));
+app.use(flash());
+
 
 //로그인 인증
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req,res,next) =>{
+  res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.user = req.user;
   next();
 });
@@ -51,6 +58,7 @@ app.use((req,res,next) =>{
 //라우팅
 app.use('/',indexRouter);
 app.use('/auth',authRouter);
+app.use('/qna', qnaRouter);     //게시판 이동 라우터
 
 //에러 처리
 app.use((req, res, next) => {
