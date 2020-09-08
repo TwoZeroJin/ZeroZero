@@ -7,10 +7,25 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 // Index
 router.get('/', async (req,res,next)=>{
   try{
+    var page = Math.max(1, parseInt(req.query.page));
+    page = !isNaN(page)?page:1;                        
+    const limit = 10;                     
+
+    const skip = (page-1)*limit;
+    const count = await Qna.countDocuments({});
+    const maxPage = Math.ceil(count/limit);
     const qna = await Qna.find()
     .sort('-createdAt')
-    .populate('reg_id');
-    res.render('board', {qna});
+    .populate('reg_id')
+    .skip(skip)   
+    .limit(limit)
+    .exec();
+    res.render('board', {
+      qna:qna,
+      currentPage:page,
+      maxPage:maxPage,
+      limit:limit
+    });
   } catch(err){
     console.error(err);
     nexr(err);
