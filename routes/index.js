@@ -19,12 +19,12 @@ router.get('/api/patients', (req,res)=>{
     })
 })
 //메인화면을 렌더링하는 함수
-router.get('/',async (req,res,next)=>{
+router.get('/',(req,res,next)=>{
     res.render('index');
 });
 
 //회원가입으로 들어오는 경로 처리
-router.get('/join',isNotLoggedIn,async (req,res,next)=>{
+router.get('/join',isNotLoggedIn,(req,res,next)=>{
     const message = req.flash('message');
     const noPass = req.flash('noPass');
     const rePass = req.flash('rePass');
@@ -33,9 +33,15 @@ router.get('/join',isNotLoggedIn,async (req,res,next)=>{
     rePass:rePass});
 })
 
-router.get('/login',isNotLoggedIn,async(req,res,next)=>{
+router.get('/login',isNotLoggedIn,(req,res,next)=>{
     const message = req.flash('message');
     res.render('login',{message:message});
+});
+router.get('/aboutus',(req,res,next)=>{
+    res.render('aboutus');
+});
+router.get('/healthtopic',(req,res,next)=>{
+    res.render('healthtopic');
 });
 
 router.get('/mypage',isLoggedIn,(req,res,next)=>{
