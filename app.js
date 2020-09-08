@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000 ;
 const path = require('path');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
+const mypageRouter = require('./routes/mypage');
 const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
@@ -52,6 +53,8 @@ app.use((req,res,next) =>{
 //라우팅
 app.use('/',indexRouter);
 app.use('/auth',authRouter);
+app.use('/mypage',mypageRouter);
+
 
 //에러 처리
 app.use((req, res, next) => {

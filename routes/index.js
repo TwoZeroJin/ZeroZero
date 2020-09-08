@@ -3,11 +3,6 @@ const router = express.Router();
 const Patient = require('../models/patients');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
  
-// 기본 경로('/'), 메인 페이지에 갈 때, 로그인한 회원의 정보를 넘겨줌
-// router.use((req,res,next) =>{
-//     res.locals.user = req.user;
-//     next();
-// });
 //api를 통해 환자 정보를 모두 가져옴
 router.get('/api/patients', (req,res)=>{
     Patient.findAll()
@@ -28,9 +23,11 @@ router.get('/join',isNotLoggedIn,(req,res,next)=>{
     const message = req.flash('message');
     const noPass = req.flash('noPass');
     const rePass = req.flash('rePass');
+    const noEmail = req.flash('noEmail');
     res.render('join',{message:message,
     noPass:noPass,
-    rePass:rePass});
+    rePass:rePass,
+    noEmail:noEmail});
 })
 
 router.get('/login',isNotLoggedIn,(req,res,next)=>{
@@ -43,9 +40,5 @@ router.get('/aboutus',(req,res,next)=>{
 router.get('/healthtopic',(req,res,next)=>{
     res.render('healthtopic');
 });
-
-router.get('/mypage',isLoggedIn,(req,res,next)=>{
-    res.send("아무것도 없음");
-})
 
 module.exports = router;

@@ -23,10 +23,13 @@
             <span style="color:red; font-size:10px"><%= rePass %></span></div>
             <%}%>
           <div>이름<input type="text" name="name" id="name" placeholder="ex)홍길동" required/></div>
-          <div>생년월일<input type="text" name="birth" id="birth" placeholder="ex)19910101"required/></div>
-          <div>전화번호<input type="text" name="ph_no" id="ph_no" required placeholder="-없이 입력해주세요"/></div>
-          <div>주소<input type="text" name="addr" id="addr" required placeholder="ex)조선시 한양구 한강동"/></div>
+          <div>생년월일<input type="text" name="birth" id="birth" placeholder="ex)19910101" required/></div>
+          <div>전화번호<input type="text" name="ph_no" id="ph_no"  placeholder="-없이 입력해주세요" required/></div>
+          <div>주소<input type="text" name="addr" id="addr" placeholder="ex)조선시 한양구 한강동" required/></div>
           <div>이멜<input type="email" name="email" id="email" required /></div>
+          <% if(noEmail){%>
+            <span style="color:red; font-size:10px"><%= noEmail %></span></div>
+            <%}%>
           <div><input id="gender" name="gender" type="radio" value="M" checked>남자
               <input id="gender" name="gender"type="radio" value="F">여자
             </div>
