@@ -11,8 +11,6 @@ const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
 
-const nunjucks = require('nunjucks');
-
 dotenv.config();
 
 //passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
@@ -20,13 +18,9 @@ const passportConfig = require('./passport');
 passportConfig();
 
 const app = express();
-//view 엔진을 html(특히 여기에선 넌적스)으로 설정
-app.set('view engine','html');
+//view 엔진을 html(ejs)로 설정
+app.set('view engine','ejs');
 //configure 함수의 첫번째 인자로 폴더 경로 설정
-nunjucks.configure('views',{
-  express:app,
-  watch:true,
-});
 //몽구스를 이용한 몽고디비 연결
 connect();
 
@@ -71,5 +65,4 @@ app.use((req, res, next) => {
     res.status(err.status || 500);
     res.render('error');
   });
-
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
