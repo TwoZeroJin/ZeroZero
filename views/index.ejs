@@ -34,15 +34,15 @@
           <nav id="nav">
             <div class="opener-holder">
               <a href="#" class="nav-opener"><span></span></a>
+              <% if (user) { %>
+                    <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
+                    <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
+                    <a href="/auth/logout" class="btn btn-primary rounded">로그아웃</a>
+                <% }else{ %>
+                  <a href="/login" class="btn btn-primary rounded">로그인</a>
+                  <a href="/join" class="btn btn-primary rounded">회원가입</a>
+                <% } %>
             </div>
-          <% if (user) { %>
-              <p>반갑습니다! <%= user.name %> 님!! ㅎㅎ</p>
-              <a href="/mypage">내 정보</a>
-              <a href="/auth/logout">로그아웃</a>
-          <% }else{ %>
-            <a href="/login" class="btn btn-primary rounded">로그인</a>
-            <a href="/join" class="btn btn-primary rounded">회원가입</a>
-          <% } %>
             <div class="nav-drop">
               <ul>
                 <li class="active visible-sm visible-xs">
