@@ -12,7 +12,7 @@ const qnaRouter = require('./routes/qna');
 const methodOverride = require('method-override');
 const connect = require('./models');
 const flash = require('connect-flash');
-
+//abc
 dotenv.config();
 
 //passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
