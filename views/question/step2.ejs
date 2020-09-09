@@ -53,48 +53,57 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
-              <h2>예진표 작성 페이지입니다</h2>
+
+              <!-- 로그인이 안되어 있는 경우 -->
+              <% if(user == null || user.length == 0){ %>
+                <h3> 회원만 이용할 수 있습니다. 로그인을 해주세요. </h3>
+                <a href="/">메인페이지로 돌아가기</a>
+              <% } else { %>
+
+              <!-- 로그인 O -->
+                <h2>예진표 작성 페이지입니다</h2>
                 <h2>STEP 2</h2>
                 <form action="/question/step2" method="post">
-                    <div>
+                  <div>
                     <input type="hidden" name="p_id" value="<%= user._id%>"">
-                    </div>
-                    <div>
-                        <label for="treat_time">초진여부 </label>
-                        <input type="radio" id="treat_time" name="treat_time" value="초진">초진
-                        <input type="radio" id="treat_time" name="treat_time" value="재진">재진
-                    </div>
-                    <div>
-                        <label for="treat_div">진료과목:</label>
-                        <select id="treat_div" name="treat_div">
-                            <option value='' selected>--선택--</option>
-                            <option value='호흡기내과'>호흡기내과</option>
-                            <option value='정형외과'>정형외과</option>
-                            <option value='이비인후과'>이비인후과</option>
-                            <option value='안과'>안과</option>
-                            <option value='피부과'>피부과</option>
-                            <option value='신경과'>신경과</option>
-                            <option value='치과'>치과</option>
-                            <option value='정신건강의학과'>정신건강의학과</option>
-                            <option value='비뇨기과'>비뇨기과</option>
-                            <option value='소아과'>소아과</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="disease_desc">증상내용:</label>
-                        <input type="textarea" id="disease_desc" name="disease_desc" value="">
-                    </div>
-                    <div>
-                        <input type="hidden" name="write_date">
-                    </div>
-                    <div>
-                        <button type="submit">다음 ></button>
-                    </div>
-                    </form>
-                </div>
+                  </div>
+                  <div>
+                    <label for="treat_time">초진여부 </label>
+                    <input type="radio" id="treat_time" name="treat_time" value="초진">초진
+                    <input type="radio" id="treat_time" name="treat_time" value="재진">재진
+                  </div>
+                  <div>
+                    <label for="treat_div">진료과목:</label>
+                    <select id="treat_div" name="treat_div">
+                      <option value='' selected>--선택--</option>
+                      <option value='호흡기내과'>호흡기내과</option>
+                      <option value='정형외과'>정형외과</option>
+                      <option value='이비인후과'>이비인후과</option>
+                      <option value='안과'>안과</option>
+                      <option value='피부과'>피부과</option>
+                      <option value='신경과'>신경과</option>
+                      <option value='치과'>치과</option>
+                      <option value='정신건강의학과'>정신건강의학과</option>
+                      <option value='비뇨기과'>비뇨기과</option>
+                      <option value='소아과'>소아과</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="disease_desc">증상내용:</label>
+                    <input type="textarea" id="disease_desc" name="disease_desc" value="">
+                  </div>
+                  <div>
+                    <input type="hidden" name="write_date">
+                  </div>
+                  <div>
+                    <button type="submit">다음 ></button>
+                  </div>
+                </form>
+              <% } %>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
         <footer id="footer">
           <div class="container">
             <div class="footer-holder">

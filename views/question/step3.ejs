@@ -53,6 +53,13 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
+              <!-- 로그인이 안되어 있는 경우 -->
+              <% if(user == null || user.length == 0){ %>
+                <h3> 회원만 이용할 수 있습니다. 로그인을 해주세요. </h3>
+                <a href="/">메인페이지로 돌아가기</a>
+              <% } else { %>
+
+              <!-- 로그인 O -->
               <h2><%= user.name %>님께서 작성하신 내용입니다.</h2>
               <div>
                 <h3>개인신상</h3>
@@ -70,6 +77,7 @@
                 <%= step2.treat_div %> <br>
                 <%= step2.disease_desc  %> <br>
               </div>
+            <% } %>
             </div>
           </div>
         </div>
