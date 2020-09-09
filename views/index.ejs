@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> 
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,13 +35,15 @@
             <div class="opener-holder">
               <a href="#" class="nav-opener"><span></span></a>
               <% if (user) { %>
-                    <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
-                    <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
-                    <a href="/auth/logout" class="btn btn-primary rounded">로그아웃</a>
-                <% }else{ %>
-                  <a href="/login" class="btn btn-primary rounded">로그인</a>
-                  <a href="/join" class="btn btn-primary rounded">회원가입</a>
-                <% } %>
+              <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
+              <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
             </div>
             <div class="nav-drop">
               <ul>
@@ -69,9 +71,11 @@
       </section>
       <section class="main">
         <div class="container">
-          <a href="checkup.html">
-            <button class="btn-a">예진표 작성하기</button>
-          </a>
+          <div class="text box col-md-offset-3 col-md-6">
+            <a href="checkup.html">
+              <button class="btn-a">예진표 작성하기</button>
+            </a>
+          </div>
           <div class="row" style="margin-top: 100px">
             <div class="text-box col-md-offset-1 col-md-10">
               <h3>비대면 진료 서비스, 아만닥</h3>
@@ -412,6 +416,5 @@
         </div>
       </footer>
     </div>
-    
   </body>
 </html>

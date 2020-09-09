@@ -34,9 +34,9 @@
             <a href="/join" class="btn btn-primary rounded">회원가입</a>
             <div class="nav-drop">
               <ul>
-                  <li><a href="/aboutus">소개</a></li>
-                  <li><a href="/healthtopic">의학정보</a></li>
-                  <li><a href="/qna">게시판</a></li>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
               </ul>
             </div>
           </nav>
@@ -68,7 +68,11 @@
                 </div>
                 <div>
                   <% if(message) {%>
-                    <p><span style="color:red; font-size:12px"><%=message%></span></p>
+                  <p>
+                    <span style="color: red; font-size: 12px"
+                      ><%=message%></span
+                    >
+                  </p>
                   <% }%>
                 </div>
                 <div class="btn-area">
