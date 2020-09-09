@@ -5,10 +5,6 @@ const bcrypt = require('bcrypt');
 const Patient = require('../models/patients');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
  
-//JSON-WEB-TOKEN을 사용한 로그인 처리!
-// const jwt = require('jsonwebtoken');
-// const { verifyToken } = require('./middlewares/middlewares');
-
 //회원가입에 대한 인증 처리
 router.post('/join',isNotLoggedIn,async (req,res,next)=>{
     const {p_id,password,rePass,name,birth,ph_no,addr,email,gender} = req.body;
@@ -76,6 +72,15 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
 router.get('/logout',isLoggedIn,(req,res)=>{
     req.logout();
     req.session.destroy();
+    res.redirect('/');
+});
+
+//카카오 로그인
+router.get('/kakao',passport.authenticate('kakao'));
+
+router.get('/kakao/callback',passport.authenticate('kakao',{
+    failureRedirect:'/',
+}),(req,res)=>{
     res.redirect('/');
 });
 
