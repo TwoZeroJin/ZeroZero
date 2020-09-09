@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Step1 = require('../models/Step1');
 var Step2 = require('../models/Step2');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 
 // 기본 경로('/'), 메인 페이지에 갈 때, 로그인한 회원의 정보를 넘겨줌
 router.use((req,res,next) =>{
@@ -9,11 +10,13 @@ router.use((req,res,next) =>{
     next();
 });
 
-router.get('/step1', function(req, res) {
+router.get('/step1', isLoggedIn, function(req, res, next) {
+    const message = req.flash('message');
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
         console.log(step1);
         res.render('question/step1', {step1: step1});            //뷰로 보내기
-   });     
+        next();
+    });     
 });
 
 router.post('/step1', function(req, res) {             
