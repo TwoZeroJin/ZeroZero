@@ -19,10 +19,6 @@
       rel="stylesheet"
       type="text/css"
     />
-    <script src="/js/jquery-1.11.2.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.main.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -34,15 +30,15 @@
           <nav id="nav">
             <div class="opener-holder">
               <a href="#" class="nav-opener"><span></span></a>
-              <% if (user) { %>
-                    <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
-                    <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
-                    <a href="/auth/logout" class="btn btn-primary rounded">로그아웃</a>
-                <% }else{ %>
-                  <a href="/login" class="btn btn-primary rounded">로그인</a>
-                  <a href="/join" class="btn btn-primary rounded">회원가입</a>
-                <% } %>
             </div>
+            <% if (user) { %>
+              <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
+              <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
+              <a href="/auth/logout" class="btn btn-primary rounded">로그아웃</a>
+            <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+            <% } %>
             <div class="nav-drop">
               <ul>
                 <li class="active visible-sm visible-xs">
@@ -412,6 +408,8 @@
         </div>
       </footer>
     </div>
-    
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.main.js"></script>
   </body>
 </html>
