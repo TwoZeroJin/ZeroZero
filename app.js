@@ -8,11 +8,8 @@ const port = process.env.PORT || 5000 ;
 const path = require('path');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
-<<<<<<< HEAD
 const stepRouter = require('./routes/step');
-=======
 const mypageRouter = require('./routes/mypage');
->>>>>>> d254b7ee6ea1c08f8c1f8b8fadd5421df974eb44
 const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
@@ -60,12 +57,9 @@ app.use((req,res,next) =>{
 //라우팅
 app.use('/',indexRouter);
 app.use('/auth',authRouter);
-<<<<<<< HEAD
 app.use('/question', stepRouter);
-=======
 app.use('/mypage',mypageRouter);
 
->>>>>>> d254b7ee6ea1c08f8c1f8b8fadd5421df974eb44
 
 //에러 처리
 app.use((req, res, next) => {

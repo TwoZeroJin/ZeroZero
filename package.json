@@ -21,11 +21,8 @@
     "express-session": "^1.17.1",
     "http-proxy-middleware": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
-<<<<<<< HEAD
     "method-override": "^3.0.0",
-=======
     "moment": "^2.27.0",
->>>>>>> d254b7ee6ea1c08f8c1f8b8fadd5421df974eb44
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
