@@ -28,18 +28,12 @@ router.post('/join',isNotLoggedIn,async (req,res,next)=>{
         }else if(password != rePass){
             req.flash('rePass','패스워드가 일치하는지 확인하세요.');
             return res.redirect('/join');
+        }else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+            req.flash('noEmail','올바른 이메일을 입력하세요.');
+            return res.redirect('/join');
         }
         const hash = await bcrypt.hash(password, 12)
         await Patient.create({
-            // 이렇게 써도 됨
-            // p_id: req.body.p_id,
-            // password: hash,
-            // name: req.body.name,
-            // birth: req.body.birth,
-            // ph_no: req.body.ph_no,
-            // addr: req.body.addr,
-            // email: req.body.email,
-            // gender: req.body.gender,
             p_id,
             password :hash,
             name,
@@ -78,35 +72,6 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
         });
     })(req,res,next);
 });
-
-//세션을 이용하지 않은 JWT 방법
-// router.post("/login",isNotLoggedIn, async(req,res,next)=>{
-//     try{
-//         const patient = await Patient.findOne({
-//             where : req.body.p_id
-//         });
-//         if(patient){
-//             const token = jwt.sign({
-//                 id: patient.p_id
-//             }, process.env.JWT_SECRET,{
-//                 expiresIn:'2m',
-//                 issuer:"amamdoc",
-//             });
-//         }
-//         return res.json({
-//             code: 200,
-//             message: '토큰이 발급되었습니다',
-//             token,
-//           });
-//         } catch (error) {
-//           console.error(error);
-//           return res.status(500).json({
-//             code: 500,
-//             message: '서버 에러',
-//           });
-//     }
-// });
-
 
 router.get('/logout',isLoggedIn,(req,res)=>{
     req.logout();
