@@ -16,7 +16,7 @@ router.get('/step1', isLoggedIn, function(req, res, next) {
         console.log(step1);
         res.render('question/step1', {step1: step1});            //뷰로 보내기
         next();
-    });     
+    });
 });
 
 router.post('/step1', function(req, res) {             
@@ -31,10 +31,11 @@ router.put('/step1_update', function(req, res) {
     Step1.findOneAndUpdate({p_id : res.locals.user}, req.body, function(err, step1) {
         if(err) return res.json(err);
         res.redirect('/question/step2'); 
-    })
-})
+    });
+});
 
-router.get('/step2', function(req, res) {      
+router.get('/step2', isLoggedIn, function(req, res, next) { 
+    const message = req.flash('message');     
     res.render('question/step2');            //뷰로 보내기
 });
 
@@ -47,7 +48,8 @@ router.post('/step2', function(req, res) {
     });
 });
 
-router.get('/step3', function(req, res){
+router.get('/step3', isLoggedIn ,function(req, res){
+    const message = req.flash('message');
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
         Step2.findOne({p_id : step1.p_id}, function(err, step2) {
             res.render('question/step3', { step1 : step1, step2: step2}); 
