@@ -26,7 +26,8 @@
             <span style="color:red; font-size:10px"><%= errors.rePass %></span></div>
             <% } %>
           <div>이름<input type="text" name="name" id="name" placeholder="ex)홍길동" required/></div>
-          <div>생년월일<input type="text" name="birth" id="birth" placeholder="ex)19910101" required/></div>
+          <div>생년월일<input type="text" name="birth" id="birth" class="checkBirth" placeholder="ex)19910101" required/>
+          <span style="color:red; font-size:10px" id="noBirth"></span></div>
           <div>전화번호<input type="text" name="ph_no" id="ph_no" class="checkPhone" placeholder="-없이 입력해주세요" required/>
           <span style="color:red; font-size:10px" id="noPhone"></span></div>
           <div>주소<input type="text" name="addr" id="addr" placeholder="ex)조선시 한양구 한강동" required/></div>

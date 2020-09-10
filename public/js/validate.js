@@ -1,9 +1,10 @@
 $(function(){
-    let flag1 = false;
-    let flag2 = false;
-    let flag3 = false;
-    let flag4 = false;
-    let flag5 = false;
+    let flag1 = true;
+    let flag2 = true;
+    let flag3 = true;
+    let flag4 = true;
+    let flag5 = true;
+    let flag6 = true;
     $(".checkId").on({"blur":function(){
         const p_id = $("#p_id").val();
             $.ajax({
@@ -90,8 +91,24 @@ $(function(){
             flag5 = true;
         }
 })
+    $(".checkBirth").on({
+        "blur":function(){
+            let birth = $("#birth").val();
+            if(!/^[0-9]{8,}$/.test(birth)){
+                $("#noBirth").css({"color":"red"}).text("올바른 생년월일을 입력해주세요.");
+                flag6 =  false;
+            }else{
+                $("#noBirth").css({"color":"green"}).text("ㅋ 나이좀 있으시네..");
+                flag6 = true;
+            }
+        },
+        "focus":function(){
+            $("#noBirth").text("");
+            flag6 = true;
+        }
+})
     $("#canSubmit").click(function(e){
-        if(!(flag1&&flag2&&flag3&&flag4&&flag5)){
+        if(!(flag1&&flag2&&flag3&&flag4&&flag5&&flag6)){
             alert('메시지를 확인해주세요 ㅎㅎ;');
             e.preventDefault();
         }
