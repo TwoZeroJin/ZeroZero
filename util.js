@@ -17,14 +17,4 @@ util.parseError = function(errors){
   return parsed;
 }
 
-util.getPostQueryString = function(req, res, next){
-  res.locals.getPostQueryString = function(isAppended=false, overwrites={}){    
-    var queryString = '';
-    var queryArray = [];
-
-    if(queryArray.length>0) queryString = (isAppended?'&':'?') + queryArray.join('&');
-
-    return queryString;
-  }
-  next();
-}
+module.exports = util;

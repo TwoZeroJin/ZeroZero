@@ -19,7 +19,9 @@
 
         <thead class="thead-light">
           <tr>
+            <th scope="col" class="numId">#</th>
             <th scope="col">Title</th>
+            <th scope="col" class="views">Views</th> 
             <th scope="col" class="author">Author</th>
             <th scope="col" class="date">Date</th>
           </tr>
@@ -28,14 +30,16 @@
         <tbody>
           <% if(qna == null || qna.length == 0){ %>
             <tr>
-              <td colspan=2> There is no data to show :( </td>
+              <td colspan=5> There is no data to show :( </td>
             </tr>
           <% } %>
           <% qna.forEach(function(qna) { %>
             <tr>
+              <td class="numId"><%= qna.numId %></td>
               <td>
                 <a href="/qna/<%= qna._id %>"><div class="ellipsis"><%= qna.title %></div></a>
               </td>
+              <td class="views"><%= qna.views %></td>
               <td class="author"> <!-- 2 -->
                 <div class="ellipsis"><%= qna.reg_id ? qna.reg_id.p_id : "" %></div>
               </td>

@@ -4,6 +4,7 @@ const Qna = require('../models/qna');
 const util = require('../util');
 const Comment = require('../models/comment');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
+const { post } = require('./comments');
 
 // Index
 router.get('/', async (req,res,next)=>{
@@ -40,16 +41,22 @@ router.get('/new',isLoggedIn, function(req, res){
 
 
 //create
-router.post('/',isLoggedIn, function(req, res){
-      req.body.reg_id = req.user.id; // 2
-      Qna.create(req.body, function(err, post){
-      if(err){
-        req.flash('qna', req.body);
-        req.flash('errors', util.parseError(err));
-        return res.redirect('/qna/new');
-      }
+router.post('/',isLoggedIn, async (req, res, next)=>{
+    try{ 
+      req.body.reg_id = req.user.id; 
+      const qna = await Qna.create({
+        title:req.body.title,
+        content:req.body.content,
+        reg_id:req.body.reg_id,
+        views: 1,
+        numId:1,
+      });
+      console.log(qna);
       res.redirect('/qna');
-    });
+    }catch(err){
+      console.error(err);
+      next(err);
+    }
 });
 // show
 router.get('/:id', function(req, res){
@@ -58,9 +65,11 @@ router.get('/:id', function(req, res){
 
   Promise.all([
       Qna.findOne({_id:req.params.id}).populate({ path: 'reg_id', select: 'p_id' }),
-      Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'reg_id', select: 'p_id' })
+      Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'commenter', select: 'p_id' })
     ])
     .then(([qna, comments]) => {
+      qna.views++;
+      qna.save();
       res.render('board/show', { qna:qna, comments:comments, commentForm:commentForm, commentError:commentError});
     })
     .catch((err) => {

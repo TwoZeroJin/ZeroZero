@@ -1623,8 +1623,15 @@ body {
 .board-table {
   table-layout: fixed;
 }
+.board-table .numId, 
+.board-table .views{
+  width: 60px;
+  text-align: center;
+}
+.board-table .author,
 .board-table .date {
   width: 100px;
+  text-align: center;
 }
 
 .post-body,
@@ -1633,6 +1640,14 @@ body {
 }
 .post-info{
   font-size: 0.8em;
+}
+.comment-edit,
+.comment-edit-enabled .comment-show {
+  display:none;
+}
+
+.comment-edit-enabled .comment-edit {
+  display:inherit;
 }
 
 /*# sourceMappingURL=all.css.map */

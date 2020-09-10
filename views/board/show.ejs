@@ -16,8 +16,8 @@
     <div class="container mb-3">
 
       <div class="card">
-        <h5 class="card-header p-2"><%= qna.title %></h5>
-        <div class="row"> <!-- 1 -->
+        <h5 class="card-header p-2" data-search-highlight="title"><%= qna.numId %><%= qna.title %></h5>
+        <div class="row">
 
           <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1"> <!-- 1 -->
             <div class="qna-body p-2"><%= qna.content %></div>
@@ -25,7 +25,8 @@
           <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2"> <!-- 1 -->
             <div class="post-info card m-2 p-2"> 
                 <div class="border-bottom pb-1 mb-1"> <!-- 1 -->
-                <span>Author</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %>
+                  <div><span>Author</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %></div>
+                  <div><span>Views</span> : <span><%= qna.views %></span></div>
                 </div>
               <div><span>Created</span> : <span data-date-time="<%= qna.createdAt %>"></span></div> <!-- 2 -->
               <% if(qna.updatedAt) { %>
@@ -50,44 +51,58 @@
       <!-- 댓글 show -->
       <h4 class="mt-3">Comments</h4> <!-- 1 -->
 
-      <% if(comments!=null){ %> <!-- 1-1 -->
+      <% if(comments.length){ %>
         <div class="mt-3 border-bottom">
-          <% comments.forEach(function(comment) { %> <!-- 1-2 -->
+          <% comments.forEach(function(comment) { %>
             <div class="border-top pt-1 pb-1">
+   <!-- 4 --> <% if(comment.isDeleted){ %>
+                <div class="text-muted p-2">(Deleted Commnet)</div>
+              <% } else { %>
               <div class="row">
-                <div class="col-3 col-md-2 col-lg-1 pl-4"><%= comment.commenter.p_id %></div> <!-- 1-3 -->
-                <div class="col-9 col-md-10 col-lg-11">
+                <div class="col-3 col-md-2 col-lg-1 pl-4"><%= comment.commenter.p_id %></div>
+       <!-- 1 --> <div id="comment-<%= comment._id %>" class="col-9 col-md-10 col-lg-11 <%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>">
                   <div class="comment-show">
-                    <div class="comment-text mb-3"><%= comment.text %></div> <!-- 1-4 -->
+                    <div class="comment-text mb-3"><%= comment.text %></div>
                     <small class="d-block">
-                      (Created: <span data-date-time="<%= comment.createdAt %>"></span>) <!-- 1-5 -->
+                      (Created: <span data-date-time="<%= comment.createdAt %>"></span>
+           <!-- 5 --> <% if(comment.updatedAt){ %>
+                          | Updated: <span data-date-time="<%= comment.updatedAt %>"></span>
+                      <% } %>
+                      )
                     </small>
+                    <% if(isAuthenticated && comment.commenter && user.id == comment.commenter._id){ %>
+                      <small class="d-block">
+             <!-- 2 --> <a href="javascript:void(0)" onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')">Edit</a>
+                        |
+             <!-- 6 --> <form action="/comments/<%= comment._id %>?postId=<%= comment._id %>&_method=delete" method="post" class="d-inline">
+                          <a href="javascript:void(0)" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">Delete</a>
+                        </form>
+                      </small>
+                    <% } %>
+                  </div>
+       <!-- 3 --> <div class="comment-edit">
+                    <%- include('./partials/comment-form', {
+                      actionUrl:'/comments/' + qna._id + '?postId=' + qna._id + '&_method=put',
+                      comment: comment,
+                      commentForm: commentForm,
+                      commentError: commentError,
+                    }); %>
                   </div>
                 </div>
               </div>
+              <% } %>
             </div>
           <% }) %>
         </div>
       <% } %>
 
-
-       <!-- 댓글 입력 -->
-       <div class="mt-3"> <!-- 2 -->
-        <form action="/comments?postId=<%= qna._id %>" method="post">
-          <fieldset <%= !isAuthenticated?'disabled':'' %>> <!-- 2-1 -->
-            <div class="row">
-              <div class="col-8">
-                <textarea name="text" rows="2" class="form-control <%= (commentError.errors.text)?'is-invalid':'' %>"><%= commentForm.form.text %></textarea>
-              </div>
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary h-100 mr-2">Add Comment</button>
-              </div>
-            </div>
-            <% if(commentError.errors.text){ %>
-              <span class="invalid-feedback d-block"><%= commentError.errors.text.message %></span> <!-- 2-2 -->
-            <% } %>
-          </fieldset>
-        </form>
+      <div class="mt-3"> <!-- 7 -->
+        <%- include('./partials/comment-form', {
+          actionUrl:'/comments?postId=' + qna._id,
+          comment: {},
+          commentForm: commentForm,
+          commentError: commentError,
+        }); %>
       </div>
 
     </div>
