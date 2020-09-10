@@ -24,7 +24,7 @@
       <header id="header">
         <div class="container">
           <div class="logo">
-            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
+            <a href="index.ejs"><img src="images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
             <div class="opener-holder">
@@ -52,22 +52,20 @@
                 <div class="int-area">
                   <input
                     type="text"
-                    class="int-area input"
                     name="p_id"
                     id="p_id"
                     autocomplete="off"
                     required
-                  /><label for="p_id">아이디</label>
+                  /><label for="id">USER NAME</label>
                 </div>
                 <div class="int-area">
                   <input
                     type="password"
-                    class="int-area input"
                     name="password"
                     id="password"
                     autocomplete="off"
                     required
-                  /><label for="password">비밀번호</label>
+                  /><label for="pw">PASSWORD</label>
                 </div>
                 <div>
                   <% if(message) {%>

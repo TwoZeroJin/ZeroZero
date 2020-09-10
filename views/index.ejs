@@ -19,10 +19,6 @@
       rel="stylesheet"
       type="text/css"
     />
-    <script src="/js/jquery-1.11.2.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.main.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -35,7 +31,7 @@
             <div class="opener-holder">
               <a href="#" class="nav-opener"><span></span></a>
               <% if (user) { %>
-              <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
+              <p>반갑습니다!<%= user.name %> 님</p>
               <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
               <a href="/auth/logout" class="btn btn-primary rounded"
                 >로그아웃</a
@@ -382,7 +378,6 @@
               <div class="col-md-2">
                 <h4>Navigation</h4>
                 <ul>
-                  <li><a href="index.html">메인페이지</a></li>
                   <li><a href="aboutus.html">소개</a></li>
                   <li><a href="healthtopic.html">의학정보</a></li>
                   <li><a href="qna.html">게시판</a></li>
