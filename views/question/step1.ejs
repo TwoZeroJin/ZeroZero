@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>원격 의료 매칭 서비스, 아만닥</title>
-
+    
     <meta name="msapplication-TileColor" content="#3867d6" />
 
     <meta name="theme-color" content="#ffffff" />
@@ -19,6 +19,16 @@
       rel="stylesheet"
       type="text/css"
     />
+    <style type="text/css">
+      form div { margin-bottom: 20px;}
+      input.error, select.error{
+          border: 1px solid red;
+      }
+      label.error {
+          margin-left:10px;
+          color:red;
+      }
+    </style>
   </head>
   <body>
     <div id="wrapper">
@@ -53,7 +63,6 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
-              
               <!-- 로그인이 안되어 있는 경우 -->
               <% if(user == null || user.length == 0){ %>
                 <h3> 회원만 이용할 수 있습니다. 로그인을 해주세요. </h3>
@@ -69,11 +78,11 @@
                     </div>
                     <div>
                       <label for="height">신장: </label>
-                      <input type="text" id="height" name="height" value="">cm
+                      <input type="text" id="height" name="height" value="" autofocus >
                     </div>
                     <div>
                         <label for="weight">체중:</label>
-                        <input type="text" id="weight" name="weight" value="">kg
+                        <input type="text" id="weight" name="weight" value="">
                     </div>
                     <div>
                         <label for="history">과거병력:</label>
@@ -89,15 +98,17 @@
                       <input type="text" id="drug"" name="drug"" value=""> <br/>
                     </div>
                     <div>
-                      <label for="drink">음주:</label>
-                      <select id="drink" name="drink_week">
+                      <label for="drink_week">음주:</label>
+                      <select id="drink_week" name="drink_week">
                         <option value='' selected>--일주일 기준--</option>
                         <option value='해당없음'>해당없음</option>
                         <option value='1회~3회'>1회 ~ 3회</option>
                         <option value='4회~6회'>4회 ~ 6회</option>
                         <option value='7회이상'>7회 이상</option>
                       </select>
-                      <select id="drink" name="drink_cnt">
+
+                      <label for="drink_cnt"></label>
+                      <select id="drink_cnt" name="drink_cnt">
                         <option value='' selected>--소주기준--</option>
                         <option value='해당없음'>해당없음</option>
                         <option value='1병미만'>1병 미만</option>
@@ -122,18 +133,18 @@
                 
                 <% } else { %>
                   <!-- 작성한 내용이 있을 경우! / Update -->
-                  <h3>*<%= user.name%>기존에 작성한 내용입니다. </h3>
+                  <h3>*<%= user.name%>님께서 이전에 작성한 내용입니다. </h3>
                   <form action="/question/step1_update?_method=put" method="post">
                     <div>
                       <input type="hidden" name="p_id" value="<%= user._id%>">
                     </div>
                     <div>
                       <label for="height">신장: </label>
-                      <input type="text" id="height" name="height" value="<%= step1.height %>">cm
+                      <input type="text" id="height" name="height" value="<%= step1.height %>" % autofocus>
                     </div>
                     <div>
                       <label for="weight">체중:</label>
-                      <input type="text" id="weight" name="weight" value="<%= step1.weight %>">kg
+                      <input type="text" id="weight" name="weight" value="<%= step1.weight %>">
                     </div>
                     <div>
                       <label for="history">과거병력:</label>
@@ -149,12 +160,12 @@
                       <input type="text" id="drug"" name="drug"" value="<%= step1.drug %>"> <br/>
                     </div>
                     <div>
-                      <label for="drink">음주:</label>
-                      <select id="drink" name="drink_week">
+                      <label for="drink_week">음주:</label>
+                      <select id="drink_week" name="drink_week">
                         <!-- 주량 select 관련 switch 문 -->
                         <% switch(step1.drink_week) {
                           case "해당없음" : %>
-                          <option value=''></option>--일주일 기준--</option>
+                          <option value=''>--일주일 기준--</option>
                           <option value='해당없음' selected >해당없음</option>
                           <option value='1회~3회'>1회 ~ 3회</option>
                           <option value='4회~6회'>4회 ~ 6회</option>
@@ -162,21 +173,21 @@
                           <% break;
                         
                           case "1회~3회" : %>
-                          <option value=''></option>--일주일 기준--</option>
+                          <option value=''>--일주일 기준--</option>
                           <option value='해당없음' >해당없음</option>
                           <option value='1회~3회' selected >1회 ~ 3회</option>
                           <option value='4회~6회'>4회 ~ 6회</option>
                           <option value='7회이상'>7회 이상</option>
                           <% break;
                           case "4회~6회" : %>
-                          <option value=''></option>--일주일 기준--</option>
+                          <option value=''>--일주일 기준--</option>
                           <option value='해당없음' >해당없음</option>
                           <option value='1회~3회' >1회 ~ 3회</option>
                           <option value='4회~6회'selected >4회 ~ 6회</option>
                           <option value='7회이상'>7회 이상</option>
                           <% break;
                           case "7회이상" : %>
-                          <option value=''></option>--일주일 기준--</option>
+                          <option value=''>--일주일 기준--</option>
                           <option value='해당없음' >해당없음</option>
                           <option value='1회~3회' >1회 ~ 3회</option>
                           <option value='4회~6회'>4회 ~ 6회</option>
@@ -185,7 +196,8 @@
                         } %>
                       </select>
 
-                      <select id="drink" name="drink_cnt">
+                      <label for="drink_cnt"></label>
+                      <select id="drink_cnt" name="drink_cnt">
                         <!-- 소주기준 select 관련 switch 문 -->
                         <% switch(step1.drink_cnt) {
                           case "해당없음" : %>
@@ -318,5 +330,7 @@
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.main.js"></script>
+    <script src ="/validation_question/jquery.validate.min.js"></script> -->
+    <script src ="/validation_question/step1.js"></script> -->
   </body>
 </html>
