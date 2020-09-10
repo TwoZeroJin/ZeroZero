@@ -17,7 +17,7 @@ router.post('/',isLoggedIn, checkPostId, function(req, res){
           req.flash('commentForm', { _id: null, form:req.body });                 // 3
           req.flash('commentError', { _id: null, errors:err });  // 3
         }
-    return res.redirect('/qna/'+Qna._id); //4
+    return res.redirect('/qna/'+post._id); //4
     });
 });
 
