@@ -57,6 +57,7 @@ module.exports = router;
 function checkPermission(req, res, next){ // 1
   Comment.findOne({_id:req.params.id}, function(err, comment){
     if(err) return res.json(err);
+    console.log(comment);
     if(comment.commenter != req.user.id) return redirect('/');
 
     next();

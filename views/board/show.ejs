@@ -10,7 +10,17 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="/js/boardscript.js"></script>
-    </head>
+        <style>
+          .comment-edit,
+          .comment-edit-enabled .comment-show {
+            display:none;
+          }
+
+          .comment-edit-enabled .comment-edit {
+            display:inherit;
+}
+        </style>
+      </head>
   </head>
   <body>
     <div class="container mb-3">
@@ -74,7 +84,7 @@
                       <small class="d-block">
              <!-- 2 --> <a href="javascript:void(0)" onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')">Edit</a>
                         |
-             <!-- 6 --> <form action="/comments/<%= comment._id %>?postId=<%= comment._id %>&_method=delete" method="post" class="d-inline">
+             <!-- 6 --> <form action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete" method="post" class="d-inline">
                           <a href="javascript:void(0)" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">Delete</a>
                         </form>
                       </small>
@@ -82,7 +92,7 @@
                   </div>
        <!-- 3 --> <div class="comment-edit">
                     <%- include('./partials/comment-form', {
-                      actionUrl:'/comments/' + qna._id + '?postId=' + qna._id + '&_method=put',
+                      actionUrl:'/comments/' + comment._id + '?postId=' + qna._id + '&_method=put',
                       comment: comment,
                       commentForm: commentForm,
                       commentError: commentError,
