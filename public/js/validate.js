@@ -30,8 +30,11 @@ $(function(){
         "blur":function(){
         let password = $("#password").val();
         if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
-            $("#noPass").text("8-16자 숫자와 영문자");
+            $("#noPass").css({"color":"red"}).text("8-16자 숫자와 영문자");
             flag = false;
+        }else{
+            $("#noPass").css({"color":"green"}).text("사용 가능한 비밀번호 입니다 ~.~");
+            flag = true;
         }
     },
         "focus":function(){
@@ -51,12 +54,31 @@ $(function(){
             $("#noRePass").text("");
             flag = true;
 }})
+    $(".checkPhone").on({
+        "blur":function(){
+            let ph_no = $("#ph_no").val();
+            if(!/^[0-9]{8,}$/.test(ph_no)){
+                $("#noPhone").css({"color":"red"}).text("올바른 전화번호를 입력하세요.");
+                flag = false;
+            }else{
+                $("#noPhone").css({"color":"green"}).text("당신의 번호는 이제 제겁니다. zㅅz;");
+                flag = true;
+        }
+    },
+    "focus":function(){
+        $("#noPhone").text("");
+        flag = true;
+    }
+})
     $(".checkEmail").on({
         "blur":function(){
             let email = $("#email").val();
             if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
-                $("#noEmail").text("올바른 이메일을 입력해주세요.");
-                flag= false;
+                $("#noEmail").css({"color":"red"}).text("올바른 이메일을 입력해주세요.");
+                flag = false;
+            }else{
+                $("#noEmail").css({"color":"green"}).text("사용 가능한 이메일입니다. ㅎㅅㅎ;");
+                flag = true;
             }
         },
         "focus":function(){
@@ -64,7 +86,7 @@ $(function(){
             flag = true;
         }
 })
-    $("#isJoin").click(function(e){
+    $("#canSubmit").click(function(e){
         if(!flag){
             alert('메시지를 확인해주세요 ㅎㅎ;');
             e.preventDefault();

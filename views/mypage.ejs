@@ -52,7 +52,8 @@
             </tr>
             <tr>
                 <form method="post" action="/mypage/<%=user.p_id%>/phone">
-                    <td><input type="text" name="ph_no" value="<%= user.ph_no %>"><input type="submit" value="변경하기"></td>
+                    <td><input type="text" name="ph_no" id="ph_no" class="checkPhone" value="<%= user.ph_no %>"><input type="submit" id="canSubmit" value="변경하기"></td>
+                    <span style="color:red; font-size:10px" id="noPhone"></span>
                 </form>
             </tr>
              <tr>
@@ -74,7 +75,8 @@
             </tr>
             <tr>
                 <form method="post" action="/mypage/<%=user.p_id%>/email">
-                    <td><input type="email" name="email" value="<%= user.email %>"><input type="submit" value="변경하기"></td>
+                    <td><input type="email" name="email" id="email" value="<%= user.email %>" class="checkEmail"><input type="submit" id="canSubmit" value="변경하기"></td>
+                    <span style="color:red; font-size:10px" id="noEmail"></span>
                 </form>
             </tr>
         </table>
@@ -91,5 +93,8 @@
     <a href="/mypage">개인 정보</a>
     <a href="/mypage">진료 기록</a>
     <a href="/">메인으로</a>
+    <script src="js/jquery-1.11.2.min.js"></script>
+      <script src="js/jquery.main.js"></script>
+      <script src="js/validate.js"></script>
 </body>
 </html>
