@@ -9,10 +9,11 @@ const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const passport = require('passport');
 const qnaRouter = require('./routes/qna');
+const commentRouter = require('./routes/comments');
 const methodOverride = require('method-override');
 const connect = require('./models');
 const flash = require('connect-flash');
-//abc
+const util = require('./util');
 dotenv.config();
 
 //passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
@@ -59,6 +60,8 @@ app.use((req,res,next) =>{
 app.use('/',indexRouter);
 app.use('/auth',authRouter);
 app.use('/qna', qnaRouter);     //게시판 이동 라우터
+app.use('/comments', commentRouter);
+
 
 //에러 처리
 app.use((req, res, next) => {
