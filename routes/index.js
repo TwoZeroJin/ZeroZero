@@ -20,14 +20,8 @@ router.get('/',(req,res,next)=>{
 
 //회원가입으로 들어오는 경로 처리
 router.get('/join',isNotLoggedIn,(req,res,next)=>{
-    const message = req.flash('message');
-    const noPass = req.flash('noPass');
-    const rePass = req.flash('rePass');
-    const noEmail = req.flash('noEmail');
-    res.render('join',{message:message,
-    noPass:noPass,
-    rePass:rePass,
-    noEmail:noEmail});
+    const errors = req.flash('errors')[0] || {};
+    res.render('join',{errors:errors});
 })
 
 router.get('/login',isNotLoggedIn,(req,res,next)=>{

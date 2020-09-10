@@ -6,26 +6,26 @@ const Patient = require('../models/patients');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
  
 //회원가입에 대한 인증 처리
-router.post('/join',isNotLoggedIn,async (req,res,next)=>{
+router.post('/join',isNotLoggedIn,async(req,res,next)=>{
     const {p_id,password,rePass,name,birth,ph_no,addr,email,gender} = req.body;
     try{
         const exUser = await Patient.findOne({p_id:p_id});
         if(exUser){
-            req.flash('message','이미 존재하는 아이디입니다.');
+            req.flash('errors',{p_id:'이미 존재하는 아이디입니다.'});
             return res.redirect('/join');
             //.test함수로 해당 매개변수를 테스트! 6자 이상 영어대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{6,}$/.test(p_id)){
-            req.flash('message','6자 이상, 숫자와 영문자만 됩니다.')
+            req.flash('errors',{p_id:'6자 이상, 숫자와 영문자만 됩니다.'})
             return res.redirect('/join');
             //8자~16자 사이 영어 대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
-            req.flash('noPass','8-16자 사이, 숫자와 영문자만 됩니다.')
+            req.flash('errors',{password:'8-16자 사이, 숫자와 영문자만 됩니다.'})
             return res.redirect('/join');
         }else if(password != rePass){
-            req.flash('rePass','패스워드가 일치하는지 확인하세요.');
+            req.flash('errors',{rePass:'패스워드가 일치하는지 확인하세요.'});
             return res.redirect('/join');
         }else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
-            req.flash('noEmail','올바른 이메일을 입력하세요.');
+            req.flash('errors',{email:'올바른 이메일을 입력하세요.'});
             return res.redirect('/join');
         }
         const hash = await bcrypt.hash(password, 12)
@@ -44,6 +44,24 @@ router.post('/join',isNotLoggedIn,async (req,res,next)=>{
         console.error(error);
         next(error);
     }
+});
+
+//아이디 중복 체크
+router.post('/valid',async(req,res,next)=>{
+    const p_id = req.body.p_id;
+    try{
+        const exUser = await Patient.findOne({p_id:p_id});
+        if(exUser){
+            res.send('0');
+        }else if(!/^[a-zA-Z0-9]{6,}$/.test(p_id)){
+            res.send('1');
+        }else{
+            res.send('2');
+        }
+    }catch(err){
+        next(err);
+    }
+    
 });
 
 //로그인에 대한 인증 처리, 세션 이용
