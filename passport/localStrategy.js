@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const Patients = require('../models/patients');
+const Patient = require('../models/patients');
  
 module.exports = () => {
   passport.use(new LocalStrategy({
@@ -10,12 +10,12 @@ module.exports = () => {
     passwordField: 'password',
   }, async (p_id, password, done) => {
     try {
-      const Patient = await Patients.findOne({p_id:p_id})
+      const patient = await Patient.findOne({p_id:p_id})
       .select('password')
-      if (Patient) {
-        const result = await bcrypt.compare(password, Patient.password);
+      if (patient) {
+        const result = await bcrypt.compare(password, patient.password);
         if (result) {
-          done(null, Patient);
+          done(null, patient);
         } else {
           done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
         }
