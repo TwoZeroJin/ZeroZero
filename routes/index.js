@@ -32,15 +32,16 @@ router.get("/join", isNotLoggedIn, (req, res, next) => {
   });
 });
 
-router.get("/login", isNotLoggedIn, (req, res, next) => {
-  const message = req.flash("message");
-  res.render("login", { message: message });
-});
 router.get("/aboutus", (req, res, next) => {
   res.render("aboutus");
 });
 router.get("/healthtopic", (req, res, next) => {
   res.render("healthtopic");
+});
+
+router.get("/login", isNotLoggedIn, (req, res, next) => {
+  const message = req.flash("message");
+  res.render("login", { message: message });
 });
 
 module.exports = router;

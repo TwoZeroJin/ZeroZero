@@ -56,12 +56,6 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/mypage", mypageRouter);
-app.get("/aboutus", function (req, res) {
-  res.render(aboutus);
-});
-app.get("/healthtopic", function (req, res) {
-  res.render(healthtopic);
-});
 
 //에러 처리
 app.use((req, res, next) => {
