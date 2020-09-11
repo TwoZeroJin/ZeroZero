@@ -14,7 +14,7 @@ router.get('/api/patients', (req,res)=>{
     })
 })
 //메인화면을 렌더링하는 함수
-router.get('/',(req,res,next)=>{
+router.get('/',async (req,res,next)=>{
     res.render('index');
 });
 

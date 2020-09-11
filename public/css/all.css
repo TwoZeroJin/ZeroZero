@@ -1686,3 +1686,49 @@ margin-top: 20px;}
   font-size : 15px; color: #999;
   text-decoration: none;
 }
+/* 다빈님이 추가한 css*/
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.breadcrumb-item {
+  font-size: 0.8em !important;
+}
+.ellipsis{
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-table {
+  table-layout: fixed;
+}
+.board-table .numId, 
+.board-table .views{
+  width: 60px;
+  text-align: center;
+}
+.board-table .author,
+.board-table .date {
+  width: 100px;
+  text-align: center;
+}
+
+.post-body,
+.comment-text{
+  white-space: pre-line;
+}
+.post-info{
+  font-size: 0.8em;
+}
+.comment-edit,
+.comment-edit-enabled .comment-show {
+  display:none;
+}
+
+.comment-edit-enabled .comment-edit {
+  display:inherit;
+}
+
+/*# sourceMappingURL=all.css.map */

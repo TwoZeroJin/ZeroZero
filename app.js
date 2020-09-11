@@ -6,13 +6,18 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const port = process.env.PORT || 5000 ;
 const path = require('path');
+const passport = require('passport');
+const connect = require('./models');
+const flash = require('connect-flash');
+const util = require('./util');
+
+
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const stepRouter = require('./routes/step');
 const mypageRouter = require('./routes/mypage');
-const passport = require('passport');
-const connect = require('./models');
-const flash = require('connect-flash');
+const qnaRouter = require('./routes/qna');
+const commentRouter = require('./routes/comments');
 
 dotenv.config();
 
@@ -23,8 +28,7 @@ passportConfig();
 const app = express();
 //view 엔진을 html(ejs)로 설정
 app.set('view engine','ejs');
-//configure 함수의 첫번째 인자로 폴더 경로 설정
-//몽구스를 이용한 몽고디비 연결
+//몽고디비연결
 connect();
 
 //미들 웨어 정리
@@ -50,6 +54,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req,res,next) =>{
+  res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.user = req.user;
   next();
 });
@@ -59,6 +64,8 @@ app.use('/',indexRouter);
 app.use('/auth',authRouter);
 app.use('/question', stepRouter);
 app.use('/mypage',mypageRouter);
+app.use('/qna', qnaRouter);     //게시판 이동 라우터
+app.use('/comments', commentRouter);
 
 
 //에러 처리
@@ -73,4 +80,5 @@ app.use((req, res, next) => {
     res.status(err.status || 500);
     res.render('error');
   });
+  
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
