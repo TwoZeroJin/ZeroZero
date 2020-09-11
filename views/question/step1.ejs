@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+    
+    <meta name="msapplication-TileColor" content="#3867d6" />
+
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="../fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/all.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style type="text/css">
+      form div { margin-bottom: 20px;}
+      input.error, select.error{
+          border: 1px solid red;
+      }
+      label.error {
+          margin-left:10px;
+          color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="../images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <div class="opener-holder">
+              <a href="#" class="nav-opener"><span></span></a>
+            </div>
+            <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님!! ㅎㅎ</p>
+              <a href="/mypage">내 정보</a>
+              <a href="/auth/logout">로그아웃</a>
+            <% } %>
+            <div class="nav-drop">
+              <ul>
+                <li class="active visible-sm visible-xs">
+                  <a href="#">Home</a>
+                </li>
+                <li><a href="aboutus.html">소개</a></li>
+                <li><a href="healthtopic.html">의학정보</a></li>
+                <li><a href="qna.html">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="visual">
+        <div class="container">
+          <div class="text-block">
+            <div class="heading-holder">
+              <!-- 로그인이 안되어 있는 경우 -->
+              <% if(user == null || user.length == 0){ %>
+                <h3> 회원만 이용할 수 있습니다. 로그인을 해주세요. </h3>
+                <a href="/">메인페이지로 돌아가기</a>
+              <% } else { %>
+                
+                <!-- 처음 예진표를 작성하는 경우! / New & Create -->
+                <h2>예진표 작성 페이지입니다</h2>
+                <% if(step1 == null || step1.length == 0){ %>
+                  <form action="/question/step1" method="post">
+                    <div>
+                      <input type="hidden" name="p_id" value="<%= user._id%>">
+                    </div>
+                    <div>
+                      <label for="height">신장: </label>
+                      <input type="text" id="height" name="height" value="" autofocus >
+                    </div>
+                    <div>
+                        <label for="weight">체중:</label>
+                        <input type="text" id="weight" name="weight" value="">
+                    </div>
+                    <div>
+                        <label for="history">과거병력:</label>
+                        <input type="text" id="history" name="history" value="">
+                    </div>
+                    <div>
+                        <label for="family">가족력:</label>
+                        <input type="text" id="family" name="family_member" value="" placeholder="관계">
+                        <input type="text" id="family" name="family_disease" value="" placeholder="병명">
+                    </div>
+                    <div>
+                      <label for="drug">복용중인 약:</label>
+                      <input type="text" id="drug"" name="drug"" value=""> <br/>
+                    </div>
+                    <div>
+                      <label for="drink_week">음주:</label>
+                      <select id="drink_week" name="drink_week">
+                        <option value='' selected>--일주일 기준--</option>
+                        <option value='해당없음'>해당없음</option>
+                        <option value='1회~3회'>1회 ~ 3회</option>
+                        <option value='4회~6회'>4회 ~ 6회</option>
+                        <option value='7회이상'>7회 이상</option>
+                      </select>
+
+                      <label for="drink_cnt"></label>
+                      <select id="drink_cnt" name="drink_cnt">
+                        <option value='' selected>--소주기준--</option>
+                        <option value='해당없음'>해당없음</option>
+                        <option value='1병미만'>1병 미만</option>
+                        <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                        <option value='2병이상'>2병 이상</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="smoke">흡연:</label>
+                      <select id="smoke" name="smoke_cnt">
+                        <option value='' selected>--하루기준--</option>
+                        <option value=''>해당없음</option>
+                        <option value='1갑 미만'>1갑 미만</option>
+                        <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                        <option value='2갑이상'>2갑 이상</option>
+                      </select>
+                    </div>
+                    <div>
+                        <button type="submit">Step2로 가기</button>
+                    </div>
+                  </form>
+                
+                <% } else { %>
+                  <!-- 작성한 내용이 있을 경우! / Update -->
+                  <h3>*<%= user.name%>님께서 이전에 작성한 내용입니다. </h3>
+                  <form action="/question/step1_update?_method=put" method="post">
+                    <div>
+                      <input type="hidden" name="p_id" value="<%= user._id%>">
+                    </div>
+                    <div>
+                      <label for="height">신장: </label>
+                      <input type="text" id="height" name="height" value="<%= step1.height %>" autofocus>
+                    </div>
+                    <div>
+                      <label for="weight">체중:</label>
+                      <input type="text" id="weight" name="weight" value="<%= step1.weight %>">
+                    </div>
+                    <div>
+                      <label for="history">과거병력:</label>
+                      <input type="text" id="history" name="history" value="<%= step1.history %>">
+                    </div>
+                    <div>
+                      <label for="family_member">가족력:</label>
+                      <input type="text" id="family" name="family_member" value="<%= step1.family_member %>" placeholder="관계">
+                      <label for="family_disease"></label>
+                      <input type="text" id="family" name="family_disease" value="<%= step1.family_disease %>" placeholder="병명">
+                    </div>
+                    <div>
+                      <label for="drug">복용중인 약:</label>
+                      <input type="text" id="drug"" name="drug"" value="<%= step1.drug %>"> <br/>
+                    </div>
+                    <div>
+                      <label for="drink">음주:</label>
+                      <select id="drink" name="drink_week">
+                        <!-- 주량 select 관련 switch 문 -->
+                        <% switch(step1.drink_week) {
+                          case "해당없음" : %>
+                          <option value=''>--일주일 기준--</option>
+                          <option value='해당없음' selected >해당없음</option>
+                          <option value='1회~3회'>1회 ~ 3회</option>
+                          <option value='4회~6회'>4회 ~ 6회</option>
+                          <option value='7회이상'>7회 이상</option>
+                          <% break;
+                        
+                          case "1회~3회" : %>
+                          <option value=''>--일주일 기준--</option>
+                          <option value='해당없음' >해당없음</option>
+                          <option value='1회~3회' selected >1회 ~ 3회</option>
+                          <option value='4회~6회'>4회 ~ 6회</option>
+                          <option value='7회이상'>7회 이상</option>
+                          <% break;
+                          case "4회~6회" : %>
+                          <option value=''>--일주일 기준--</option>
+                          <option value='해당없음' >해당없음</option>
+                          <option value='1회~3회' >1회 ~ 3회</option>
+                          <option value='4회~6회'selected >4회 ~ 6회</option>
+                          <option value='7회이상'>7회 이상</option>
+                          <% break;
+                          case "7회이상" : %>
+                          <option value=''>--일주일 기준--</option>
+                          <option value='해당없음' >해당없음</option>
+                          <option value='1회~3회' >1회 ~ 3회</option>
+                          <option value='4회~6회'>4회 ~ 6회</option>
+                          <option value='7회이상'selected >7회 이상</option>
+                          <% break;
+                        } %>
+                      </select>
+
+                      <select id="drink" name="drink_cnt">
+                        <!-- 소주기준 select 관련 switch 문 -->
+                        <% switch(step1.drink_cnt) {
+                          case "해당없음" : %>
+                          <option value=''>--소주기준--</option>
+                          <option value='해당없음' selected>해당없음</option>
+                          <option value='1병미만'>1병 미만</option>
+                          <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                          <option value='2병이상'>2병 이상</option>
+                          <% break;
+                          case "1병미만" : %>
+                          <option value=''>--소주기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1병미만' selected >1병 미만</option>
+                          <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                          <option value='2병이상'>2병 이상</option>
+                          <% break;
+                          case "1병이상 ~ 2병미만" : %>
+                          <option value=''>--소주기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1병미만'>1병 미만</option>
+                          <option value='1병이상 ~ 2병미만' selected >1병 이상 ~ 2병미만</option>
+                          <option value='2병이상'>2병 이상</option>
+                          <% break;
+                          case "2병이상" : %>
+                          <option value=''>--소주기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1병미만'>1병 미만</option>
+                          <option value='1병이상 ~ 2병미만'>1병 이상 ~ 2병미만</option>
+                          <option value='2병이상' selected >2병 이상</option>
+                          <% break;
+                        } %>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="smoke">흡연:</label>
+                      <select id="smoke" name="smoke_cnt">
+                        <!-- 흡연 select 관련 switch 문 -->
+                        <% switch(step1.smoke_cnt) {
+                          case "해당없음" : %>
+                          <option value=''>--하루기준--</option>
+                          <option value='해당없음' selected >해당없음</option>
+                          <option value='1갑 미만'>1갑 미만</option>
+                          <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                          <option value='2갑이상'>2갑 이상</option>
+                          <% break;
+
+                          case "1갑 미만" : %>
+                          <option value=''>--하루기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1갑 미만' selected >1갑 미만</option>
+                          <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                          <option value='2갑이상'>2갑 이상</option>
+                          <% break;
+
+                          case "1갑이상 ~ 2갑미만" : %>
+                          <option value=''>--하루기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1갑 미만'>1갑 미만</option>
+                          <option value='1갑이상 ~ 2갑미만' selected >1갑 이상~2갑미만</option>
+                          <option value='2갑이상'>2갑 이상</option>
+                          <% break;
+
+                          case "2갑이상" : %>
+                          <option value=''>--하루기준--</option>
+                          <option value='해당없음'>해당없음</option>
+                          <option value='1갑 미만'>1갑 미만</option>
+                          <option value='1갑이상 ~ 2갑미만'>1갑 이상~2갑미만</option>
+                          <option value='2갑이상' selected >2갑 이상</option>
+                          <% break;
+                        } %>
+                      </select>
+                    </div>
+                    <div>
+                      <button type="submit">Step2로 가기</button>
+                    </div>
+                  </form>
+                <% } %>
+              <% } %>
+            </div>    
+          </div>
+        </div>
+      </section>
+      <footer id="footer">
+        <div class="container">
+          <div class="footer-holder">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="logo">
+                  <a href="#"><img src="../images/logo.svg" alt="amandoc" /></a>
+                </div>
+                <p>아무때나 만나는 내 손 안의 닥터</p>
+              </div>
+              <div class="col-md-2">
+                <h4>Navigation</h4>
+                <ul>
+                  <li><a href="/">메인페이지</a></li>
+                  <li><a href="/aboutus">소개</a></li>
+                  <li><a href="/healthtopic">의학정보</a></li>
+                  <li><a href="/qna">게시판</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <div class="text-holder">
+                  <strong class="phone"
+                    ><a href="tel:0282821111">02 8282 1111</a></strong
+                  >
+                  <span class="available">고객상담시간 : 12PM - 18PM</span>
+                  <h4>아만닥</h4>
+                  <address>
+                    아만빌딩 10F, <br />
+                    서울특별시 종로구 종로 55 종로 55
+                  </address>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-frame">
+                  <h4>Info</h4>
+                  <p>
+                    Wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex commodo
+                    consequat. Autem vel hendrerit iriure dolor in hendrerit.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script src ="/validation_question/jquery.validate.min.js"></script>
+    <script src ="/validation_question/step1.js"></script>
+  </body>
+</html>
