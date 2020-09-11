@@ -15,25 +15,35 @@ router.post('/join',isNotLoggedIn,async (req,res,next)=>{
     try{
         const exUser = await Patient.findOne({p_id:p_id});
         if(exUser){
-            req.flash('message','이미 존재하는 아이디입니다.');
-            return res.redirect('/join');
+            return res.render('join',{
+                message:"이미 존재하는 아이디입니다."
+            });
             //.test함수로 해당 매개변수를 테스트! 6자 이상 영어대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{6,}$/.test(p_id)){
-            req.flash('message','6자 이상, 숫자와 영문자만 됩니다.')
-            return res.redirect('/join');
+            return res.render('join',{
+                message:"6자 이상, 숫자와 대소문자만 됩니다."
+            });
             //8자~16자 사이 영어 대소문자 숫자 가능
         }else if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
-            req.flash('noPass','8-16자 사이, 숫자와 영문자만 됩니다.')
-            return res.redirect('/join');
+            return res.render('join',{
+                noPass:"8-16자,숫자와 대소문자만 됩니다."
+            });
         }else if(password != rePass){
-            req.flash('rePass','패스워드가 일치하는지 확인하세요.');
-            return res.redirect('/join');
-        }else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
-            req.flash('noEmail','올바른 이메일을 입력하세요.');
-            return res.redirect('/join');
+            return res.render('join',{
+                equalPass:"패스워드가 일치하는지 확인하세요."
+            });
         }
         const hash = await bcrypt.hash(password, 12)
         await Patient.create({
+            // 이렇게 써도 됨
+            // p_id: req.body.p_id,
+            // password: hash,
+            // name: req.body.name,
+            // birth: req.body.birth,
+            // ph_no: req.body.ph_no,
+            // addr: req.body.addr,
+            // email: req.body.email,
+            // gender: req.body.gender,
             p_id,
             password :hash,
             name,
@@ -60,8 +70,7 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
         }
         if(!user){
             //localStrategy에서 정의한 message 를 info로 받아오는 것 !!
-            req.flash('message',info.message);
-            return res.redirect('/login');
+            return res.render('login',{message:info.message});
         }
         return req.login(user,(loginError)=>{
             if(loginError){
@@ -72,6 +81,35 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
         });
     })(req,res,next);
 });
+
+//세션을 이용하지 않은 JWT 방법
+// router.post("/login",isNotLoggedIn, async(req,res,next)=>{
+//     try{
+//         const patient = await Patient.findOne({
+//             where : req.body.p_id
+//         });
+//         if(patient){
+//             const token = jwt.sign({
+//                 id: patient.p_id
+//             }, process.env.JWT_SECRET,{
+//                 expiresIn:'2m',
+//                 issuer:"amamdoc",
+//             });
+//         }
+//         return res.json({
+//             code: 200,
+//             message: '토큰이 발급되었습니다',
+//             token,
+//           });
+//         } catch (error) {
+//           console.error(error);
+//           return res.status(500).json({
+//             code: 500,
+//             message: '서버 에러',
+//           });
+//     }
+// });
+
 
 router.get('/logout',isLoggedIn,(req,res)=>{
     req.logout();
