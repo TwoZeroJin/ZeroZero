@@ -19,6 +19,17 @@
       rel="stylesheet"
       type="text/css"
     />
+    <style type="text/css">
+      form div { margin-bottom: 20px;}
+      input.error, select.error  {
+          border: 1px solid red;
+      }
+      label.error {
+          margin-left:10px;
+          color:red;
+      }
+    </style>
+    </style>
   </head>
   <body>
     <div id="wrapper">
@@ -67,10 +78,10 @@
                   <div>
                     <input type="hidden" name="p_id" value="<%= user._id%>"">
                   </div>
-                  <div>
-                    <label for="treat_time">초진여부 </label>
-                    <input type="radio" id="treat_time" name="treat_time" value="초진">초진
-                    <input type="radio" id="treat_time" name="treat_time" value="재진">재진
+                  <div >
+                    <label>초진여부</label> &nbsp; 
+                      <input type="radio" id="treat_time" name="treat_time" value="초진"><label for="treat_time">초진</label>
+                      <input type="radio" id="treat_time" name="treat_time" value="재진"><label for="treat_time">재진</label>
                   </div>
                   <div>
                     <label for="treat_div">진료과목:</label>
@@ -89,11 +100,8 @@
                     </select>
                   </div>
                   <div>
-                    <label for="disease_desc">증상내용:</label>
+                    <label for="disease_desc">증상:</label>
                     <input type="textarea" id="disease_desc" name="disease_desc" value="">
-                  </div>
-                  <div>
-                    <input type="hidden" name="write_date">
                   </div>
                   <div>
                     <button type="submit">다음 ></button>
@@ -154,5 +162,7 @@
       <script src="/js/jquery-1.11.2.min.js"></script>
       <script src="/js/bootstrap.js"></script>
       <script src="/js/jquery.main.js"></script>
+      <script src ="/validation_question/jquery.validate.min.js"></script>
+      <script src ="/validation_question/step2.js"></script>
     </body>
   </html>

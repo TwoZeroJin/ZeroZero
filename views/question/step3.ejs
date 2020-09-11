@@ -63,19 +63,26 @@
               <h2><%= user.name %>님께서 작성하신 내용입니다.</h2>
               <div>
                 <h3>개인신상</h3>
-                <%= step1.height %> <br>
-                <%= step1.weight %> <br>
-                <%= step1.history %> <br>
-                <%= step1.family_member %> <%= step1.family_disease %> <br>
-                <%= step1.drug %> <br>
-                <%= step1.drink_week %> <%= step1.drink_cnt %> <br>
-                <%= step1.smoke_cnt %>
+                신장: <%= step1.height %> <br>
+
+                체중: <%= step1.weight %> <br>
+                
+                <% if (step1.history == '') { %> 과거병력: 해당없음
+                <% } else { %> 과거병력: <%= step1.history %> <% } %> <br> 
+
+                <% if (step1.family_member == '') { %> 가족력: 해당없음
+                <% } else { %> 가족력: <%= step1.family_member %> <%= step1.family_disease %> <% } %> <br>
+
+                <% if (step1.drug == '') { %> 복용약: 해당없음
+                <% } else { %> 복용약: <%= step1.drug %> <% } %> <br> 
+                음주: <%= step1.drink_week %> <%= step1.drink_cnt %> <br>
+                담배: <%= step1.smoke_cnt %>
               </div>
               <div>
                 <h3>예진표</h3>
-                <%= step2.treat_time %> <br>
-                <%= step2.treat_div %> <br>
-                <%= step2.disease_desc  %> <br>
+                초진여부: <%= step2.treat_time %> <br>
+                진료과목: <%= step2.treat_div %> <br>
+                증상: <%= step2.disease_desc  %> <br>
               </div>
             <% } %>
             </div>

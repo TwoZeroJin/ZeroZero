@@ -140,7 +140,7 @@
                     </div>
                     <div>
                       <label for="height">신장: </label>
-                      <input type="text" id="height" name="height" value="<%= step1.height %>" % autofocus>
+                      <input type="text" id="height" name="height" value="<%= step1.height %>" autofocus>
                     </div>
                     <div>
                       <label for="weight">체중:</label>
@@ -151,8 +151,9 @@
                       <input type="text" id="history" name="history" value="<%= step1.history %>">
                     </div>
                     <div>
-                      <label for="family">가족력:</label>
+                      <label for="family_member">가족력:</label>
                       <input type="text" id="family" name="family_member" value="<%= step1.family_member %>" placeholder="관계">
+                      <label for="family_disease"></label>
                       <input type="text" id="family" name="family_disease" value="<%= step1.family_disease %>" placeholder="병명">
                     </div>
                     <div>
@@ -160,8 +161,8 @@
                       <input type="text" id="drug"" name="drug"" value="<%= step1.drug %>"> <br/>
                     </div>
                     <div>
-                      <label for="drink_week">음주:</label>
-                      <select id="drink_week" name="drink_week">
+                      <label for="drink">음주:</label>
+                      <select id="drink" name="drink_week">
                         <!-- 주량 select 관련 switch 문 -->
                         <% switch(step1.drink_week) {
                           case "해당없음" : %>
@@ -196,8 +197,7 @@
                         } %>
                       </select>
 
-                      <label for="drink_cnt"></label>
-                      <select id="drink_cnt" name="drink_cnt">
+                      <select id="drink" name="drink_cnt">
                         <!-- 소주기준 select 관련 switch 문 -->
                         <% switch(step1.drink_cnt) {
                           case "해당없음" : %>
@@ -330,7 +330,7 @@
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.main.js"></script>
-    <script src ="/validation_question/jquery.validate.min.js"></script> -->
-    <script src ="/validation_question/step1.js"></script> -->
+    <script src ="/validation_question/jquery.validate.min.js"></script>
+    <script src ="/validation_question/step1.js"></script>
   </body>
 </html>
