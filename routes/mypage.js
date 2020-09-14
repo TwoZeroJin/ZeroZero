@@ -62,7 +62,6 @@ router.post('/:p_id',isLoggedIn,async(req,res,next)=>{
         location.href="/";
         </script>`)
       }else{
-        console.log(password1,password2);
         return res.send(`<script> 
         alert('비밀번호가 맞지 않습니다..ㅋ')
         window.history.back()

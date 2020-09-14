@@ -5,24 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "start": "nodemon app"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-=======
-    "start": "nodemon start"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.3.0"
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.11.0",
->>>>>>> 8463de981ce5eba833a3cf82a6f8c17c12cbd3cf
-    "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
@@ -31,17 +18,10 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-<<<<<<< HEAD
-    "global": "^4.4.0",
-    "http-proxy-middleware": "^1.0.5",
-    "jquery": "^3.5.1",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.27.0",
-=======
     "http-proxy-middleware": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
->>>>>>> 8463de981ce5eba833a3cf82a6f8c17c12cbd3cf
+    "moment": "^2.27.0",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",

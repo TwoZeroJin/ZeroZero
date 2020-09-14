@@ -1,94 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>원격 의료 매칭 서비스, 아만닥</title>
-</head>
-<style>
-    table,th,td{
-        border: solid 1px black; 
-        border-collapse: collapse;
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: solid 1px black;
+      border-collapse: collapse;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div>
-        <h1>내 정보</h1>
-        <table>
-            <tr>
-                <th>이름</th>
-                <td><%= user.name %></td>
-            </tr>
-            <tr>
-                <th>생년월일</th>
-                <td><%= user.birth %></td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td><%= user.ph_no %></td>
-            </tr>
-            <tr>
-                <th>주소</th>
-                <td><%= user.addr %></td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td><%= user.email %></td>
-            </tr>
-            <tr>
-                <th>가입날짜</th>
-                <td><span><%= reg_date %></span></td>
-            </tr>
-        </table>
+      <h1>마이페이지</h1>
+      <table>
+        <tr>
+          <th>이름</th>
+          <td><%= user.name %></td>
+        </tr>
+        <tr>
+          <th>생년월일</th>
+          <td><%= user.birth %></td>
+        </tr>
+        <tr>
+          <th>전화번호</th>
+          <td><%= user.ph_no %></td>
+        </tr>
+        <tr>
+          <th>주소</th>
+          <td><%= user.addr %></td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td><%= user.email %></td>
+        </tr>
+        <tr>
+          <th>가입날짜</th>
+          <td><span><%= reg_date %></span></td>
+        </tr>
+      </table>
     </div>
     <div>
-        <h1>내 정보 변경하기</h1>
-        <table>
-            <tr>
-                <th>전화번호 변경</th>
-            </tr>
-            <tr>
-                <th>새 전화번호</th>
-            </tr>
-            <tr>
-                <form method="post" action="/mypage/<%=user.p_id%>/phone">
-                    <td><input type="text" name="ph_no" value="<%= user.ph_no %>"><input type="submit" value="변경하기"></td>
-                </form>
-            </tr>
-             <tr>
-                <th>주소 변경</th>
-            </tr>
-            <tr>
-                <th>새 주소</th>
-            </tr>
-            <tr>
-                <form method="post" action="/mypage/<%=user.p_id%>/address">
-                    <td><input type="text" name="addr" value="<%= user.addr %>"><input type="submit" value="변경하기"></td>
-                </form>
-            </tr>
-            <tr>
-                <th>이메일 변경</th>
-            </tr>
-            <tr>
-                <th>새 이메일</th>
-            </tr>
-            <tr>
-                <form method="post" action="/mypage/<%=user.p_id%>/email">
-                    <td><input type="email" name="email" value="<%= user.email %>"><input type="submit" value="변경하기"></td>
-                </form>
-            </tr>
-        </table>
+      <h1>내 정보 변경하기</h1>
+      <table>
+        <tr>
+          <th>전화번호 변경</th>
+        </tr>
+        <tr>
+          <th>새 전화번호</th>
+        </tr>
+        <tr>
+          <form method="post" action="/mypage/<%=user.p_id%>/phone">
+            <td>
+              <input
+                type="text"
+                name="ph_no"
+                id="ph_no"
+                class="checkPhone"
+                value="<%= user.ph_no %>"
+              /><input type="submit" id="canSubmit" value="변경하기" />
+            </td>
+            <span style="color: red; font-size: 10px" id="noPhone"></span>
+          </form>
+        </tr>
+        <tr>
+          <th>주소 변경</th>
+        </tr>
+        <tr>
+          <th>새 주소</th>
+        </tr>
+        <tr>
+          <form method="post" action="/mypage/<%=user.p_id%>/address">
+            <td>
+              <input type="text" name="addr" value="<%= user.addr %>" /><input
+                type="submit"
+                value="변경하기"
+              />
+            </td>
+          </form>
+        </tr>
+        <tr>
+          <th>이메일 변경</th>
+        </tr>
+        <tr>
+          <th>새 이메일</th>
+        </tr>
+        <tr>
+          <form method="post" action="/mypage/<%=user.p_id%>/email">
+            <td>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value="<%= user.email %>"
+                class="checkEmail"
+              /><input type="submit" id="canSubmit" value="변경하기" />
+            </td>
+            <span style="color: red; font-size: 10px" id="noEmail"></span>
+          </form>
+        </tr>
+      </table>
     </div>
     <div>
-        <h1>탈퇴하기</h1>
-        <form method="post" action="/mypage/<%=user.p_id%>">
-            <h4>비밀번호 입력</h4>
-            <input type="hidden" name="p_id" value="<%= user.p_id %>">
-            <div><input type="password" name="password" placeholder="비밀번호가 일치하면 탈퇴됩니다."></div>
-            <input type="submit" value="탈퇴하기">
-        </form>
+      <h1>탈퇴하기</h1>
+      <form method="post" action="/mypage/<%=user.p_id%>">
+        <h4>비밀번호 입력</h4>
+        <input type="hidden" name="p_id" value="<%= user.p_id %>" />
+        <div>
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호가 일치하면 탈퇴됩니다."
+          />
+        </div>
+        <input type="submit" value="탈퇴하기" />
+      </form>
     </div>
     <a href="/mypage">개인 정보</a>
     <a href="/mypage">진료 기록</a>
-</body>
+    <a href="/">메인으로</a>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.main.js"></script>
+    <script src="js/validate.js"></script>
+  </body>
 </html>

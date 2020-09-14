@@ -19,10 +19,6 @@
       rel="stylesheet"
       type="text/css"
     />
-    <script src="/js/jquery-1.11.2.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.main.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -36,7 +32,7 @@
               <a href="#" class="nav-opener"><span></span></a>
               <% if (user) { %>
               <p>반갑습니다!<%= user.name %> 님</p>
-              <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
               <a href="/auth/logout" class="btn btn-primary rounded"
                 >로그아웃</a
               >
@@ -71,11 +67,9 @@
       </section>
       <section class="main">
         <div class="container">
-          <div class="text box col-md-offset-3 col-md-6">
-            <a href="checkup.html">
-              <button class="btn-a">예진표 작성하기</button>
-            </a>
-          </div>
+          <a href="/question/step1">
+            <button class="btn-a">예진표 작성하기</button>
+          </a>
           <div class="row" style="margin-top: 100px">
             <div class="text-box col-md-offset-1 col-md-10">
               <h3>비대면 진료 서비스, 아만닥</h3>
@@ -196,9 +190,8 @@
                         </div>
                       </div>
                       <p>
-                        <a href="#">@Pixelbuddha</a> Suspendisse sodales sem
-                        est, in scelerisque felis scelerisque in. Aenean
-                        faucibus mollis risus. Praesent sit amet erat eget eros.
+                        오래 기다릴 필요없이 믿을만한 의사선생님께 <br />
+                        진료를 받을 수 있어서 정말 좋네요. 또 이용할게요!
                       </p>
                       <em class="date">2 hours ago</em>
                     </div>
@@ -218,8 +211,8 @@
                         </div>
                       </div>
                       <p>
-                        <a href="#">@PSD2HTML</a> 언택트 시대에 걸맞는 안전하고
-                        확실한 서비스라고 생각합니다.
+                        언택트 시대에 걸맞는 <br />안전하고 확실한 서비스라고
+                        생각합니다.
                       </p>
                       <em class="date">5 hours ago</em>
                     </div>
@@ -234,14 +227,13 @@
                           />
                         </div>
                         <div class="text-holder">
-                          <h3>조승우</h3>
-                          <a href="#">@swzzang</a>
+                          <h3>김소미</h3>
+                          <a href="#">@somi1290</a>
                         </div>
                       </div>
                       <p>
-                        <a href="#">@codrops</a> 일이 바빠서 병원 갈 시간 조차
-                        없었는데, <br />
-                        아만닥덕분에 건강하게 유지할 수 있는 거 같습니다.
+                        일이 바빠서 병원 갈 시간 조차 없었는데, <br />
+                        아만닥덕분에 건강하게 유지할 수 있는 것 같습니다 :)
                       </p>
                       <em class="date">1 day ago</em>
                     </div>
@@ -415,5 +407,9 @@
         </div>
       </footer>
     </div>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

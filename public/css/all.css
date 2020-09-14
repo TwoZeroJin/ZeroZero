@@ -120,8 +120,8 @@ a:hover {
   padding: 31px 0 32px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(196, 194, 202, 0.23);
-  -webkit-backface-visibility: hidden;
-  /* Prevent Chrome bug because of on-scroll effect in other section */
+  /*-webkit-backface-visibility: hidden;
+  Prevent Chrome bug because of on-scroll effect in other section */
 }
 #header .btn {
   float: right;
@@ -409,7 +409,7 @@ a:hover {
   font-size: 2.8rem;
   line-height: 1.285;
   font-weight: 300;
-  color: #4b6584;
+  color: #3867d6;
 }
 .main h4 {
   margin: 0 0 12px;
@@ -502,7 +502,7 @@ a:hover {
   font-size: 1.6rem;
   line-height: 1.5;
   font-weight: bold;
-  color: #635c73;
+  color: #3867d6;
 }
 .visual-list p {
   margin: 0 0 21px;
@@ -518,6 +518,7 @@ a:hover {
 }
 .cycle-gallery p a {
   font-weight: 400;
+  color: #3867d6;
 }
 .cycle-gallery .img-box {
   display: block;
@@ -538,15 +539,17 @@ a:hover {
   display: inline-block;
   vertical-align: middle;
   text-align: left;
+  color: #31384d;
 }
 .cycle-gallery .img-box h3 {
   margin: 0;
   font-size: 2.4rem;
   line-height: 1.33333;
-  color: #635c73;
+  color: #3867d6;
 }
 .cycle-gallery .img-box a {
   font-weight: bold;
+  color: #494654;
 }
 .cycle-gallery:after {
   content: "";
@@ -733,7 +736,7 @@ a:hover {
   display: block;
   padding: 0 0 17px;
   font-size: 6.4rem;
-  vertical-align: top;
+  /*vertical-align: top;*/
   line-height: 1;
   white-space: nowrap;
 }
@@ -833,7 +836,7 @@ a:hover {
   font-size: 3rem;
   line-height: 1.4;
   font-weight: bold;
-  color: #635c73;
+  color: #3867d6;
 }
 .subscribe .form-group {
   overflow: hidden;
@@ -942,7 +945,7 @@ a:hover {
   }
 
   .opener-holder {
-    float: right;
+    /*float: right;*/
     display: inline-block;
     vertical-align: top;
     position: relative;
@@ -1643,6 +1646,12 @@ a:hover {
   background-color: transparent;
 }
 
+.kakao-btn {
+  background: url("../images/kakao_login_medium_wide.png") no-repeat;
+  border: none;
+  color: black;
+}
+
 .login-form {
   position: relative;
   z-index: 2;
@@ -1653,7 +1662,7 @@ a:hover {
   font-size: 28px;
   color: #fff;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 37px;
 }
 .login-form p {
   color: #778ca3;
@@ -1743,13 +1752,13 @@ a:hover {
   color: #999;
   text-decoration: none;
 }
-body {
-  font-family: 'Open Sans', sans-serif;
-}
+
+/* 다빈님이 추가한 css*/
+
 .breadcrumb-item {
   font-size: 0.8em !important;
 }
-.ellipsis{
+.ellipsis {
   display: block;
   width: 100%;
   white-space: nowrap;
@@ -1760,8 +1769,8 @@ body {
 .board-table {
   table-layout: fixed;
 }
-.board-table .numId, 
-.board-table .views{
+.board-table .numId,
+.board-table .views {
   width: 60px;
   text-align: center;
 }
@@ -1772,19 +1781,19 @@ body {
 }
 
 .post-body,
-.comment-text{
+.comment-text {
   white-space: pre-line;
 }
-.post-info{
+.post-info {
   font-size: 0.8em;
 }
 .comment-edit,
 .comment-edit-enabled .comment-show {
-  display:none;
+  display: none;
 }
 
 .comment-edit-enabled .comment-edit {
-  display:inherit;
+  display: inherit;
 }
 
 /*# sourceMappingURL=all.css.map */
