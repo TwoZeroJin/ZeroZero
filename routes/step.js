@@ -4,12 +4,6 @@ var Step1 = require('../models/Step1');
 var Step2 = require('../models/Step2');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 
-// 기본 경로('/'), 메인 페이지에 갈 때, 로그인한 회원의 정보를 넘겨줌
-router.use((req,res,next) =>{
-    res.locals.user = req.user;
-    next();
-});
-
 router.get('/step1', isLoggedIn, function(req, res, next) {
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
         console.log(step1);
@@ -37,7 +31,7 @@ router.get('/step2', isLoggedIn, function(req, res, next) {
 });
 
 
-router.post('/step2', function(req, res) {
+router.post('/step2',isLoggedIn,function(req, res) {
     Step2.create(req.body, function(err, step2) {
         console.log('STEP 2의 db저장완료');
         console.log('내용 확인 페이지 출력합니다.');
@@ -45,12 +39,14 @@ router.post('/step2', function(req, res) {
     });
 });
 
-router.get('/step3', isLoggedIn ,function(req, res){
-    Step1.findOne({p_id : res.locals.user}, function(err, step1) {
-        Step2.findOne({p_id : step1.p_id}, function(err, step2) {
-            res.render('question/step3', { step1 : step1, step2: step2}); 
-        });
-    });
+router.get('/step3', isLoggedIn ,async(req, res,next)=>{
+    try{
+        const step1 = await Step1.findOne({p_id:res.locals.user});
+        const step2 = await Step2.findOne({p_id:step1.p_id}).sort('-write_date');
+        res.render('question/step3',{step1:step1,step2:step2});
+    }catch(err){
+        next(err);
+    }
 });
 
 module.exports = router;

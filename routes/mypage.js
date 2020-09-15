@@ -5,13 +5,70 @@ const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 const Patients = require('../models/patients');
 const moment = require('moment');
+const Step1 = require('../models/Step1');
+const Step2 = require('../models/Step2');
 
 //Date format 사용
-router.get('/',isLoggedIn,(req,res,next)=>{
-  reg_date = moment(res.locals.reg_date).format("YYYY-MM-DD");
+router.get('/',isLoggedIn,async(req,res,next)=>{
+  reg_date = moment(res.locals.reg_date).format("YYYY년 MM월 DD일");
+  await Step1.findOne({p_id:res.locals.user})
+  .then(result=>{
     res.render('mypage',{
-      reg_date:reg_date
+      step1:result,
+      reg_date:reg_date});
+  })
+  .catch(err=>{
+    next(err);
+  })
+});
+
+router.route('/myPharmacy')
+.get((req,res,next)=>{
+  res.render('myPharmacy');
+})
+.post(async(req,res,next)=>{
+  try{
+    const myPharmacy = req.body.myPharmacy;
+    await Patient.findOneAndUpdate({p_id:res.locals.user.p_id},{myPharmacy:myPharmacy},{upsert:true});
+    return res.send(`<script> 
+        alert('변경되었습니다..ㅎ;');
+        window.close();
+        </script>`);
+  }catch(err){
+    next(err);
+  }
+})
+
+
+//그동안 받은 진료 이력 출력하긔
+router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
+  try{
+    let page = Math.max(1, parseInt(req.query.page));
+    page = !isNaN(page)?page:1;                        
+    const limit = 2;                     
+
+    const skip = (page-1)*limit;
+    const count = await Step2.countDocuments({p_id:res.locals.user});
+    const maxPage = Math.ceil(count/limit);
+    const step2 = await Step2.find({p_id:res.locals.user})
+    .sort('-write_date')
+    .populate('p_id')
+    .skip(skip)   
+    .limit(limit)
+    .exec();
+    write_date = moment(step2.write_date).format("YYYY년 MM월 DD일");
+    res.render('mytreat', {
+      step2:step2,
+      currentPage:page,
+      maxPage:maxPage,
+      limit:limit,
+      write_date:write_date,
+      count:count
     });
+  } catch(err){
+    console.error(err);
+    nexr(err);
+  }
 });
 
 router.post('/:p_id/phone',isLoggedIn,async(req,res,next)=>{

@@ -48,9 +48,10 @@ const patientSchema = new Schema({
   reg_date:{
     type:Date,
     default:Date.now
-  }
+  },
+  myPharmacy:{
+    type:String
+  },
 });
-
-
 
 module.exports = mongoose.model('Patient', patientSchema);
