@@ -50,7 +50,7 @@
                     <th>증상</th>
                     <td><%=step2[i].disease_desc%></td>
                     <th>처방전</th>
-                    <td style="text-align: center;"><button>처방전 출력</button></td>
+                    <td style="text-align: center;"><button id="print">처방전 출력</button></td>
                 </tr>
             </table>
             <br><br>
@@ -85,5 +85,13 @@
     <a href="/">메인으로</a>
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/jquery.main.js"></script>
+    <script>
+        $(function(){
+            $("#print").click(e=>{
+                e.preventDefault();
+                alert('처방전이 출력되었습니다!');
+            })
+        })
+    </script>
 </body>
 </html>

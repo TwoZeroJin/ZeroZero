@@ -21,9 +21,9 @@ router.get('/',isLoggedIn,async(req,res,next)=>{
     next(err);
   })
 });
-
+// MY약국 지정하기
 router.route('/myPharmacy')
-.get((req,res,next)=>{
+.get(isLoggedIn,(req,res,next)=>{
   res.render('myPharmacy');
 })
 .post(async(req,res,next)=>{
@@ -37,10 +37,8 @@ router.route('/myPharmacy')
   }catch(err){
     next(err);
   }
-})
-
-
-//그동안 받은 진료 이력 출력하긔
+});
+// 그동안 받은 진료 이력 출력하긔
 router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
   try{
     let page = Math.max(1, parseInt(req.query.page));
@@ -70,7 +68,7 @@ router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
     nexr(err);
   }
 });
-
+// 전화번호,주소,이메일 수정
 router.post('/:p_id/phone',isLoggedIn,async(req,res,next)=>{
   try{
     await Patient.findOneAndUpdate({p_id:req.params.p_id},{ph_no:req.body.ph_no});
@@ -107,6 +105,7 @@ router.post('/:p_id/email',isLoggedIn,async(req,res,next)=>{
     next(err);
   }
 });
+// 회원 탈퇴하기
 router.post('/:p_id',isLoggedIn,async(req,res,next)=>{
     try{
         const Patient = await Patients.findOne({p_id:req.params.p_id})
@@ -120,8 +119,8 @@ router.post('/:p_id',isLoggedIn,async(req,res,next)=>{
         </script>`)
       }else{
         return res.send(`<script> 
-        alert('비밀번호가 맞지 않습니다..ㅋ')
-        window.history.back()
+        alert('비밀번호가 맞지 않습니다..ㅋ');
+        window.history.back();
         </script>`)
       }
     }catch(err){
