@@ -1453,8 +1453,8 @@ img {
 }
 
 hr {
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 0;
   border-top: 1px solid #eeeeee;
 }
@@ -3912,8 +3912,8 @@ fieldset[disabled] .btn-default.active {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4b7bec;
+  color: #4b7bec;
+  background-color: #fff;
   border-color: #4b7bec;
 }
 .btn-primary:hover,

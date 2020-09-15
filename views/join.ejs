@@ -18,8 +18,8 @@
       rel="stylesheet"
       type="text/css"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <body>
     <div id="wrapper">
       <header id="header">
@@ -48,7 +48,7 @@
         <div class="text-block2">
           <section class="login-form">
             <h1><img src="images/logo.svg" style="width: 260px" /></h1>
-            <p>회원가입</p>
+            <p style="margin-bottom: 23px;">회원가입</p>
             <form method="post" action="/auth/join">
                     <div class="int-area">
                       <input
@@ -81,12 +81,12 @@
                     <div class="int-area">
                       <input
                         type="password"
-                        class="badge input"
+                        class="int-area input"
                         name="rePass"
                         id="rePass"
                         placeholder="위와 동일하게 입력"
                         required
-                      /><label for="rePass">비밀번호 확인</label><% if(errors.rePass){%>
+                      /><label for="rePass">비밀번호 확인</label> <% if(errors.rePass){%>
                       <span style="color: red; font-size: 10px"
                         ><%= errors.rePass %></span
                       >

@@ -27,9 +27,9 @@ p {
 .btn-a {
   display: block;
   position: relative;
-  width: 100%;
-  margin: -80px 0 0 0;
-  height: 100px;
+  align-content: center;
+  margin: -90px auto 0 auto;
+  height: 90px;
   line-height: 20px;
   min-width: 400px;
   border-radius: 5em;
@@ -119,18 +119,18 @@ a:hover {
   z-index: 99;
   padding: 31px 0 32px;
   background: #fff;
-  box-shadow: 0 1px 1px rgba(196, 194, 202, 0.23);
+  box-shadow: 0 30px 30px rgba(196, 194, 202, 0.23);
   /*-webkit-backface-visibility: hidden;
   Prevent Chrome bug because of on-scroll effect in other section */
 }
 #header .btn {
   float: right;
-  margin: 2px 0 0 59px;
+  margin: 2px 0 0 20px;
   height: 38px;
-  min-width: 145px;
+  min-width: 100px;
   padding: 7px;
   font-weight: bold;
-  font-size: 1.6rem;
+  font-size: 15px;
   line-height: 22px;
   letter-spacing: 0;
 }
@@ -157,7 +157,7 @@ a:hover {
   font-weight: bold;
   letter-spacing: 0;
   white-space: normal;
-  margin: 0 0 0 34px;
+  margin: 0 20px 0 20px;
 }
 #nav li a {
   display: block;
@@ -392,7 +392,7 @@ a:hover {
 }
 
 .rounded {
-  border-radius: 40px;
+  border-radius: 12px;
 }
 
 .main {
@@ -974,10 +974,11 @@ a:hover {
   }
   #header .btn {
     float: none;
-    height: 48px;
-    font-size: 1.7rem;
-    line-height: 22px;
-    margin: 0;
+    height: 40px;
+    width: min-content;
+    font-size: 1.5rem;
+    line-height: 15px;
+    margin: 0 20px 0 0;
     padding: 12px 40px;
     display: inline-block;
     vertical-align: top;
@@ -994,7 +995,7 @@ a:hover {
     display: block;
     clear: both;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     position: absolute;
     right: 0;
     top: 100%;
@@ -1004,6 +1005,7 @@ a:hover {
     transition: transform 0.3s, opacity 0.3s;
     -webkit-transform: translate3d(0, 30px, 0);
     transform: translate3d(0, 30px, 0);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
   }
   #nav .nav-drop > ul {
     display: block;
@@ -1026,7 +1028,7 @@ a:hover {
     bottom: 20px;
     width: 4px;
     left: 0;
-    background: #8d81ac;
+    background: #3867d6;
   }
   #nav .nav-drop > ul li a {
     display: block;
@@ -1040,14 +1042,12 @@ a:hover {
   #nav .nav-drop > ul li a:focus,
   #nav .nav-drop > ul li a:hover {
     text-decoration: none;
-    color: #8d81ac;
+    color: #3867d6;
   }
   #nav .nav-drop > ul li.active {
     position: relative;
   }
-  #nav .nav-drop > ul li.active a {
-    color: #858585;
-  }
+
   #nav .nav-drop .drop-holder {
     margin: 0 -9999px;
     padding: 20px 10014px;
@@ -1655,14 +1655,14 @@ a:hover {
 .login-form {
   position: relative;
   z-index: 2;
-  max-height: 800px;
+  max-height: 1000px;
   margin-top: 0;
 }
 .login-form h1 {
   font-size: 28px;
   color: #fff;
   text-align: center;
-  margin-bottom: 37px;
+  margin: 100px 0 37px 0;
 }
 .login-form p {
   color: #778ca3;
@@ -1683,7 +1683,7 @@ a:hover {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #999;
-  font-size: 18px;
+  font-size: 16px;
   color: #778ca3;
   outline: none;
 }
@@ -1697,7 +1697,7 @@ a:hover {
 .int-area label {
   position: absolute;
   left: 10px;
-  font-size: 20px;
+  font-size: 16px;
   color: #4b7bec;
   transition: all 0.5s ease;
 }
@@ -1732,13 +1732,13 @@ a:hover {
   margin-top: 30px;
 }
 .btn-area button {
-  width: 100%;
-  height: 50px;
+  width: 300px;
+  height: 45px;
   background: #4b7bec;
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
