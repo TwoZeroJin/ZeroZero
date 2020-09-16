@@ -9,6 +9,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 router.post('/join',isNotLoggedIn,async(req,res,next)=>{
     const {p_id,password,rePass,name,birth,ph_no,addr,email,gender} = req.body;
     try{
+        // BackEnd 유효성 검사
         const exUser = await Patient.findOne({p_id:p_id});
         if(exUser){
             req.flash('errors',{p_id:'이미 존재하는 아이디입니다.'});
@@ -28,7 +29,8 @@ router.post('/join',isNotLoggedIn,async(req,res,next)=>{
             req.flash('errors',{email:'올바른 이메일을 입력하세요.'});
             return res.redirect('/join');
         }
-        const hash = await bcrypt.hash(password, 12)
+        // 검증이 끝나면 DB에 입력받은 데이터 값 추가
+        const hash = await bcrypt.hash(password, 12) // 비밀번호 암호화, password의 값을 12번 암호화 작업
         await Patient.create({
             p_id,
             password :hash,
@@ -49,6 +51,7 @@ router.post('/join',isNotLoggedIn,async(req,res,next)=>{
 router.post('/valid',async(req,res,next)=>{
     const p_id = req.body.p_id;
     try{
+        // if문에 따라 send함수로 값을 보내주고 그 값에 따라 결과를 validate.js에서 출력
         const exUser = await Patient.findOne({p_id:p_id});
         if(exUser){
             res.send('0');
@@ -69,7 +72,7 @@ router.post("/login",isNotLoggedIn,(req,res,next)=>{
             return next(authError);
         }
         if(!user){
-            //localStrategy에서 정의한 message 를 info로 받아오는 것 !!
+            // localStrategy에서 정의한 message 를 info로 받아오는 것 !!
             req.flash('message',info.message);
             return res.redirect('/login');
         }
