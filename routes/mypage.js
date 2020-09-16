@@ -10,12 +10,12 @@ const Step2 = require('../models/Step2');
 
 //Date format 사용
 router.get('/',isLoggedIn,async(req,res,next)=>{
-  reg_date = moment(res.locals.reg_date).format("YYYY년 MM월 DD일");
+  // reg_date = moment(res.locals.reg_date).format("YYYY년 MM월 DD일");
   await Step1.findOne({p_id:res.locals.user})
   .then(result=>{
     res.render('mypage',{
       step1:result,
-      reg_date:reg_date});
+      moment});
   })
   .catch(err=>{
     next(err);
@@ -56,17 +56,18 @@ router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
     const step2 = await Step2.find({p_id:res.locals.user})
     .sort('-write_date')
     .populate('p_id')
-    .skip(skip)   
+    .skip(skip)
     .limit(limit)
     .exec();
-    write_date = moment(step2.write_date).format("YYYY년 MM월 DD일");
+    console.log(step2);
+    // const write_date = moment(step2.write_date).format("YYYY년 MM월 DD일");
     res.render('mytreat', {
       step2:step2,
       currentPage:page,
       maxPage:maxPage,
       limit:limit,
-      write_date:write_date,
-      count:count
+      count:count,
+      moment
     });
   } catch(err){
     console.error(err);

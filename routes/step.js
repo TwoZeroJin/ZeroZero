@@ -6,7 +6,6 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 
 router.get('/step1', isLoggedIn, function(req, res, next) {
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
-        console.log(step1);
         res.render('question/step1', {step1: step1});            //뷰로 보내기
     });
 });
