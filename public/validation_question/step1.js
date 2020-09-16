@@ -1,12 +1,12 @@
 $(function(){
-	$("form").validate({
+	$("form").validate({			//validate 플러그인을 사용
 		//규칙
 		rules:{
 			height:{
 				required : true, //필수입력여부
-				number : true,
-                min: 30,
-                max: 250,
+				number : true,	//숫자사용
+                min: 30,		//최소값
+                max: 250,		//최대값
 			},
 			weight:{
 				required : true, //필수입력여부

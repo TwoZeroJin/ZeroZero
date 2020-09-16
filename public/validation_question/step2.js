@@ -17,8 +17,8 @@ $(function(){
 		//에러 css처리(위치)
 		errorPlacement: function(error, element) 
         {
-            if ( element.is(":radio") ) {
-			   element.next().next().next().after(error);
+            if ( element.is(":radio") ) {				//요소가 radio 박스이면
+			   element.next().next().next().after(error);	//해당요소의 다다다다음 요소에 error를 출력
             }
             else { // 라디오버튼 요소 외 다른 요소들의 경우
                 error.insertAfter( element );
