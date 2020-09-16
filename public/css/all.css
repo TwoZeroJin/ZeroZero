@@ -10,7 +10,8 @@ html {
 body {
   margin: 0;
   height: 100%;
-  font: 1.3rem/1.61538 "Montserrat", sans-serif;
+  font: 15px "맑은고딕", "Malgun Gothic", "Apple SD Gothic Neo", arial, "돋움",
+    Dotum, Tahoma, Geneva, sans-serif;
 }
 
 p {
@@ -888,8 +889,8 @@ a:hover {
   line-height: 21px;
 }
 .footer-holder h4 {
-  margin: 0 0 14px;
-  font-size: 1.6rem;
+  margin: 0 0 20px;
+  font-size: 18px;
   line-height: 1.5;
   font-weight: bold;
 }
@@ -901,6 +902,19 @@ a:hover {
   font-size: 1.5rem;
   line-height: 1.55;
 }
+
+.footer-holder ul li a:hover {
+  padding-left: 5px;
+}
+
+.footer-holder li {
+  margin-bottom: 11px;
+}
+
+.footer-holder a {
+  transition: all 0.3s ease-out 0s;
+}
+
 .footer-holder ul a {
   color: #4b7bec;
 }
@@ -949,8 +963,8 @@ a:hover {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    padding: 0 0 0 25px;
-    margin: 7px 25px 0;
+    margin: 0 25px;
+    text-align: center;
   }
   .opener-holder:before {
     position: absolute;
@@ -959,7 +973,6 @@ a:hover {
     left: 0;
     top: 0;
     bottom: -6px;
-    background: #f4f4f4;
   }
 
   #header {
@@ -973,15 +986,18 @@ a:hover {
     margin: 3px 0 30px 20px;
   }
   #header .btn {
-    float: none;
-    height: 40px;
-    width: min-content;
+    float: right;
+    height: 38px;
+    width: 100px;
     font-size: 1.5rem;
     line-height: 15px;
-    margin: 0 20px 0 0;
-    padding: 12px 40px;
-    display: inline-block;
+    margin: 20px 20px 30px 0;
+    padding: 12px 19px;
     vertical-align: top;
+  }
+
+  #header .btn a {
+    text-align: center;
   }
 
   #nav {
@@ -1006,6 +1022,11 @@ a:hover {
     -webkit-transform: translate3d(0, 30px, 0);
     transform: translate3d(0, 30px, 0);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  #nav p {
+    font-size: 15px;
+    margin-right: 80px;
   }
   #nav .nav-drop > ul {
     display: block;
@@ -1150,7 +1171,7 @@ a:hover {
 
   .area h2 {
     text-align: center;
-    font-size: 4.8rem;
+    font-size: 22px;
     line-height: 1.125;
   }
 
@@ -1635,6 +1656,16 @@ a:hover {
   background: cover; */
 }
 
+.visual .text-block3 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+
 .visual .text-block1::before {
   content: "";
   position: absolute;
@@ -1656,7 +1687,7 @@ a:hover {
   position: relative;
   z-index: 2;
   max-height: 1000px;
-  margin-top: 0;
+  margin-top: 100px;
 }
 .login-form h1 {
   font-size: 28px;
@@ -1671,7 +1702,7 @@ a:hover {
 .int-area {
   width: 350px;
   position: relative;
-  margin-top: 15px;
+  margin: 15px 0;
 }
 
 /*.int-area:first-child {
@@ -1755,15 +1786,104 @@ a:hover {
 
 /* 다빈님이 추가한 css*/
 
-.breadcrumb-item {
-  font-size: 0.8em !important;
-}
 .ellipsis {
   display: block;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: "맑은고딕", "Malgun Gothic", "Apple SD Gothic Neo", arial, "돋움",
+    Dotum, Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.8px;
+}
+
+.ellipsis > h3 {
+  margin-bottom: 50px;
+}
+
+.show-table {
+  position: relative;
+  table-layout: fixed;
+  width: 100%;
+  border-top: 2px solid #888;
+  border-bottom: 2px solid #888;
+}
+
+.show-table tr:first-child {
+  border-bottom: 1px dashed #4b7bec;
+}
+
+.show-table td {
+  padding: 30px 20px;
+  color: #333;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: left;
+}
+
+.show-table td.data {
+  color: #888;
+  font-size: 14px;
+  text-align: right;
+  line-height: 18px;
+}
+
+.show-table td.textus {
+  width: 100%;
+  color: #333;
+  line-height: normal;
+  height: 300px;
+  word-break: break-all;
+  display: inline-block;
+}
+
+.show-table .show-user {
+  width: 20%;
+  color: #333;
+  font-size: 14px;
+  float: right;
+  display: block;
+}
+
+.show-table .tit {
+  font-size: 22px;
+}
+
+.board-table th {
+  height: 50px;
+  padding: 15px 0;
+  color: #3867d6;
+  text-align: center;
+}
+
+.board-table tr {
+  height: 20px;
+  padding: 15px 0;
+  color: #1b2637;
+  line-height: 10px;
+}
+
+.board-table > tbody > tr > td {
+  height: 20px;
+  padding: 15px 0;
+  line-height: 10px;
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+.board-table td.title {
+  width: 80%;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  color: #1b2637;
+  text-align: left;
+  padding: 15px 0 15px 20px;
+}
+
+.board-table td.title a {
+  color: #000;
 }
 
 .board-table {
@@ -1771,13 +1891,15 @@ a:hover {
 }
 .board-table .numId,
 .board-table .views {
-  width: 60px;
+  width: 80px;
   text-align: center;
+  padding: 15px 0;
 }
 .board-table .author,
 .board-table .date {
   width: 100px;
   text-align: center;
+  padding: 15px 0;
 }
 
 .post-body,
@@ -1797,3 +1919,10 @@ a:hover {
 }
 
 /*# sourceMappingURL=all.css.map */
+
+/* 페이징 넘기기 CSS */
+
+.page_wrap {
+  text-align: center;
+  font-size: 0;
+}
