@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <th>가입날짜</th>
-                <td><span><%= reg_date %></span></td>
+                <td><span><%= moment(user.reg_date).format('YYYY년 MM월 DD일') %></span></td>
                 <th>음주</th>
                 <% if (step1) {%>
                     <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
