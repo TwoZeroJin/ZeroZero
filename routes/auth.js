@@ -121,18 +121,24 @@ router.post('/findPwd',async(req,res,next)=>{
 router.post('/newPwd',async(req,res,next)=>{
     const { password,rePass,p_id } = req.body;
     try{
-        if(password!=rePass){
-            res.send(`<script>
+        if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
+            return res.send(`<script>
+            alert('8-16자 사이 숫자와 영문자로 부탁드립니다.');
+            window.history.back();
+            </script>`);
+        }else if(password!=rePass){
+            return res.send(`<script>
             alert('비밀번호를 확인해 주세요.');
             window.history.back();
-            </script>`)
+            </script>`);
+        }else{
+            const newPwd = await bcrypt.hash(password,12);
+            await Patient.findOneAndUpdate({p_id:p_id},{password:newPwd});
+            return res.send(`<script>
+            alert('비밀번호가 변경되었습니다.');
+            window.close();
+            </script>`);
         }
-        const newPwd = await bcrypt.hash(password,12);
-        await Patient.findOneAndUpdate({p_id:p_id},{password:newPwd});
-        return res.send(`<script>
-        alert('비밀번호가 변경되었습니다.');
-        window.close();
-        </script>`)
     }catch(err){
         next(err);
     }

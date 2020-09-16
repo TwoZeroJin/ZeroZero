@@ -49,11 +49,11 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="더조은 약국" id="keyword" size="15"> 
                     <button type="submit">검색하기</button>
                 </form>
                 <form method="post" action="/mypage/myPharmacy">
-                    약국명 : <input type="text" name="myPharmacy" id="myPharmacy" size="15">
+                    약국명 : <input type="text" name="myPharmacy" id="myPharmacy" value="<%=user.myPharmacy%>" size="15">
                 <button type="submit" onclick="selectPharmacy();">지정하기</button></form>
             </div>
         </div>

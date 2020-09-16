@@ -29,11 +29,16 @@ router.route('/myPharmacy')
 .post(async(req,res,next)=>{
   try{
     const myPharmacy = req.body.myPharmacy;
-    await Patient.findOneAndUpdate({p_id:res.locals.user.p_id},{myPharmacy:myPharmacy},{upsert:true});
-    return res.send(`<script> 
-        alert('변경되었습니다..ㅎ;');
-        window.close();
-        </script>`);
+    if(myPharmacy===null||myPharmacy.length===0){
+      return false;
+    }else{
+      await Patient.findOneAndUpdate({p_id:res.locals.user.p_id},{myPharmacy:myPharmacy},{upsert:true});
+      return res.send(`<script> 
+          alert('변경되었습니다..ㅎ;');
+          opener.parent.location.reload();
+          window.close();
+          </script>`);
+    }
   }catch(err){
     next(err);
   }
