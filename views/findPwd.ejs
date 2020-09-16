@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>비밀번호 찾기</h2>
+        <form action="auth/findPwd" method="post">
+            아이디 : <input type="text" name="p_id">
+            전화번호 : <input type="text" name="ph_no">
+            <input type="submit" value="비밀번호 찾기"/>
+        </form>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script>
+        $(function(){
+            $('#close').click(e=>{
+                e.preventDefault();
+                window.close();
+            })
+        })
+    </script>
+    </form>
+</body>
+</html>

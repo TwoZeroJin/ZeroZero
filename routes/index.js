@@ -14,7 +14,7 @@ router.get('/api/patients', (req,res)=>{
     })
 })
 //메인화면을 렌더링하는 함수
-router.get('/',async (req,res,next)=>{
+router.get('/',(req,res,next)=>{
     res.render('index');
 });
 
@@ -28,11 +28,19 @@ router.get('/login',isNotLoggedIn,(req,res,next)=>{
     const message = req.flash('message');
     res.render('login',{message:message});
 });
+
+router.get('/findId',(req,res,next)=>{
+    const message ="";
+    res.render('findId',{message:message});
+});
+router.get('/findPwd',(req,res,next)=>{
+    const newPwd = false;
+    res.render('findPwd',{newPwd:newPwd});
+});
+
 router.get('/aboutus',(req,res,next)=>{
     res.render('aboutus');
 });
-router.get('/healthtopic',(req,res,next)=>{
-    res.render('healthtopic');
-});
+
 
 module.exports = router;
