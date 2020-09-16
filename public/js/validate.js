@@ -12,6 +12,7 @@ $(function(){
                 type:'post',
                 data:{p_id:p_id},
                 success:(data)=>{
+                    // auth/valid로부터 res.send함수로 받은 값에 따라 text값 지정
                     if(data=='0'){
                         $("#noId").css({"color":"red"}).text("이미 존재하는 아이디입니다.");
                         flag1 = false;
@@ -28,7 +29,7 @@ $(function(){
         })
     },"focus":function(){
         $("#noId").text("");
-            flag2 = true;
+            flag1 = true;
     }
     })
     $(".checkPass").on({

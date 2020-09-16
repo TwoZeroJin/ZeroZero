@@ -11,7 +11,7 @@ const connect = require('./models');
 const flash = require('connect-flash');
 const util = require('./util');
 
-
+// Router
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const stepRouter = require('./routes/step');
@@ -22,7 +22,7 @@ const healthTopic = require('./routes/healthtopic');
 
 dotenv.config();
 
-//passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
+//passport폴더 안에 정의된 함수들 require
 const passportConfig = require('./passport');
 passportConfig();
 
@@ -68,7 +68,6 @@ app.use('/mypage',mypageRouter);
 app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
 app.use('/healthtopic', healthTopic);
-
 
 //에러 처리
 app.use((req, res, next) => {

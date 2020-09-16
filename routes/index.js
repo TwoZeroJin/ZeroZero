@@ -5,7 +5,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
  
 //api를 통해 환자 정보를 모두 가져옴
 router.get('/api/patients', (req,res)=>{
-    Patient.findAll()
+    Patient.find()
     .then(result=>{
         res.send(result);
     })
@@ -23,12 +23,11 @@ router.get('/join',isNotLoggedIn,(req,res,next)=>{
     const errors = req.flash('errors')[0] || {};
     res.render('join',{errors:errors});
 })
-
 router.get('/login',isNotLoggedIn,(req,res,next)=>{
     const message = req.flash('message');
     res.render('login',{message:message});
 });
-
+// 아이디/비번 찾기
 router.get('/findId',(req,res,next)=>{
     const message ="";
     res.render('findId',{message:message});

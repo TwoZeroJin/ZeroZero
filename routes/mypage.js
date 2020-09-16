@@ -10,7 +10,6 @@ const Step2 = require('../models/Step2');
 
 //Date format 사용
 router.get('/',isLoggedIn,async(req,res,next)=>{
-  // reg_date = moment(res.locals.reg_date).format("YYYY년 MM월 DD일");
   await Step1.findOne({p_id:res.locals.user})
   .then(result=>{
     res.render('mypage',{
@@ -59,8 +58,6 @@ router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
     .skip(skip)
     .limit(limit)
     .exec();
-    console.log(step2);
-    // const write_date = moment(step2.write_date).format("YYYY년 MM월 DD일");
     res.render('mytreat', {
       step2:step2,
       currentPage:page,
