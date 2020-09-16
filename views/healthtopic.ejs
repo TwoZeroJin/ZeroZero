@@ -49,64 +49,26 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
+              <!-- 코로나 확진자 수 크롤링 -->
               <h4 align="left">코로나 환자 실시간 현황</h4>
               <table border="2px solid black">
-                <tr>
-                  <td><%= resultArr[0]._text %></td>
-                  <td><%= resultArr[0]._num  %></td>
-                </tr>
-                <tr>
-                  <td><%= resultArr[1]._text %></td>
-                  <td><%= resultArr[1]._num  %></td>
-                </tr>
-                <tr>
-                  <td><%= resultArr[2]._text %></td>
-                  <td><%= resultArr[2]._num  %></td>
-                </tr>
-                <tr>
-                  <td><%= resultArr[3]._text %></td>
-                  <td><%= resultArr[3]._num  %></td>
-                </tr>
+                <% coronaArr.forEach(function(element) { %>
+                  <tr>
+                    <td><%=element._text %></td>
+                    <td><%=element._num %> </td>
+                  </tr>
+                <% }) %>
               </table>
 
+              <!-- 건강정보 크롤링 -->
               <h4 align="left">이달의 건강소식</h4>
               <table border="2px solid black" text-align="left">
-                <tr>
-                  <td>1</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[0]._addr%>" target="_blank"><%= infoArr[0]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[1]._addr%>" target="_blank"><%= infoArr[1]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[2]._addr%>" target="_blank"><%= infoArr[2]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[3]._addr%>" target="_blank"><%= infoArr[3]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[4]._addr%>" target="_blank"><%= infoArr[4]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[5]._addr%>" target="_blank"><%= infoArr[5]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[6]._addr%>" target="_blank"><%= infoArr[6]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[7]._addr%>" target="_blank"><%= infoArr[7]._title %></a></td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td><a href="http://www.cdc.go.kr/<%=infoArr[8]._addr%>" target="_blank"><%= infoArr[8]._title %></a></td>
-                </tr>
+                <% infoArr.forEach(function(element, i) { %>
+                  <tr>
+                    <td><%= i+1 %></td>
+                    <td><a href="http://www.cdc.go.kr/<%=element._addr%>" target="_blank"><%= element._title %></a></td>
+                    </tr>
+                <%  }) %>
               </table>
               <p>출처: 질병관리청</p>
             </div>
