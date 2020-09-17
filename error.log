@@ -17,3 +17,8 @@ undefined
   level: 'error',
   timestamp: '2020-09-17T04:22:17.456Z'
 }
+{
+  message: 'GET /favicon.ico 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-17T08:46:00.597Z'
+}
