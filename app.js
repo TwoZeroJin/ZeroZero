@@ -10,7 +10,7 @@ const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
 
-const helmpt = require('helmet');
+const helmet = require('helmet');
 const hpp = require('hpp');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
@@ -30,10 +30,10 @@ const healthTopic = require('./routes/healthtopic');
 
 dotenv.config();
 //dotenv보다 밑에 있어야함
-const redisClient = redis.createClient({
-  url:`redis://${process.env.REDIS_HOST}:${process.env.REDIES_PORT}`,
-  password:process.env.REDIS_PASSWORD,
-});
+// const redisClient = redis.createClient({
+//   url:`redis://${process.env.REDIS_HOST}:${process.env.REDIES_PORT}`,
+//   password:process.env.REDIS_PASSWORD,
+// });
 //passport폴더 안에 정의된 함수들 require
 const passportConfig = require('./passport');
 passportConfig();
@@ -65,7 +65,7 @@ app.use(session({
       httpOnly:true,
       secure:false,
   },
-  store:new RedisStore({client:redisClient}),
+  // store:new RedisStore({client:redisClient}),
 }));
 app.use(flash());
 app.use(methodOverride('_method'));

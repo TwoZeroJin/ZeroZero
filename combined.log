@@ -36,3 +36,23 @@ undefined
   level: 'error',
   timestamp: '2020-09-17T04:22:17.456Z'
 }
+{
+  message: '에러페이지에 접속되었습니다.',
+  level: 'info',
+  timestamp: '2020-09-17T13:07:26.720Z'
+}
+{
+  message: 'GET /favicon.ico 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-17T13:07:26.729Z'
+}
+{
+  message: '에러페이지에 접속되었습니다.',
+  level: 'info',
+  timestamp: '2020-09-17T13:17:18.986Z'
+}
+{
+  message: 'GET /favicon.ico 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-17T13:17:19.003Z'
+}
