@@ -4,24 +4,66 @@
  commentForm
  commentError
 */%>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>원격 의료 매칭 서비스, 아만닥</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<meta name="msapplication-TileColor" content="#3867d6" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/css/all.css" />
+<link
+href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+rel="stylesheet"
+type="text/css"
+/>
+<!-- jquery & bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<script src="/js/boardscript.js"></script>
+<style>
+  .comment-edit,
+  .comment-edit-enabled .comment-show {
+    display: none;
+  }
+  .comment-edit-enabled .comment-edit {
+    display: inherit;
+  }
+</style>
+</head>
 
 <form action="<%= actionUrl %>" method="post">
-  <fieldset <%= !isAuthenticated?'disabled':'' %>>
-    <div class="row">
-      <div class="col-8"> <!-- 2 -->
-        <textarea name="text" rows="2" class="form-control <%= (commentError._id == comment._id && commentError.errors.text)?'is-invalid':'' %>"><%= (commentForm._id == comment._id)?commentForm.form.text:comment.text %></textarea>
-      </div>
-      <div class="col-4">
-        <% if(comment._id){ %>
-          <button type="submit" class="btn btn-primary h-100 mr-2 pl-4 pr-4">Edit</button>
-<!-- 3 --><a href="javascript:void(0)" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">Cancel</a>
-        <% } else { %>
-          <button type="submit" class="btn btn-primary h-100 mr-2">댓글 달기</button>
+  <div <%= !isAuthenticated?'disabled':'' %>>
+    <div class="widget-area no-padding blank">
+      <div class="status-upload">
+        <form>
+        <textarea placeholder="댓글을 작성하세요" name="text"><%= (commentForm._id == comment._id)?commentForm.form.text:comment.text %></textarea>
+          <div>
+            <% if(comment._id){ %>
+              <button type="submit" class="btn btn-primary-1">수정</button>
+              <a href="javascript:void(0)" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">삭제</a>
+              <% } else { %>
+                <button type="submit" class="btn btn-success green">등록하기</button>
+                <% } %>
+          </div>
+        <% if(commentError._id == comment._id && commentError.errors.text){ %>
+          <span><%= commentError.errors.text.message %></span>
         <% } %>
+        </form>
       </div>
     </div>
-    <% if(commentError._id == comment._id && commentError.errors.text){ %>
-      <span class="invalid-feedback d-block"><%= commentError.errors.text.message %></span>
-    <% } %>
-  </fieldset>
+  </div>
 </form>
+</html>

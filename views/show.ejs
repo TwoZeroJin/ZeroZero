@@ -5,38 +5,38 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>원격 의료 매칭 서비스, 아만닥</title>
       <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <meta name="msapplication-TileColor" content="#3867d6" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/all.css" />
-    <link
-      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-      <!-- jquery & bootstrap -->
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-      ></script>
-      <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-      <script src="/js/boardscript.js"></script>
-      <style>
-        .comment-edit,
-        .comment-edit-enabled .comment-show {
-          display: none;
-        }
-        .comment-edit-enabled .comment-edit {
-          display: inherit;
-        }
-      </style>
+      <meta name="msapplication-TileColor" content="#3867d6" />
+      <meta name="theme-color" content="#ffffff" />
+      <link rel="stylesheet" href="/css/bootstrap.css" />
+      <link rel="stylesheet" href="/css/all.css" />
+      <link
+        href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+        rel="stylesheet"
+        type="text/css"
+      />
+        <!-- jquery & bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"
+        ></script>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        <script src="/js/boardscript.js"></script>
+        <style>
+          .comment-edit,
+          .comment-edit-enabled .comment-show {
+            display: none;
+          }
+          .comment-edit-enabled .comment-edit {
+            display: inherit;
+          }
+        </style>
     </head>
     <body>
       <div id="wrapper">
@@ -69,12 +69,16 @@
             </nav>
           </div>
         </header>
+
+
       <section class="visual">
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
               <div class="ellipsis">
                 <h3>게시판</h3>
+
+
                 <table class="show-table">
                   <colgroup>
                     <col style="width: 80%;">
@@ -82,138 +86,138 @@
                   </colgroup>
                   <tbody>
                     <tr>
-                      <td>
-                        <span class="tit"><%= qna.title %></span>
+                      <td class="tit">
+                        <span><%= qna.title %></span>
                       </td>
-                      <td class="data"><span data-date-time="<%= qna.createdAt %>"></span></td>
+                      <td class="data"><p wrap="virtual"> <span data-date-time="<%= qna.createdAt %>"></p></span></td>
                     </tr>
-                    <tr>
                       <td class="textus" colspan="2">
-                        <p><%= qna.content %></p>
-                      </td>
+                        <p>
+                        <%= qna.content %></td>
+                        </p>
                         <td class="show-user">
-                        <span>작성자</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %>
-                        <span>조회수</span> : <span><%= qna.views %></span>
-                        </td>
+                          <span>작성자</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %>
+                          <span>조회수</span> : <span><%= qna.views %></span>
+                          </td>
+                      <tr>
+                        
                     </tr>
                   </tbody>
                 </table>
               </div>
-      <div class="container mb-3">
-        <div class="card">
-          
-            <div class="row">
-              <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1">
-            </div>
-            <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2">
-              <!-- 1 -->
-              <div class="post-info card m-2 p-2">
-                <% if(qna.updatedAt) { %>
+
+              <!-- 글 수정되면 실행됨 -->
                 <div>
-                  <span>Updated</span> :
-                  <span data-date-time="<%= qna.updatedAt %>"></span>
+                    <% if(qna.updatedAt) { %>
+                    <div>
+                      <span>(수정됨)</span> :
+                      <span data-date-time="<%= qna.updatedAt %>"></span>
+                    </div>
+                    <% } %>
                 </div>
-                <!-- 2 -->
-                <% } %>
-              </div>
+
+            </div> <!-- Heading-holder의 끝 -->
+            
+            <!-- 목록 / 수정 / 삭제 button show -->
+            <div class="show-btn">
+              <a class="btn btn-primary-1" href="/qna">목록으로</a>
+              <% if(isAuthenticated && qna.reg_id && user.id == qna.reg_id.id){ %>
+              <a class="btn btn-primary-1" href="/qna/<%= qna._id %>/edit">수정</a>
+              <form
+                action="/qna/<%= qna._id %>?_method=delete"
+                method="post"
+                class="d-inline">
+                <a
+                  class="btn btn-primary-1"
+                  href="javascript:void(0)"
+                  onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
+                  >삭제</a
+                >
+              </form>
+              <% } %>
             </div>
-          </div>
-        </div>
-        <div class="mt-3">
-          <a class="btn btn-primary" href="/qna">뒤로</a>
-          <% if(isAuthenticated && qna.reg_id && user.id == qna.reg_id.id){ %>
-          <a class="btn btn-primary" href="/qna/<%= qna._id %>/edit">수정</a>
-          <form
-            action="/qna/<%= qna._id %>?_method=delete"
-            method="post"
-            class="d-inline"
-          >
-            <a
-              class="btn btn-primary"
-              href="javascript:void(0)"
-              onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
-              >삭제</a
-            >
-          </form>
-          <% } %>
-        </div>
-        <!-- 댓글 show -->
-        <h4 class="mt-3">Comments</h4>
-        <!-- 1 -->
-        <% if(comments.length){ %>
-        <div class="mt-3 border-bottom">
-          <% comments.forEach(function(comment) { %>
-          <div class="border-top pt-1 pb-1">
-            <!-- 4 -->
-            <% if(comment.isDeleted){ %>
-            <div class="text-muted p-2">(Deleted Commnet)</div>
-            <% } else { %>
-            <div class="row">
-              <div class="col-3 col-md-2 col-lg-1 pl-4">
-                <%= comment.commenter.p_id %>
-              </div>
-              <!-- 1 -->
-              <div
-                id="comment-<%= comment._id %>"
-                class="col-9 col-md-10 col-lg-11 <%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>"
-              >
-                <div class="comment-show">
-                  <div class="comment-text mb-3"><%= comment.text %></div>
-                  <small class="d-block">
-                    (Created:
-                    <span data-date-time="<%= comment.createdAt %>"></span>
-                    <!-- 5 -->
-                    <% if(comment.updatedAt){ %> | Updated:
-                    <span data-date-time="<%= comment.updatedAt %>"></span>
-                    <% } %> )
-                  </small>
-                  <% if(isAuthenticated && comment.commenter && user.id ==
-                  comment.commenter._id){ %>
-                  <small class="d-block">
-                    <!-- 2 -->
-                    <a
-                      href="javascript:void(0)"
-                      onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
-                      >수정</a
-                    >
-                    |
-                    <!-- 6 -->
-                    <form
-                      action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
-                      method="post"
-                      class="d-inline"
-                    >
-                      <a
-                        href="javascript:void(0)"
-                        onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
-                        >삭제</a
-                      >
-                    </form>
-                  </small>
-                  <% } %>
-                </div>
-                <!-- 3 -->
-                <div class="comment-edit">
-                  <%- include('./comment-form', { actionUrl:'/comments/' +
-                  comment._id + '?postId=' + qna._id + '&_method=put', comment:
-                  comment, commentForm: commentForm, commentError: commentError,
-                  }); %>
+
+            <!-- 여기부터 댓글 show -->
+            <div>
+            <h4>댓글</h4>
+            <% if(comments.length){ %>
+              <div class="show-comment">
+                <% comments.forEach(function(comment) { %>
+                <div class="border-top">
+                  <% if(comment.isDeleted){ %>
+                  <div>(삭제된 댓글입니다.)</div>
+                  <% } else { %>
+
+                    <!-- 삭제가 안됐으면 댓글 보여줌( id, 내용, 날짜, 수정 / 삭제 버튼) -->
+                    <div class="show-comment">
+                      <%= comment.commenter.p_id %></div>
+                      <div id="comment-<%= comment._id %>">
+                      <!-- class="<%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>" --> 
+                      
+                      <div class="comment-show">
+                        <p><%= comment.text %></p>
+
+                        <!-- 댓글 작성 시간 -->
+                        <small>(
+                        <span data-date-time=" <%= comment.createdAt %>"></span>
+                        <% if(comment.updatedAt){ %> |(수정됨):
+                          <span data-date-time="<%= comment.updatedAt %>"></span>
+                          <% } %> )
+                        </small>
+
+                        <!-- small 수정 / 삭제 -->
+                        <% if(isAuthenticated && comment.commenter && user.id ==
+                        comment.commenter._id){ %>
+                          <small>
+                          <a
+                            href="javascript:void(0)"
+                            onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
+                            $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
+                            >수정</a>
+                          |
+                          <form
+                            action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
+                            method="post"
+                            class="d-inline"
+                          >
+                            <a
+                              href="javascript:void(0)"
+                              onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
+                              >삭제</a>
+                          </form>
+                          </small>
+                        <% } %>
+                      </div>
+                          <div class="comment-edit">
+                            <%- include('./comment-form', { actionUrl:'/comments/' +
+                              comment._id + '?postId=' + qna._id + '&_method=put', comment:
+                              comment, commentForm: commentForm, commentError: commentError,
+                              }); %>
+                          </div>
+                        <% } %>
+                      </div> <!-- border-top div 끝 -->
+                      <% }) %>
+                    </div> <!-- show comment div 끝-->
+                    <% } %>
+                  </div> <!-- 댓글 show 첫번쨰 div 끝 -->
+
+                  <!-- 여기까지 댓글 show -->
+
+
                 </div>
               </div>
-            </div>
-            <% } %>
-          </div>
-          <% }) %>
-        </div>
-        <% } %>
-        <div class="mt-3">
-          <!-- 7 -->
+
+
+      <!-- 댓글 입력창 -->
+      <div class="widget-area no-padding blank">
+        <div class="status-upload">
           <%- include('./comment-form', { actionUrl:'/comments?postId=' + qna._id,
           comment: {}, commentForm: commentForm, commentError: commentError, });
           %>
         </div>
       </div>
     </div>
+
   </section>
     <footer id="footer">
       <div class="container">
@@ -261,9 +265,8 @@
         </div>
     </footer>
   </div>
-  <script src="./js/jquery-1.11.2.min.js"></script>
-  <script src="./js/bootstrap.js"></script>
-  <script src="./js/jquery.main.js"></script>
+  <script src="/js/jquery-1.11.2.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>

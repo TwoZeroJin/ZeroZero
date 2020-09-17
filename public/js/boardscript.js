@@ -6,12 +6,12 @@ $(function () {
   function getDate(dateObj) {
     if (dateObj instanceof Date)
       return (
-        dateObj.getFullYear() +
-        "년 " +
+        dateObj.getFullYear() -
+        2000 +
+        "." +
         get2digits(dateObj.getMonth() + 1) +
-        "월 " +
-        get2digits(dateObj.getDate()) +
-        "일"
+        "." +
+        get2digits(dateObj.getDate())
       );
   }
 

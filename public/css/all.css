@@ -136,6 +136,10 @@ a:hover {
   letter-spacing: 0;
 }
 
+.heading-holder h3 {
+  margin: 30px 0;
+}
+
 #nav {
   overflow: hidden;
   text-align: right;
@@ -1803,6 +1807,12 @@ a:hover {
   margin-bottom: 50px;
 }
 
+.show-btn {
+  display: flex;
+  position: relative;
+  margin-bottom: 50px;
+}
+
 .show-table {
   position: relative;
   table-layout: fixed;
@@ -1816,7 +1826,6 @@ a:hover {
 }
 
 .show-table td {
-  padding: 30px 20px;
   color: #333;
   font-size: 16px;
   line-height: 26px;
@@ -1834,9 +1843,18 @@ a:hover {
   width: 100%;
   color: #333;
   line-height: normal;
-  height: 300px;
+  height: 500px;
   word-break: break-all;
-  display: inline-block;
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+.show-table td.textus p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  word-break: break-all;
+  white-space: pre-line;
 }
 
 .show-table .show-user {
@@ -1847,8 +1865,9 @@ a:hover {
   display: block;
 }
 
-.show-table .tit {
+.show-table td.tit {
   font-size: 22px;
+  padding: 30px 20px;
 }
 
 .board-table th {
@@ -1873,7 +1892,7 @@ a:hover {
   vertical-align: inherit;
 }
 
-.board-table td.title {
+.board-table .title {
   width: 80%;
   font-size: 16px;
   letter-spacing: 0.8px;
@@ -1902,20 +1921,21 @@ a:hover {
   padding: 15px 0;
 }
 
+.board-table .title {
+  padding: 15px 0;
+}
+
+#text {
+  overflow: hidden;
+}
+
 .post-body,
 .comment-text {
   white-space: pre-line;
+  width: 100%;
 }
 .post-info {
   font-size: 0.8em;
-}
-.comment-edit,
-.comment-edit-enabled .comment-show {
-  display: none;
-}
-
-.comment-edit-enabled .comment-edit {
-  display: inherit;
 }
 
 /*# sourceMappingURL=all.css.map */
@@ -1925,4 +1945,159 @@ a:hover {
 .page_wrap {
   text-align: center;
   font-size: 0;
+}
+
+/* 댓글창 css */
+
+.d-block {
+  width: max-content;
+}
+
+.widget-area.blank {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+}
+body .no-padding {
+  padding: 0;
+}
+
+.widget-area {
+  background-color: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  float: left;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.status-upload {
+  background: none repeat scroll 0 0 #f5f5f5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  float: left;
+  width: 100%;
+}
+
+.status-upload form {
+  float: left;
+  width: 100%;
+  padding: 0;
+}
+.status-upload form textarea {
+  background: none repeat scroll 0 0 #fff;
+  border: medium none;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -ms-border-radius: 4px 4px 0 0;
+  -o-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+  color: #777777;
+  float: left;
+  font-size: 14px;
+  height: 142px;
+  letter-spacing: 0.3px;
+  padding: 20px;
+  margin: 10px;
+  width: 90%;
+  resize: vertical;
+  outline: none;
+  border: 1px solid #f2f2f2;
+}
+
+.status-upload ul {
+  float: left;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0 0 0 15px;
+  width: auto;
+}
+.status-upload ul > li {
+  float: left;
+}
+.status-upload ul > li > a {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  color: #777777;
+  float: left;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  margin: 10px 0 10px 10px;
+  text-align: center;
+  -webkit-transition: all 0.4s ease 0s;
+  -moz-transition: all 0.4s ease 0s;
+  -ms-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+  width: 30px;
+  cursor: pointer;
+}
+.status-upload ul > li > a:hover {
+  background: none repeat scroll 0 0 #606060;
+  color: #fff;
+}
+.status-upload form button {
+  border: medium none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  margin: 64px 0;
+  padding: 6px 15px;
+}
+
+.status-upload form button > i {
+  margin-right: 7px;
+}
+
+.show-comment {
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.show-comment p {
+  display: inline-block;
+  position: relative;
+}
+
+.comment-edit,
+.comment-edit-enabled .comment-show {
+  display: none;
+}
+.comment-edit-enabled .comment-edit {
+  display: inherit;
+}
+
+.comment-show {
+  float: left;
+  margin: 50px;
+  font-size: 14px;
 }
