@@ -54,17 +54,3 @@ router.get('/step3', isLoggedIn ,function(req, res){
 });
 
 module.exports = router;
-
-// functions
-function parseError(errors){
-    var parsed = {};
-    if(errors.name == 'ValidationError'){
-      for(var name in errors.errors){
-        var validationError = errors.errors[name];
-        parsed[name] = { message:validationError.message };
-      }
-    } else {
-      parsed.unhandled = JSON.stringify(errors);
-    }
-    return parsed;
-  };

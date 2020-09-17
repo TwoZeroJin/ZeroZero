@@ -24,6 +24,7 @@ const qnaSchema = new Schema({
     },
     numId:{
         type:Number
+        
     },
     createdAt:{
         type:Date,

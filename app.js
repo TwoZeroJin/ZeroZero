@@ -9,8 +9,6 @@ const path = require('path');
 const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
-const util = require('./util');
-
 
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
@@ -18,7 +16,7 @@ const stepRouter = require('./routes/step');
 const mypageRouter = require('./routes/mypage');
 const qnaRouter = require('./routes/qna');
 const commentRouter = require('./routes/comments');
-
+const connectRouter = require('./routes/connect');
 dotenv.config();
 
 //passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
@@ -26,6 +24,11 @@ const passportConfig = require('./passport');
 passportConfig();
 
 const app = express();
+//http 서버 생성
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const { v4: uuidV4 } = require('uuid');
+
 //view 엔진을 html(ejs)로 설정
 app.set('view engine','ejs');
 //몽고디비연결
@@ -66,6 +69,26 @@ app.use('/question', stepRouter);
 app.use('/mypage',mypageRouter);
 app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
+//app.use('/connect', connectRouter);
+app.use('/connect', (req, res) => {
+  res.redirect(`/${uuidV4()}`);
+});
+
+app.use('/connect/:room', (req, res) => {
+  res.render('room', { roomId: req.params.room });
+});
+
+//소켓 연결
+io.on('connection', (socket) => {
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit('user-connected', userId);
+
+    socket.on('disconnect', () => {
+      socket.to(roomId).broadcast.emit('user-disconnected', userId);
+    });
+  });
+});
 
 
 //에러 처리

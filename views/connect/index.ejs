@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>원격 의료 매칭 서비스, 아만닥</title>
+    
+        <meta name="msapplication-TileColor" content="#3867d6" />
+    
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="stylesheet" href="../css/bootstrap.css" />
+        <link
+          rel="stylesheet"
+          href="../fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="../css/all.css" />
+        <link
+          href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+          rel="stylesheet"
+          type="text/css"
+        />
+      </head>
+<body>
+    <div>
+    <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="../images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <div class="opener-holder">
+              <a href="#" class="nav-opener"><span></span></a>
+            </div>
+            <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님!! ㅎㅎ</p>
+              <a href="/mypage">내 정보</a>
+              <a href="/auth/logout">로그아웃</a>
+            <% } %>
+            <div class="nav-drop">
+              <ul>
+                <li class="active visible-sm visible-xs">
+                  <a href="#">Home</a>
+                </li>
+                <li><a href="aboutus.html">소개</a></li>
+                <li><a href="healthtopic.html">의학정보</a></li>
+                <li><a href="qna.html">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <div>
+        <h3<%= user.name %>님께서 작성하신 내용입니다.</h3>
+              <div>
+                <h3>개인신상</h3>
+                신장: <%= step1.height %> <br>
+
+                체중: <%= step1.weight %> <br>
+                
+                <% if (step1.history == '') { %> 과거병력: 해당없음
+                <% } else { %> 과거병력: <%= step1.history %> <% } %> <br> 
+
+                <% if (step1.family_member == '') { %> 가족력: 해당없음
+                <% } else { %> 가족력: <%= step1.family_member %> <%= step1.family_disease %> <% } %> <br>
+
+                <% if (step1.drug == '') { %> 복용약: 해당없음
+                <% } else { %> 복용약: <%= step1.drug %> <% } %> <br> 
+                음주: <%= step1.drink_week %> <%= step1.drink_cnt %> <br>
+                담배: <%= step1.smoke_cnt %>
+              </div>
+              <div>
+                <h3>예진표</h3>
+                초진여부: <%= step2.treat_time %> <br>
+                진료과목: <%= step2.treat_div %> <br>
+                증상: <%= step2.disease_desc  %> <br>
+              </div>
+    </div>
+    <div>
+        <%= user.name %>
+        <video id="localVideo" autoplay width="480px"></video>
+        <h5>의사 화면</h5>>
+        <video id="remoteVideo" width="480px" autoplay></video>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="rts.js"></script>
+</body>
+</html>

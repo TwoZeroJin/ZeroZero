@@ -73,6 +73,7 @@
        <!-- 1 --> <div id="comment-<%= comment._id %>" class="col-9 col-md-10 col-lg-11 <%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>">
                   <div class="comment-show">
                     <div class="comment-text mb-3"><%= comment.text %></div>
+                    
                     <small class="d-block">
                       (Created: <span data-date-time="<%= comment.createdAt %>"></span>
            <!-- 5 --> <% if(comment.updatedAt){ %>
@@ -80,6 +81,7 @@
                       <% } %>
                       )
                     </small>
+
                     <% if(isAuthenticated && comment.commenter && user.id == comment.commenter._id){ %>
                       <small class="d-block">
              <!-- 2 --> <a href="javascript:void(0)" onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')">Edit</a>
@@ -90,7 +92,7 @@
                       </small>
                     <% } %>
                   </div>
-       <!-- 3 --> <div class="comment-edit">
+                 <div class="comment-edit">
                     <%- include('./partials/comment-form', {
                       actionUrl:'/comments/' + comment._id + '?postId=' + qna._id + '&_method=put',
                       comment: comment,
@@ -106,7 +108,7 @@
         </div>
       <% } %>
 
-      <div class="mt-3"> <!-- 7 -->
+      <div class="mt-3">
         <%- include('./partials/comment-form', {
           actionUrl:'/comments?postId=' + qna._id,
           comment: {},
