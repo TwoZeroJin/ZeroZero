@@ -7,7 +7,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 /* -----------------STEP 1----------------- */
 /* 예진표 STEP1 - get 메소드 페이지 */
 router.get('/step1', isLoggedIn, async(req, res, next)=>{
-    await Step1.findOne({p_id : res.locals.user}, function(err, step1) {  // 로그인 되어있는 사용자의 정보를 'step1' 컬렉션에서 찾아
+    await Step1.findOne({p_id : res.locals.user}, async(err, step1)=>{  // 로그인 되어있는 사용자의 정보를 'step1' 컬렉션에서 찾아
         res.render('question/step1', {step1: step1});              // 뷰로 보내기
     });
 });
