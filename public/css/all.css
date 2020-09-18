@@ -2101,3 +2101,10 @@ body .no-padding {
   margin: 50px;
   font-size: 14px;
 }
+
+.updated {
+  text-align: left;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 20px;
+}

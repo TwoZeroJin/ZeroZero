@@ -109,8 +109,8 @@
               <!-- 글 수정되면 실행됨 -->
                 <div>
                     <% if(qna.updatedAt) { %>
-                    <div>
-                      <span>(수정됨)</span> :
+                    <div class="updated">
+                      <span>수정됨</span> :
                       <span data-date-time="<%= qna.updatedAt %>"></span>
                     </div>
                     <% } %>
