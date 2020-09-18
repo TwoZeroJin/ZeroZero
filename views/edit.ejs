@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <meta name="msapplication-TileColor" content="#3867d6" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="stylesheet" href="/css/bootstrap.css" />
+  <link rel="stylesheet" href="/css/all.css" />
+  <link
+    href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+    rel="stylesheet"
+    type="text/css"
+  />
+    <!-- jquery & bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <script src="/js/boardscript.js"></script>
+    <style>
+      .comment-edit,
+      .comment-edit-enabled .comment-show {
+        display: none;
+      }
+      .comment-edit-enabled .comment-edit {
+        display: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="/images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
+            <div class="opener-holder">
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
+            </div>
+            <div class="nav-drop">
+              <ul>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <section class="visual">
+        <div class="container">
+          <div class="text-block">
+            <div class="heading-holder">
+              <section>
+              <form action="/qna/<%= qna._id %>?_method=put" method="post">
+                <div class="form-group">
+                  <label for="title">제목</label>
+                  <input type="text" id="title" name="title" value="<%= qna.title %>" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="body">내용</label>
+                    <textarea id="content" name="content" rows="5" class="form-control"><%= qna.content %></textarea>
+                </div>
+                <div class="new-btn">
+                  <a class="btn btn-primary-1" href="/qna/<%= qna._id %>">뒤로</a>
+                  <button type="submit" class="btn btn-primary-1">수정</button> </div>
+                </div>
+              </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-holder">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="logo">
+                <a href="#"><img src="/images/logo.svg" alt="amandoc" /></a>
+              </div>
+              <p>아무때나 만나는 내 손 안의 닥터</p>
+            </div>
+            <div class="col-md-2">
+              <h4>Navigation</h4>
+              <ul>
+                <li><a href="/">메인페이지</a></li>
+                <li><a href="./aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <div class="text-holder">
+                <strong class="phone"
+                  ><a href="tel:0282821111">02 8282 1111</a></strong
+                >
+                <span class="available">고객상담시간 : 12PM - 18PM</span>
+                <h4>아만닥</h4>
+                <address>
+                  아만빌딩 10F, <br />
+                  서울특별시 종로구 종로 55 종로 55
+                </address>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="text-frame">
+                <h4>Info</h4>
+                <p>
+                  Wisi enim ad minim veniam, quis nostrud exerci tation
+                  ullamcorper suscipit lobortis nisl ut aliquip ex commodo
+                  consequat. Autem vel hendrerit iriure dolor in hendrerit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </footer>
+  </div>
+  <script src="./js/jquery-1.11.2.min.js"></script>
+  <script src="./js/bootstrap.js"></script>
+  <script src="./js/jquery.main.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>

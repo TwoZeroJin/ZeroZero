@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <meta name="msapplication-TileColor" content="#3867d6" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+      <!--jquery & bootstrap-->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <!--<<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+      <script src="/js/boardscript.js"></script>
+      <link rel="stylesheet" href="css/all.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <div class="opener-holder">
+              <a href="#" class="nav-opener"><span></span></a>
+              <% if (user) { %>
+              <p>반갑습니다!<%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
+            </div>
+            <div class="nav-drop">
+              <ul>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="visual">
+        <div class="container">
+          <div class="text-block">
+            <div class="heading-holder">
+          <div class="ellipsis">
+            <h3>게시판</h3>
+            <colgroup>
+              <col style="width: 8%;">
+              <col style="width: 74%;">
+              <col style="width: 9%;">
+              <col style="width: 9%;">
+            </colgroup>
+        <table class="board-table table">
+          <thead>
+            <tr>
+              <th scope="col" class="numId">No</th>
+              <th scope="col" class="title">제목</th>
+              <th scope="col" class="views">조회수</th> 
+              <th scope="col" class="author">작성자</th>
+              <th scope="col" class="date">작성일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(qna == null || qna.length == 0){ %>
+              <tr>
+                <td colspan=5> 게시글이 없습니다. </td>
+              </tr>
+            <% } %>
+            <% qna.forEach(function(qna) { %>
+              <tr>
+                <td class="numId"><%= qna.numId %></td>
+                <td class="title">
+                  <a href="/qna/<%= qna._id %>"><div><%= qna.title %></div></a>
+                </td>
+                <td class="views"><%= qna.views %></td>
+                <td class="author"> <!-- 2 -->
+                  <div class="ellipsis"><%= qna.reg_id ? qna.reg_id.p_id : "" %></div>
+                </td>
+                <td class="date">
+                  <span data-date="<%= qna.createdAt %>"></span> <!-- 1 -->
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <div>
+        <% if(isAuthenticated){ %>
+        <a class="btn btn-primary-1" href="/qna/new">글 작성하기</a>
+        <% } %>
+      </div>
+      <nav class="col-8">
+        <% 
+          var offset = 2;
+          var previousBtnEnabled = currentPage>1;
+          var nextBtnEnabled = currentPage<maxPage;
+        %>
+        <div class="page_wrap">
+          <div class="page_nation">
+          <ul class="pagination pagination-sm justify-content-center align-items-center h-100 mb-0"> 
+              <li class="page-item <%= previousBtnEnabled?'':'disabled' %>">
+              <a href="/qna?page=<%= currentPage-1 %>&limit=<%= limit %>" <%= previousBtnEnabled?'':'tabindex=-1' %>>«</a>
+              </li>
+            <% for(i=1;i<=maxPage;i++){ %>
+              <% if(i==1 || i==maxPage || (i>=currentPage-offset && i<=currentPage+offset)){ %>
+                <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/qna?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
+              <% } else if(i==2 || i==maxPage-1){ %>
+                <li><a>...</a></li>
+              <% } %>
+            <% } %>
+              <li class="page-item <%= nextBtnEnabled?'':'disabled' %>">
+              <a href="/qna?page=<%= currentPage+1 %>&limit=<%= limit %>" <%= nextBtnEnabled?'':'tabindex=-1' %>>»</a>
+            </li>
+          </ul>
+          </div>
+        </div>
+            </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-holder">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="logo">
+              <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
+            </div>
+            <p>아무때나 만나는 내 손 안의 닥터</p>
+          </div>
+          <div class="col-md-2">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="/">메인페이지</a></li>
+              <li><a href="/aboutus">소개</a></li>
+              <li><a href="/healthtopic">의학정보</a></li>
+              <li><a href="/qna">게시판</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <div class="text-holder">
+              <strong class="phone"
+                ><a href="tel:0282821111">02 8282 1111</a></strong
+              >
+              <span class="available">고객상담시간 : 12PM - 18PM</span>
+              <h4>아만닥</h4>
+              <address>
+                아만빌딩 10F, <br />
+                서울특별시 종로구 종로 55 종로 55
+              </address>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-frame">
+              <h4>Info</h4>
+              <p>
+                Wisi enim ad minim veniam, quis nostrud exerci tation
+                ullamcorper suscipit lobortis nisl ut aliquip ex commodo
+                consequat. Autem vel hendrerit iriure dolor in hendrerit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </footer>
+</div>
+<script src="/js/jquery-1.11.2.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/jquery.main.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

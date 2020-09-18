@@ -1,50 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <meta charset="UTF-8" />
     <title>Join FORM</title>
-</head>
-<body>
-    <form method="post" action="/auth/join">
-        <fieldset>
-          <legend>사용자 등록(모두 작성해주세요)</legend>
-          
-          <div>아이디<input type="text" name="p_id" id="p_id" class="checkId" placeholder="6자 이상 숫자와 영문자"required>&nbsp;&nbsp;
-            <span style="color:red; font-size:10px" id="noId"></span>
-            <% if(errors.p_id) {%>
-            <span style="color:red; font-size:10px"><%= errors.p_id %></span></div>
-            <% } %>
-          <div>비밀번호<input type="password" name="password" id="password" class="checkPass" placeholder="8-16자 숫자와 영문자" required>&nbsp;&nbsp;
-            <span style="color:red; font-size:10px" id="noPass"></span>
-            <% if(errors.password) {%>
-            <span style="color:red; font-size:10px"><%= errors.password %></span></div>
-            <% } %>
-          <div>비밀번호 확인<input type="password" name="rePass" id="rePass" class="checkRePass" placeholder="위와 동일하게 입력" required>&nbsp;&nbsp;
-            <span style="color:red; font-size:10px" id="noRePass"></span>
-            <% if(errors.rePass) {%>
-            <span style="color:red; font-size:10px"><%= errors.rePass %></span></div>
-            <% } %>
-          <div>이름<input type="text" name="name" id="name" placeholder="ex)홍길동" required/></div>
-          <div>생년월일<input type="text" name="birth" id="birth" class="checkBirth" placeholder="ex)19910101" required/>
-          <span style="color:red; font-size:10px" id="noBirth"></span></div>
-          <div>전화번호<input type="text" name="ph_no" id="ph_no" class="checkPhone" placeholder="-없이 입력해주세요" required/>
-          <span style="color:red; font-size:10px" id="noPhone"></span></div>
-          <div>주소<input type="text" name="addr" id="addr" placeholder="ex)조선시 한양구 한강동" required/></div>
-          <div>이멜<input type="email" name="email" id="email" class="checkEmail" required/>
-            <span style="color:red; font-size:10px" id="noEmail"></span>
-          <% if(errors.email){%>
-            <span style="color:red; font-size:10px"><%= errors.email %></span></div>
-            <%}%>
-          <div><input id="gender" name="gender" type="radio" value="M" checked>남자
-              <input id="gender" name="gender"type="radio" value="F">여자
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <meta name="msapplication-TileColor" content="#3867d6" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/all.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
+            <div class="opener-holder">
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
             </div>
-          <input type="submit" id="canSubmit" value="가입"/>
-        </fieldset>
-      </form>
-      <a href="/"><button>메인으로</button></a>
-      <script src="js/jquery-1.11.2.min.js"></script>
-      <script src="js/jquery.main.js"></script>
-      <script src="js/validate.js"></script>
-</body>
+            <div class="nav-drop">
+              <ul>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+    <section class="visual">
+      <div class="container" style="height: 1120px;">
+        <div class="text-block2">
+          <section class="login-form">
+            <h1><img src="images/logo.svg" style="width: 260px" /></h1>
+            <p style="margin-bottom: 23px;">회원가입</p>
+            <form method="post" action="/auth/join">
+                    <div class="int-area">
+                      <input
+                        type="text"
+                        class="checkId int-area input"
+                        name="p_id"
+                        id="p_id"
+                        placeholder="6자 이상 숫자와 영문자"
+                        required
+                      /><label for="id">아이디</label><span style="color:red; font-size:10px" id="noId">
+                      </span> <% if(errors.p_id){%>
+                      <span style="color: red; font-size: 10px"
+                        ><%= errors.p_id %></span>
+                    <%}%>
+                  </div>
+                    <div class="int-area">
+                      <input
+                        type="password"
+                        class="int-area input"
+                        name="password"
+                        id="password"
+                        placeholder="8-16자 숫자와 영문자"
+                        required
+                      /><label for="pw">비밀번호</label> <% if(errors.password){%>
+                      <span style="color: red; font-size: 10px"
+                        ><%= errors.password %></span
+                      >
+                      <%}%>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="password"
+                        class="int-area input"
+                        name="rePass"
+                        id="rePass"
+                        placeholder="위와 동일하게 입력"
+                        required
+                      /><label for="rePass">비밀번호 확인</label> <% if(errors.rePass){%>
+                      <span style="color: red; font-size: 10px"
+                        ><%= errors.rePass %></span
+                      >
+                      <%}%>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="text"
+                        class="int-area input"
+                        name="name"
+                        id="name"
+                        required
+                      /><label for="rePass">이름</label>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="text"
+                        class="int-area input"
+                        name="birth"
+                        id="birth"
+                        placeholder="ex)19910101"
+                        required
+                      /><label for="birth">생년월일</label>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="text"
+                        class="int-area input .social-placeholder"
+                        name="ph_no"
+                        id="ph_no"
+                        placeholder="-없이 입력해주세요"
+                        required
+                      /><label for="ph_no">전화번호</label>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="text"
+                        class="int-area input"
+                        name="addr"
+                        id="addr"
+                        required
+                      /><label for="addr">주소</label>
+                    </div>
+                    <div class="int-area">
+                      <input
+                        type="email"
+                        class="int-area input"
+                        name="email"
+                        id="email"
+                        required
+                      /><label for="email">이메일</label><% if(errors.email){%>
+                        <span style="color: red; font-size: 10px"
+                          ><%= errors.email %></span
+                        >
+                        <%}%>
+                    </div>
+                    <div class="btn-area">
+                     <input
+                        id="gender"
+                        name="gender"
+                        type="radio"
+                        value="M"
+                        style="font-size: 15px;"
+                        checked
+                      /><span style="font-size : 16px; margin:10px;">남자</span>
+                      <input
+                        id="gender"
+                        name="gender"
+                        type="radio"
+                        value="F"
+                      /><span style="font-size : 16px; margin:10px;">여자</span>
+                    </div>
+                    <div class="btn-area">
+                    <button id="btn" type="submit">가입</button>
+                  </div>
+                </form>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </section>
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-holder">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="logo">
+                <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
+              </div>
+              <p>아무때나 만나는 내 손 안의 닥터</p>
+            </div>
+            <div class="col-md-2">
+              <h4>Navigation</h4>
+              <ul>
+                <li><a href="/">메인페이지</a></li>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <div class="text-holder">
+                <strong class="phone"
+                  ><a href="tel:0282821111">02 8282 1111</a></strong
+                >
+                <span class="available">고객상담시간 : 12PM - 18PM</span>
+                <h4>아만닥</h4>
+                <address>
+                  아만빌딩 10F, <br />
+                  서울특별시 종로구 종로 55 종로 55
+                </address>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="text-frame">
+                <h4>Info</h4>
+                <p>
+                  Wisi enim ad minim veniam, quis nostrud exerci tation
+                  ullamcorper suscipit lobortis nisl ut aliquip ex commodo
+                  consequat. Autem vel hendrerit iriure dolor in hendrerit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="js/jquery-1.11.2.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery.main.js"></script>
+  <script src="js/validate.js"></script>
+  </body>
 </html>
