@@ -53,18 +53,20 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-    /*  store:new RedisStore({client:redisClient}), */
-  })
-);
+const sessionOption = {
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+};
+if (process.env.NODE_ENV === "production") {
+  sessionOption.proxy = true;
+  // sessionOption.cookie.secure = true;
+}
+app.use(session(sessionOption));
 app.use(flash());
 app.use(methodOverride("_method"));
 
