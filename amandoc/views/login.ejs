@@ -8,34 +8,34 @@
     <meta name="msapplication-TileColor" content="#3867d6" />
 
     <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
     <link
       rel="stylesheet"
-      href="../fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+      href="fonts/font-awesome-4.3.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="../css/all.css" />
+    <link rel="stylesheet" href="css/all.css" />
     <link
       href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
       rel="stylesheet"
       type="text/css"
     />
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
       <header id="header">
         <div class="container">
           <div class="logo">
-            <a href="/"><img src="../images/logo.svg" alt="아만닥" /></a>
+            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
             <div class="opener-holder">
               <a href="#" class="nav-opener"><span></span></a>
             </div>
-            <% if (user) { %>
-              <p>반갑습니다! <%= user.name %> 님!! ㅎㅎ</p>
-              <a href="/mypage">내 정보</a>
-              <a href="/auth/logout">로그아웃</a>
-            <% } %>
+            <a href="/login" class="btn btn-primary rounded">로그인</a>
             <div class="nav-drop">
               <ul>
                 <li class="active visible-sm visible-xs">
@@ -53,38 +53,21 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
-              <!-- 로그인이 안되어 있는 경우 -->
-              <% if(user == null || user.length == 0){ %>
-                <h3> 회원만 이용할 수 있습니다. 로그인을 해주세요. </h3>
-                <a href="/">메인페이지로 돌아가기</a>
-              <% } else { %>
-
-              <!-- 로그인 O -->
-              <h2><%= user.name %>님께서 작성하신 내용입니다.</h2>
-              <div>
-                <h3>개인신상</h3>
-                신장: <%= step1.height %> <br>
-
-                체중: <%= step1.weight %> <br>
-                
-                <% if (step1.history == '') { %> 과거병력: 해당없음
-                <% } else { %> 과거병력: <%= step1.history %> <% } %> <br> 
-
-                <% if (step1.family_member == '') { %> 가족력: 해당없음
-                <% } else { %> 가족력: <%= step1.family_member %> <%= step1.family_disease %> <% } %> <br>
-
-                <% if (step1.drug == '') { %> 복용약: 해당없음
-                <% } else { %> 복용약: <%= step1.drug %> <% } %> <br> 
-                음주: <%= step1.drink_week %> <%= step1.drink_cnt %> <br>
-                담배: <%= step1.smoke_cnt %>
-              </div>
-              <div>
-                <h3>예진표</h3>
-                초진여부: <%= step2.treat_time %> <br>
-                진료과목: <%= step2.treat_div %> <br>
-                증상: <%= step2.disease_desc  %> <br>
-              </div>
-            <% } %>
+              <h2>로그인 페이지 입니다</h2>
+              <hr>
+              <form method="post" action="/auth/login">
+                <fieldset>
+                  <legend>로그인</legend>
+                  <div><input type="text" name="p_id">아이디</div>
+                  <div><input type="password" name="password">비밀번호</div>
+                  <% if(message) {%>
+                    <p><span style="color:red; font-size:10px"><%-message%></span></p>
+                  <% }%>
+                  <button type="submit">로그인</button>
+                </form>
+                </fieldset>
+                <a href="/"><button>메인으로</button></a>
+                <hr>
             </div>
           </div>
         </div>
@@ -95,7 +78,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="logo">
-                  <a href="#"><img src="../images/logo.svg" alt="amandoc" /></a>
+                  <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
                 </div>
                 <p>아무때나 만나는 내 손 안의 닥터</p>
               </div>
@@ -136,8 +119,5 @@
         </div>
       </footer>
     </div>
-    <script src="/js/jquery-1.11.2.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.main.js"></script>
   </body>
 </html>

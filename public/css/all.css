@@ -27,10 +27,11 @@ p {
 
 .btn-a {
   display: inline-block;
-  position: inherit;
-  margin: -90px 0 40px 0;
-  width: 100%;
-  width: 450px;
+  justify-content: center;
+  position: absolute;
+  margin: -200px;
+  letter-spacing: 0.8px;
+  width: 400px;
   height: 90px;
   border-radius: 5em;
   z-index: 1;
@@ -45,6 +46,7 @@ p {
 
 .btn-a a {
   text-align: center;
+  justify-content: center;
 }
 
 .btn,
@@ -92,6 +94,7 @@ a:hover {
 .step-btn {
   padding: 10px 0 0;
   text-align: center;
+  justify-content: center;
 }
 
 .btn-blue {
@@ -136,7 +139,7 @@ a:hover {
   float: right;
   margin: 2px 0 0 20px;
   height: 38px;
-  min-width: 100px;
+  width: 100px;
   padding: 7px;
   font-weight: bold;
   font-size: 15px;
@@ -257,7 +260,7 @@ a:hover {
 .visual .bg-stretch {
   width: auto;
   height: auto;
-  max-width: 100%;
+  max-width: 120%;
   max-height: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -414,6 +417,7 @@ a:hover {
 
 .main {
   padding: 47px 0;
+  justify-content: center;
 }
 .main .content {
   padding: 25px 15px 23px;
@@ -971,7 +975,11 @@ a:hover {
 @media only screen and (max-width: 992px) {
   .nav-opener {
     display: inline-block;
-    vertical-align: top;
+    margin-left: inherit;
+    position: relative;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 10px;
   }
 
   .opener-holder {
@@ -991,6 +999,23 @@ a:hover {
     bottom: -6px;
   }
 
+  .btn-a {
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    margin: -25% -15%;
+    letter-spacing: 0.8px;
+    width: 250px;
+    height: 90px;
+    border-radius: 5em;
+    z-index: 1;
+    font-size: 1.7rem;
+    background-color: rgba(75, 75, 75, 0.4);
+    color: white;
+    border: solid 3px #fff;
+    padding: 35px;
+  }
+
   #header {
     position: relative;
     padding: 0;
@@ -1003,13 +1028,20 @@ a:hover {
   }
   #header .btn {
     float: right;
-    height: 38px;
-    width: 100px;
-    font-size: 1.5rem;
-    line-height: 15px;
-    margin: 20px 20px 30px 0;
-    padding: 12px 19px;
-    vertical-align: top;
+    height: 35px;
+    width: 60px;
+    font-size: 1.1rem;
+    line-height: 10px;
+    margin: 5px;
+    padding: 11px;
+    align-items: center;
+  }
+
+  #header .btn:hover {
+    background: white;
+    border: none;
+    color: #3867d6;
+    font-weight: 400;
   }
 
   #header .btn a {
@@ -1141,6 +1173,7 @@ a:hover {
   }
   .visual .bg-stretch {
     bottom: -60px;
+    max-width: 150%;
   }
 
   .area {
@@ -1155,6 +1188,7 @@ a:hover {
 
   .main .text-box p {
     margin: 0 0 33px;
+    word-break: keep-all;
   }
 
   .text-box h2 {
@@ -1360,9 +1394,37 @@ a:hover {
     margin: 0 30px 36px;
   }
 }
+
+/* responsive 핸드폰 */
+
 @media only screen and (max-width: 479px) {
   body {
     min-width: 320px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .visual p.tagline {
+    font-size: 15px;
+  }
+
+  .btn-a {
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    margin: -25%;
+    letter-spacing: 0.8px;
+    width: 200px;
+    height: 80px;
+    border-radius: 5em;
+    z-index: 1;
+    font-size: 1.5rem;
+    background-color: rgba(75, 75, 75, 0.4);
+    color: white;
+    border: solid 3px #fff;
+    padding: 30px;
   }
 
   #header > .container {
@@ -1374,13 +1436,18 @@ a:hover {
   }
 
   #header .btn {
-    height: 30px;
     margin: 8px 0 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 20px;
-    padding: 3px 20px;
+    padding: 3px 10px;
     min-width: 0;
   }
+
+  .btn-primary {
+    color: #4b7bec;
+    border: none;
+  }
+
   #header .logo {
     margin: 4px 0 10px 10px;
     width: 150px;
@@ -1399,8 +1466,9 @@ a:hover {
     line-height: 1.5;
   }
   .visual .bg-stretch {
-    max-width: 110%;
+    max-width: 125%;
   }
+
   .visual .info {
     background: rgba(255, 255, 255, 0.3);
     color: #bebcc3;
@@ -1449,7 +1517,7 @@ a:hover {
   .visual-container h2,
   .area h2 {
     margin: 0 0 20px;
-    font-size: 3.2rem;
+    font-size: 2.5rem;
     line-height: 1.125;
   }
 
@@ -1576,7 +1644,40 @@ a:hover {
     font-size: 1.4rem;
     line-height: 1.285;
   }
-}
+
+  /* board-table css */
+
+  .board-table th.title {
+    color: royalblue;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .board-table .author,
+  .board-table .date {
+    width: 20%;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .board-table .numId,
+  .board-table .views {
+    width: 20%;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .board-table .title {
+    width: 70%;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    color: #1b2637;
+    text-align: left;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+  }
+} /* responsive 핸드폰 끝 */
+
 @media only screen and (min-width: 1025px) {
   [href^="tel:"] {
     cursor: default;
@@ -1704,6 +1805,7 @@ a:hover {
   z-index: 2;
   max-height: 1000px;
   margin-top: 100px;
+  justify-content: center;
 }
 .login-form h1 {
   font-size: 28px;
@@ -1711,6 +1813,10 @@ a:hover {
   text-align: center;
   margin: 0 0 37px 0;
 }
+.login-form form {
+  justify-content: center;
+}
+
 .login-form p {
   color: #778ca3;
   font-size: 20px;
@@ -1922,19 +2028,21 @@ a:hover {
 }
 .board-table .numId,
 .board-table .views {
-  width: 80px;
+  width: 20%;
   text-align: center;
   padding: 15px 0;
 }
 .board-table .author,
 .board-table .date {
-  width: 100px;
+  width: 20%;
   text-align: center;
   padding: 15px 0;
 }
 
 .board-table .title {
   padding: 15px 0;
+  width: 70%;
+  text-overflow: ellipsis;
 }
 
 #text {
