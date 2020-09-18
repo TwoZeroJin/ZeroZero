@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -10,8 +9,17 @@ const path = require("path");
 const passport = require("passport");
 const connect = require("./models");
 const flash = require("connect-flash");
-const util = require("./util");
 
+const helmet = require("helmet");
+const hpp = require("hpp");
+const redis = require("redis");
+const RedisStore = require("connect-redis")(session);
+const logger = require("./logger");
+
+// const sanitizeHtml = require('sanitize-html');
+// const html = "<script>location.href='나중에 사용할 주소'</script>"
+
+// Router
 const indexRouter = require("./routes");
 const authRouter = require("./routes/auth");
 const stepRouter = require("./routes/step");
@@ -21,45 +29,9 @@ const commentRouter = require("./routes/comments");
 const healthTopic = require("./routes/healthtopic");
 
 dotenv.config();
-
-//passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
-const passportConfig = require("./passport");
-=======
-const express = require('express');
-const dotenv = require('dotenv'); 
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const methodOverride = require('method-override');
-const port = process.env.PORT || 5000 ;
-const path = require('path');
-const passport = require('passport');
-const connect = require('./models');
-const flash = require('connect-flash');
-
-const helmet = require('helmet');
-const hpp = require('hpp');
-const redis = require('redis');
-const RedisStore = require('connect-redis')(session);
-const logger = require('./logger');
-
-// const sanitizeHtml = require('sanitize-html');
-// const html = "<script>location.href='나중에 사용할 주소'</script>"
-
-// Router
-const indexRouter = require('./routes');
-const authRouter = require('./routes/auth');
-const stepRouter = require('./routes/step');
-const mypageRouter = require('./routes/mypage');
-const qnaRouter = require('./routes/qna');
-const commentRouter = require('./routes/comments');
-const healthTopic = require('./routes/healthtopic');
-
-dotenv.config();
 //dotenv보다 밑에 있어야함
 //passport폴더 안에 정의된 함수들 require
-const passportConfig = require('./passport');
->>>>>>> 612e831a8d2de7753d9603a49a302b2dc8b577a2
+const passportConfig = require("./passport");
 passportConfig();
 
 const app = express();
@@ -69,24 +41,18 @@ app.set("view engine", "ejs");
 connect();
 
 //미들 웨어 정리
-<<<<<<< HEAD
-app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "public")));
-=======
-if(process.env.NODE_ENV ==='production'){
-  app.use(morgan('combined'));
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
   app.use(helmet());
   app.use(hpp());
-}else{
-  app.use(morgan('dev'));
+} else {
+  app.use(morgan("dev"));
 }
 // app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname,'public')));
->>>>>>> 612e831a8d2de7753d9603a49a302b2dc8b577a2
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-<<<<<<< HEAD
 app.use(
   session({
     resave: false,
@@ -96,20 +62,9 @@ app.use(
       httpOnly: true,
       secure: false,
     },
+    /*  store:new RedisStore({client:redisClient}), */
   })
 );
-=======
-app.use(session({
-  resave:false,
-  saveUninitialized:false,
-  secret:process.env.COOKIE_SECRET,
-  cookie:{
-      httpOnly:true,
-      secure:false,
-  },
- /*  store:new RedisStore({client:redisClient}), */
-}));
->>>>>>> 612e831a8d2de7753d9603a49a302b2dc8b577a2
 app.use(flash());
 app.use(methodOverride("_method"));
 
@@ -124,7 +79,6 @@ app.use((req, res, next) => {
 });
 
 //라우팅
-<<<<<<< HEAD
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/question", stepRouter);
@@ -137,6 +91,8 @@ app.use("/healthtopic", healthTopic);
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
   error.status = 404;
+  logger.info("에러페이지에 접속되었습니다.");
+  logger.error(error.message);
   next(error);
 });
 app.use((err, req, res, next) => {
@@ -147,29 +103,3 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-=======
-app.use('/',indexRouter);
-app.use('/auth',authRouter);
-app.use('/question', stepRouter);
-app.use('/mypage',mypageRouter);
-app.use('/qna', qnaRouter);     //게시판 이동 라우터
-app.use('/comments', commentRouter);
-app.use('/healthtopic', healthTopic);
-
-//에러 처리
-app.use((req, res, next) => {
-    const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-    error.status = 404;
-    logger.info('에러페이지에 접속되었습니다.');
-    logger.error(error.message);
-    next(error);
-  });
-  app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
-    res.status(err.status || 500);
-    res.render('error');
-  });
-  
-app.listen(port, ()=> console.log(`Listening on port ${port}`));
->>>>>>> 612e831a8d2de7753d9603a49a302b2dc8b577a2

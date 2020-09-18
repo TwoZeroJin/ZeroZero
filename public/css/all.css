@@ -26,15 +26,13 @@ p {
 }
 
 .btn-a {
-  display: block;
-  position: relative;
-  align-content: center;
-  margin: -90px auto 0 auto;
+  display: inline-block;
+  position: inherit;
+  margin: -90px 0 40px 0;
+  width: 100%;
+  width: 450px;
   height: 90px;
-  line-height: 20px;
-  min-width: 400px;
   border-radius: 5em;
-  text-align: center;
   z-index: 1;
   font-size: 2rem;
   border: none;
@@ -42,6 +40,11 @@ p {
   background-color: #3867d6;
   color: white;
   box-shadow: 0px 0px 8px 2px #273c75;
+  padding: 30px;
+}
+
+.btn-a a {
+  text-align: center;
 }
 
 .btn,
@@ -84,6 +87,11 @@ a:hover {
   overflow: hidden;
   display: table-footer-group;
   height: 1%;
+}
+
+.step-btn {
+  padding: 10px 0 0;
+  text-align: center;
 }
 
 .btn-blue {
@@ -250,7 +258,10 @@ a:hover {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 .visual > .container {
   display: inline-block;
@@ -261,6 +272,7 @@ a:hover {
   line-height: 1.5;
   letter-spacing: 0;
 }
+
 .visual h1 {
   margin: 0 0 10px;
   font-size: 8.2rem;
@@ -1654,8 +1666,8 @@ a:hover {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 1000px;
+  align-items: inherit;
+  min-height: 1000px;
   /* background: url("bg.jpg") no-repeat center;
   background: cover; */
 }
@@ -1697,7 +1709,7 @@ a:hover {
   font-size: 28px;
   color: #fff;
   text-align: center;
-  margin: 100px 0 37px 0;
+  margin: 0 0 37px 0;
 }
 .login-form p {
   color: #778ca3;
