@@ -24,8 +24,8 @@ const passportConfig = require('./passport');
 passportConfig();
 
 const app = express();
-//http 서버 생성
-const server = require('http').Server(app);
+//http 서버 생성(추가본)
+const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const { v4: uuidV4 } = require('uuid');
 
@@ -71,24 +71,50 @@ app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
 //app.use('/connect', connectRouter);
 app.use('/connect', (req, res) => {
-  res.redirect(`/${uuidV4()}`);
+  res.render('connect');
 });
 
 app.use('/connect/:room', (req, res) => {
   res.render('room', { roomId: req.params.room });
 });
 
-//소켓 연결
-io.on('connection', (socket) => {
-  socket.on('join-room', (roomId, userId) => {
-    socket.join(roomId);
-    socket.to(roomId).broadcast.emit('user-connected', userId);
 
-    socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId);
-    });
-  });
-});
+io.on('connection', (socket) => {
+  socket.on('join', (roomId) => {
+    const roomClients = io.sockets.adapter.rooms[roomId] || { length: 0 }
+    const numberOfClients = roomClients.length
+
+    if (numberOfClients == 0) {
+      console.log(`Creating room ${roomId} and emitting room_created socket event`)
+      socket.join(roomId)
+      socket.emit('room_created', roomId)
+    } else if (numberOfClients == 1) {
+      console.log(`Joining room ${roomId} and emitting room_joined socket event`)
+      socket.join(roomId)
+      socket.emit('room_joined', roomId)
+    } else {
+      console.log(`Can't join room ${roomId}, emitting full_room socket event`)
+      socket.emit('full_room', roomId)
+    }
+  })
+
+  socket.on('start_call', (roomId) => {
+    console.log(`Broadcasting start_call event to peers in room ${roomId}`)
+    socket.broadcast.to(roomId).emit('start_call')
+  })
+  socket.on('webrtc_offer', (event) => {
+    console.log(`Broadcasting webrtc_offer event to peers in room ${event.roomId}`)
+    socket.broadcast.to(event.roomId).emit('webrtc_offer', event.sdp)
+  })
+  socket.on('webrtc_answer', (event) => {
+    console.log(`Broadcasting webrtc_answer event to peers in room ${event.roomId}`)
+    socket.broadcast.to(event.roomId).emit('webrtc_answer', event.sdp)
+  })
+  socket.on('webrtc_ice_candidate', (event) => {
+    console.log(`Broadcasting webrtc_ice_candidate event to peers in room ${event.roomId}`)
+    socket.broadcast.to(event.roomId).emit('webrtc_ice_candidate', event)
+  })
+})
 
 
 //에러 처리
@@ -104,4 +130,4 @@ app.use((req, res, next) => {
     res.render('error');
   });
   
-app.listen(port, ()=> console.log(`Listening on port ${port}`));
+server.listen(port, ()=> console.log(`Listening on port ${port}`));

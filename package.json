@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodemon app"
   },
   "author": "",
   "license": "ISC",
@@ -24,10 +24,12 @@
     "moment": "^2.27.0",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
+    "node-static": "^0.7.11",
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
     "passport-local": "^1.0.0",
     "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "uuid": "^8.3.0"
   }
 }
