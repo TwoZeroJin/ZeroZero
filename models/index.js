@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
- 
+// 몽고디비에 연결
 const connect = () => {
   if (process.env.NODE_ENV !== 'production') {
     mongoose.set('debug', true);
@@ -17,7 +17,6 @@ const connect = () => {
     }
   });
 };
-
 mongoose.connection.on('error', (error) => {
   console.error('몽고디비 연결 에러', error);
 });

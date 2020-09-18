@@ -103,8 +103,14 @@
                   /></a>
                 </div>
                 <div class="caption">
+<<<<<<< HEAD
                   <a href="">비밀번호를 잊으셨나요?</a> &nbsp;
                   <a href="/join">아직 회원이 아니신가요?</a>
+=======
+                  <a href="" class="findId">아이디를 잊으셨나요?</a> |
+                  <a href="" class="findPwd">비밀번호를 잊으셨나요?</a> |
+                  <a href="/join">회원가입</a>
+>>>>>>> 612e831a8d2de7753d9603a49a302b2dc8b577a2
                 </div>
               </form>
             </section>
@@ -176,5 +182,17 @@
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.main.js"></script>
+    <script>
+      $(function(){
+        $('.findId').click(e=>{
+          e.preventDefault;
+          window.open("findId","findId","width=510,height=310,left=300,top=50");
+        });
+        $('.findPwd').click(e=>{
+          e.preventDefault;
+          window.open("findPwd","findPwd","width=510,height=310,left=300,top=50");
+        });
+      })
+    </script>
   </body>
 </html>

@@ -68,26 +68,89 @@
           <tr>
             <th>이름</th>
             <td><%= user.name %></td>
+            <th>신장</th>
+            <% if (step1) {%>
+            <td><%= step1.height %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
           <tr>
             <th>생년월일</th>
             <td><%= user.birth %></td>
+            <th>몸무게</th>
+            <% if (step1) {%>
+            <td><%= step1.weight %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
           <tr>
             <th>전화번호</th>
             <td><%= user.ph_no %></td>
+            <th>과거 병력</th>
+            <% if (step1) {%>
+            <td><%= step1.history %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
           <tr>
             <th>주소</th>
             <td><%= user.addr %></td>
+            <th>가족력</th>
+            <% if (step1) {%>
+            <td>
+              관계 : <%= step1.family_member %> 병명 : <%=
+              step1.family_disease%>
+            </td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
           <tr>
             <th>이메일</th>
             <td><%= user.email %></td>
+            <th>복용중인 약물</th>
+            <% if (step1) {%>
+            <td><%= step1.drug %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
           <tr>
             <th>가입날짜</th>
-            <td><span><%= reg_date %></span></td>
+            <td>
+              <span
+                ><%= moment(user.reg_date).format('YYYY년 MM월 DD일') %></span
+              >
+            </td>
+            <th>음주</th>
+            <% if (step1) {%>
+            <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
+          </tr>
+          <tr>
+            <th>MY 약국</th>
+            <% if (user.myPharmacy) {%>
+            <td>
+              <span
+                ><%= user.myPharmacy %><button class="myPharmacy">
+                  MY약국 변경하기
+                </button></span
+              >
+            </td>
+            <%}else{%>
+            <td><button class="myPharmacy">MY약국 등록하기</button></td>
+            <%}%>
+            <th>흡연</th>
+            <% if (step1) {%>
+            <td><%= step1.smoke_cnt %></td>
+            <%}else{%>
+            <td></td>
+            <%}%>
           </tr>
         </table>
       </div>
@@ -223,5 +286,16 @@
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.main.js"></script>
+    <script>
+      $(function () {
+        $(".myPharmacy").click((e) => {
+          window.open(
+            "mypage/myPharmacy",
+            "myPharmacy",
+            "width=900,height=510,left=300,top=50"
+          );
+        });
+      });
+    </script>
   </body>
 </html>
