@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html> 
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
     <title>원격 의료 매칭 서비스, 아만닥</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <meta name="msapplication-TileColor" content="#3867d6" />
-
     <meta name="theme-color" content="#ffffff" />
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link
@@ -28,22 +27,21 @@
             <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
             <div class="opener-holder">
-              <a href="#" class="nav-opener"><span></span></a>
-            </div>
-            <% if (user) { %>
-              <p>반갑습니다!<%= user.name %> 님!! ㅎㅎ</p>
-              <a href="/mypage" class="btn btn-primary rounded">내 정보</a>
-              <a href="/auth/logout" class="btn btn-primary rounded">로그아웃</a>
-            <% }else{ %>
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
               <a href="/login" class="btn btn-primary rounded">로그인</a>
               <a href="/join" class="btn btn-primary rounded">회원가입</a>
-            <% } %>
+              <% } %>
+            </div>
             <div class="nav-drop">
               <ul>
-                <li class="active visible-sm visible-xs">
-                  <a href="#">Home</a>
-                </li>
                 <li><a href="/aboutus">소개</a></li>
                 <li><a href="/healthtopic">의학정보</a></li>
                 <li><a href="/qna">게시판</a></li>
@@ -65,9 +63,16 @@
       </section>
       <section class="main">
         <div class="container">
-          <a href="/question/step1">
-            <button class="btn-a">예진표 작성하기</button>
-          </a>
+          <div class="step-btn">
+            <a href="/question/step1" class="btn-a">예진표 작성하기</a>
+          </div>
+
+          <!--<div class="step-btn">
+            <a href="/question/step1">
+              <button class="btn-a">예진표 작성하기</button>
+            </a>
+          </div>-->
+
           <div class="row" style="margin-top: 100px">
             <div class="text-box col-md-offset-1 col-md-10">
               <h3>비대면 진료 서비스, 아만닥</h3>
@@ -188,9 +193,8 @@
                         </div>
                       </div>
                       <p>
-                        <a href="#">@Pixelbuddha</a> Suspendisse sodales sem
-                        est, in scelerisque felis scelerisque in. Aenean
-                        faucibus mollis risus. Praesent sit amet erat eget eros.
+                        오래 기다릴 필요없이 믿을만한 의사선생님께 <br />
+                        진료를 받을 수 있어서 정말 좋네요. 또 이용할게요!
                       </p>
                       <em class="date">2 hours ago</em>
                     </div>
@@ -210,8 +214,8 @@
                         </div>
                       </div>
                       <p>
-                        <a href="#">@PSD2HTML</a> 언택트 시대에 걸맞는 안전하고
-                        확실한 서비스라고 생각합니다.
+                        언택트 시대에 걸맞는 <br />안전하고 확실한 서비스라고
+                        생각합니다.
                       </p>
                       <em class="date">5 hours ago</em>
                     </div>
@@ -226,14 +230,13 @@
                           />
                         </div>
                         <div class="text-holder">
-                          <h3>조승우</h3>
-                          <a href="#">@swzzang</a>
+                          <h3>김소미</h3>
+                          <a href="#">@somi1290</a>
                         </div>
                       </div>
                       <p>
-                        <a href="#">@codrops</a> 일이 바빠서 병원 갈 시간 조차
-                        없었는데, <br />
-                        아만닥덕분에 건강하게 유지할 수 있는 거 같습니다.
+                        일이 바빠서 병원 갈 시간 조차 없었는데, <br />
+                        아만닥덕분에 건강하게 유지할 수 있는 것 같습니다 :)
                       </p>
                       <em class="date">1 day ago</em>
                     </div>
@@ -250,7 +253,6 @@
           </div>
         </div>
       </section>
-
       <section class="area">
         <div class="container">
           <div class="subscribe">
@@ -374,10 +376,9 @@
               <div class="col-md-2">
                 <h4>Navigation</h4>
                 <ul>
-                  <li><a href="index.html">메인페이지</a></li>
-                  <li><a href="aboutus.html">소개</a></li>
-                  <li><a href="healthtopic.html">의학정보</a></li>
-                  <li><a href="qna.html">게시판</a></li>
+                  <li><a href="/aboutus">소개</a></li>
+                  <li><a href="/healthtopic">의학정보</a></li>
+                  <li><a href="/qna">게시판</a></li>
                 </ul>
               </div>
               <div class="col-md-3">
@@ -396,11 +397,7 @@
               <div class="col-md-3">
                 <div class="text-frame">
                   <h4>Info</h4>
-                  <p>
-                    Wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex commodo
-                    consequat. Autem vel hendrerit iriure dolor in hendrerit.
-                  </p>
+                  <p>COPYRIGHT(C) 2020 AMANDOC. <br />ALL RIGHTS RESERVED.</p>
                 </div>
               </div>
             </div>
@@ -411,6 +408,5 @@
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.main.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

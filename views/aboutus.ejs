@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> 
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,27 +31,25 @@
             <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
             <div class="opener-holder">
-              <a href="#" class="nav-opener"><span></span></a>
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
             </div>
-            <a href="/login" class="btn btn-primary rounded">로그인</a>
             <div class="nav-drop">
               <ul>
-                <li class="active visible-sm visible-xs">
-                  <a href="#">Home</a>
-                </li>
                 <li><a href="/aboutus">소개</a></li>
                 <li><a href="/healthtopic">의학정보</a></li>
                 <li><a href="/qna">게시판</a></li>
               </ul>
-              <div class="drop-holder visible-sm visible-xs">
-                <span>Follow Us</span>
-                <ul class="social-networks">
-                  <li><a class="fa fa-github" href="#"></a></li>
-                  <li><a class="fa fa-twitter" href="#"></a></li>
-                  <li><a class="fa fa-facebook" href="#"></a></li>
-                </ul>
-              </div>
             </div>
           </nav>
         </div>
@@ -201,10 +199,10 @@
               <div class="col-md-2">
                 <h4>Navigation</h4>
                 <ul>
-                  <li><a href="index.html">메인페이지</a></li>
-                  <li><a href="aboutus.html">소개</a></li>
-                  <li><a href="healthtopic.html">의학정보</a></li>
-                  <li><a href="qna.html">게시판</a></li>
+                  <li><a href="/">메인페이지</a></li>
+                  <li><a href="/aboutus">소개</a></li>
+                  <li><a href="/healthtopic">의학정보</a></li>
+                  <li><a href="/qna">게시판</a></li>
                 </ul>
               </div>
               <div class="col-md-3">
