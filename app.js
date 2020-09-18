@@ -63,7 +63,7 @@ const sessionOption = {
   },
 };
 if (process.env.NODE_ENV === "production") {
-  // sessionOption.proxy = true;
+  sessionOption.proxy = true;
   // sessionOption.cookie.secure = true;
 }
 app.use(session(sessionOption));
