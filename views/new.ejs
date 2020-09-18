@@ -40,6 +40,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/boardscript.js"></script>
+    <script src="/js/validate_board.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -87,16 +88,19 @@
                       id="title"
                       name="title"
                       value=""
-                      class="form-control"
+                      class="form-control isTitle"
+                      required
                     />
+                    <span style="color:red; font-size:10px" id="noTitle"></span>
                   </div>
                   <div class="form-group green-border-focus">
                     <label for="content">내용</label>
-                    <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+                    <textarea class="form-control isContent" id="content" name="content" rows="10" required></textarea>
+                    <span style="color:red; font-size:10px" id="noContent"></span>
                   </div>
                   <div class="new-btn">
                     <a class="btn btn-primary-1" href="/qna">뒤로</a>
-                    <button type="submit" class="btn btn-primary-1">작성하기</button>
+                    <button type="submit" class="btn btn-primary-1" id="canSubmit">작성하기</button>
                   </div>
                 </form>
               </div>

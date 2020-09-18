@@ -27,3 +27,43 @@ undefined
   level: 'error',
   timestamp: '2020-09-18T07:07:47.342Z'
 }
+{
+  message: 'GET /qna/5f64632e7771da14ccf9a301/js/bootstrap.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:45:22.923Z'
+}
+{
+  message: 'GET /qna/5f64632e7771da14ccf9a301/js/jquery.main.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:45:22.940Z'
+}
+{
+  message: 'GET /qna/5f64632e7771da14ccf9a301/js/jquery-1.11.2.min.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:45:22.949Z'
+}
+{
+  message: 'GET /qna/5f64632e7771da14ccf9a301/js/bootstrap.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:45:23.181Z'
+}
+{
+  message: 'GET /qna/5f64632e7771da14ccf9a301/js/jquery.main.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:45:23.407Z'
+}
+{
+  message: 'GET /qna/5f6468c53e37172e343e6e94/js/jquery-1.11.2.min.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:59:07.691Z'
+}
+{
+  message: 'GET /qna/5f6468c53e37172e343e6e94/js/bootstrap.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:59:07.704Z'
+}
+{
+  message: 'GET /qna/5f6468c53e37172e343e6e94/js/jquery.main.js 라우터가 없습니다.',
+  level: 'error',
+  timestamp: '2020-09-18T07:59:07.711Z'
+}
