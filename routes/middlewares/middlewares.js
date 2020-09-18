@@ -4,7 +4,7 @@ exports.isLoggedIn = (req, res, next) => {
     } else {
       res.send(`<script> 
       alert('로그인이 필요합니다.')
-      location.href="/";
+      location.href="/login";
       </script>`)
     }
   };
