@@ -43,8 +43,8 @@ connect();
 //미들 웨어 정리
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
-  app.use(helmet());
-  app.use(hpp());
+  // app.use(helmet());
+  // app.use(hpp());
 } else {
   app.use(morgan("dev"));
 }
@@ -63,7 +63,7 @@ const sessionOption = {
   },
 };
 if (process.env.NODE_ENV === "production") {
-  sessionOption.proxy = true;
+  // sessionOption.proxy = true;
   // sessionOption.cookie.secure = true;
 }
 app.use(session(sessionOption));
