@@ -17,6 +17,7 @@ module.exports = () => {
         if (result) {
           done(null, patient);
         } else {
+          // messages는 passport의 authenticate 함수의 info.message로 넘겨짐
           done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
         }
       } else {

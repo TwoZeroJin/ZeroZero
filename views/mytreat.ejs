@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+</head>
+<style>
+    table,th,td{
+        border: solid 1px black; 
+        border-collapse: collapse;
+    }
+    nav ul{
+        list-style-type: none;
+    }
+    nav ul li{
+        display: inline;
+    }
+    nav ul li a{
+        text-decoration: none;
+    }
+</style>
+<body>
+    <div>
+        <h1>내 진료 이력</h1>
+        
+            <% if (step2) {%>
+                <p>내가 받은 진료 이력입니다.</p>
+            <% for(i=0;i< step2.length;i++) { %>
+            <table>
+                <tr>
+                    <th colspan="2">나의 진단 기록</th>
+                    <th colspan="2">의사 소견</th>
+                </tr>
+                <tr>
+                    <th>진료 날짜</th>
+                    <td><%=moment(step2[i].write_date).format('YYYY년 MM월 DD일')%></td>
+                    <th colspan="2">전문의 공선생</th>
+                </tr>
+                <tr>
+                    <th>초진 여부</th>
+                    <td><%=step2[i].treat_time%></td>
+                    <th colspan="2" rowspan="2">&nbsp;스트레스를 줄이시고 7-8시간 수면을 취하시고<br>아침 점심 저녁 꼭 챙겨드시길 바랍니다.</th>
+                </tr>
+                <tr>
+                    <th>진료 과목</th>
+                    <td><%=step2[i].treat_div%></td>
+                </tr>
+                <tr>
+                    <th>증상</th>
+                    <td><%=step2[i].disease_desc%></td>
+                    <th>처방전</th>
+                    <td style="text-align: center;"><button id="print">처방전 출력</button></td>
+                </tr>
+            </table>
+            <br><br>
+                <%}}else{%>
+                    <h2>나띵</h2>
+                <%}%>
+        <nav class="col-8">
+            <% 
+              var offset = 2;
+              var previousBtnEnabled = currentPage>1;
+              var nextBtnEnabled = currentPage<maxPage;
+            %>
+              <ul class="pagination pagination-sm justify-content-center align-items-center h-100 mb-0"> 
+                <li class="page-item <%= previousBtnEnabled?'':'disabled' %>">
+                <a class="page-link" href="/mypage/mytreat?page=<%= currentPage-1 %>&limit=<%= limit %>" <%= previousBtnEnabled?'':'tabindex=-1' %>>«</a>
+              </li>
+              <% for(i=1;i<=maxPage;i++){ %>
+                <% if(i==1 || i==maxPage || (i>=currentPage-offset && i<=currentPage+offset)){ %>
+                  <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/mypage/mytreat?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
+                <% } else if(i==2 || i==maxPage-1){ %>
+                  <li><a class="page-link">...</a></li>
+                <% } %>
+              <% } %>
+              <li class="page-item <%= nextBtnEnabled?'':'disabled' %>">
+                <a class="page-link" href="/mypage/mytreat?page=<%= currentPage+1 %>&limit=<%= limit %>" <%= nextBtnEnabled?'':'tabindex=-1' %>>»</a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+    <a href="/mypage">개인 정보</a>
+    <a href="/mypage/mytreat">진료 기록</a>
+    <a href="/">메인으로</a>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script>
+        $(function(){
+            $("#print").click(e=>{
+                e.preventDefault();
+                alert('처방전이 출력되었습니다!');
+            })
+        })
+    </script>
+</body>
+</html>

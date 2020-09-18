@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <title>아만닥 - 로그인</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>원격 의료 매칭 서비스, 아만닥</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <meta name="msapplication-TileColor" content="#3867d6" />
     <meta name="theme-color" content="#ffffff" />
@@ -18,6 +18,7 @@
       rel="stylesheet"
       type="text/css"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -27,15 +28,24 @@
             <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
             <div class="opener-holder">
-              <a href="#" class="nav-opener"><span></span></a>
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a
+              >
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
             </div>
-            <a href="/login" class="btn btn-primary rounded">로그인</a>
             <div class="nav-drop">
               <ul>
-                  <li><a href="/aboutus">소개</a></li>
-                  <li><a href="/healthtopic">의학정보</a></li>
-                  <li><a href="/qna">게시판</a></li>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
               </ul>
             </div>
           </nav>
@@ -43,9 +53,10 @@
       </header>
       <section class="visual">
         <div class="container">
-          <div class="text-block1">
+          <div class="text-block3">
             <section class="login-form">
               <h1><img src="images/logo.svg" style="width: 260px" /></h1>
+              <p>로그인</p>
               <form method="post" action="/auth/login">
                 <div class="int-area">
                   <input
@@ -54,7 +65,7 @@
                     id="p_id"
                     autocomplete="off"
                     required
-                  /><label for="id">USER NAME</label>
+                  /><label for="id">아이디</label>
                 </div>
                 <div class="int-area">
                   <input
@@ -63,20 +74,37 @@
                     id="password"
                     autocomplete="off"
                     required
-                  /><label for="pw">PASSWORD</label>
+                  /><label for="pw">비밀번호</label>
                 </div>
                 <div>
                   <% if(message) {%>
-                    <p><span style="color:red; font-size:12px"><%=message%></span></p>
+                  <p>
+                    <span style="color: red; font-size: 12px"
+                      ><%=message%></span
+                    >
+                  </p>
                   <% }%>
+                </div>
+                <div class="col-md-12 form-group" style="float: left">
+                  <label for="f-option" style="font-size: small"
+                    >로그인 정보 기억하기</label
+                  >
+                  <input type="checkbox" id="f-option" name="selector" />
                 </div>
                 <div class="btn-area">
                   <button id="btn" type="submit">로그인</button>
-                  <br><hr>
-                  <button id="btn"><a href="/auth/kakao" class="btn btn-primary rounded">카카오 로그인</a></button>
+                  <br />
+                  <hr />
+                  <a href="/auth/kakao"
+                    ><img
+                      src="images/kakao_login_medium_wide.jpg"
+                      width="300px"
+                      height="45px"
+                  /></a>
                 </div>
                 <div class="caption">
-                  <a href="">비밀번호를 잊으셨나요?</a> |
+                  <a href="" class="findId">아이디를 잊으셨나요?</a> |
+                  <a href="" class="findPwd">비밀번호를 잊으셨나요?</a> |
                   <a href="/join">회원가입</a>
                 </div>
               </form>
@@ -149,5 +177,25 @@
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.main.js"></script>
+    <script>
+      $(function () {
+        $(".findId").click((e) => {
+          e.preventDefault;
+          window.open(
+            "findId",
+            "findId",
+            "width=510,height=310,left=300,top=50"
+          );
+        });
+        $(".findPwd").click((e) => {
+          e.preventDefault;
+          window.open(
+            "findPwd",
+            "findPwd",
+            "width=510,height=310,left=300,top=50"
+          );
+        });
+      });
+    </script>
   </body>
 </html>

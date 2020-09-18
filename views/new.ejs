@@ -4,28 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>원격 의료 매칭 서비스, 아만닥</title>
-
     <meta name="msapplication-TileColor" content="#3867d6" />
-
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link
-      rel="stylesheet"
-      href="fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    <meta
+      name="msapplication-TileImage"
+      content="favicons/mstile-144x144.png"
     />
-    <link rel="stylesheet" href="css/all.css" />
+    <meta name="msapplication-config" content="favicons/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/all.css" />
     <link
       href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
       rel="stylesheet"
       type="text/css"
     />
+    <!-- jquery & bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/boardscript.js"></script>
+    <script src="/js/validate_board.js"></script>
   </head>
   <body>
-    <div id="wrapper">
+    <div class="wrapper">
       <header id="header">
         <div class="container">
           <div class="logo">
-            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
+            <a href="/"><img src="/images/logo.svg" alt="아만닥" /></a>
           </div>
           <nav id="nav">
             <a href="#" class="nav-opener"><span></span></a>
@@ -55,31 +77,35 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
-              <!-- 코로나 확진자 수 크롤링 -->
-              <h4 align="left">코로나 환자 실시간 현황</h4>
-              <table border="2px solid black">
-                <% coronaArr.forEach(function(element) { %>
-                  <tr>
-                    <td><%=element._text %></td>
-                    <td><%=element._num %> </td>
-                  </tr>
-                <% }) %>
-              </table>
-
-              <!-- 건강정보 크롤링 -->
-              <h4 align="left">이달의 건강소식</h4>
-              <table border="2px solid black" text-align="left">
-                <% infoArr.forEach(function(element, i) { %>
-                  <tr>
-                    <td><%= i+1 %></td>
-                    <td><a href="http://www.cdc.go.kr/<%=element._addr%>" target="_blank"><%= element._title %></a></td>
-                    </tr>
-                <%  }) %>
-              </table>
-              <p>출처: 질병관리청</p>
+              <div>
+              <h3>글쓰기</h3>
+              <div class="container">
+                <form action="/qna" method="post">
+                  <div class="form-group">
+                    <label>제목</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      value=""
+                      class="form-control isTitle"
+                      required
+                    />
+                    <span style="color:red; font-size:10px" id="noTitle"></span>
+                  </div>
+                  <div class="form-group green-border-focus">
+                    <label for="content">내용</label>
+                    <textarea class="form-control isContent" id="content" name="content" rows="10" required></textarea>
+                    <span style="color:red; font-size:10px" id="noContent"></span>
+                  </div>
+                  <div class="new-btn">
+                    <a class="btn btn-primary-1" href="/qna">뒤로</a>
+                    <button type="submit" class="btn btn-primary-1" id="canSubmit">작성하기</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
       </section>
       <footer id="footer">
         <div class="container">
@@ -87,7 +113,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="logo">
-                  <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
+                  <a href="#"><img src="/images/logo.svg" alt="amandoc" /></a>
                 </div>
                 <p>아무때나 만나는 내 손 안의 닥터</p>
               </div>

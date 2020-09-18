@@ -10,17 +10,29 @@ const passport = require('passport');
 const connect = require('./models');
 const flash = require('connect-flash');
 
-const indexRouter = require('./routes');
-const authRouter = require('./routes/auth');
-const stepRouter = require('./routes/step');
-const mypageRouter = require('./routes/mypage');
-const qnaRouter = require('./routes/qna');
-const commentRouter = require('./routes/comments');
+const helmet = require("helmet");
+const hpp = require("hpp");
+const redis = require("redis");
+const RedisStore = require("connect-redis")(session);
+const logger = require("./logger");
+
+// const sanitizeHtml = require('sanitize-html');
+// const html = "<script>location.href='나중에 사용할 주소'</script>"
+
+// Router
+const indexRouter = require("./routes");
+const authRouter = require("./routes/auth");
+const stepRouter = require("./routes/step");
+const mypageRouter = require("./routes/mypage");
+const qnaRouter = require("./routes/qna");
+const commentRouter = require("./routes/comments");
 const connectRouter = require('./routes/connect');
+const healthTopic = require("./routes/healthtopic");
 dotenv.config();
 
-//passport폴더 안에 정의된 함수들 임포트, 해주어야함 !!
-const passportConfig = require('./passport');
+//dotenv보다 밑에 있어야함
+//passport폴더 안에 정의된 함수들 require
+const passportConfig = require("./passport");
 passportConfig();
 
 const app = express();
@@ -29,33 +41,45 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 //view 엔진을 html(ejs)로 설정
-app.set('view engine','ejs');
+app.set("view engine", "ejs");
 //몽고디비연결
 connect();
 
 //미들 웨어 정리
-app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname,'public')));
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(helmet());
+  app.use(hpp());
+} else {
+  app.use(morgan("dev"));
+}
+// app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(session({
-  resave:false,
-  saveUninitialized:false,
-  secret:process.env.COOKIE_SECRET,
-  cookie:{
-      httpOnly:true,
-      secure:false,
+const sessionOption = {
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
   },
-}));
+};
+if (process.env.NODE_ENV === "production") {
+  sessionOption.proxy = true;
+  // sessionOption.cookie.secure = true;
+}
+app.use(session(sessionOption));
 app.use(flash());
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 //로그인 인증
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req,res,next) =>{
+app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.user = req.user;
   next();
@@ -69,8 +93,7 @@ app.use('/mypage',mypageRouter);
 app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
 app.use('/connect', connectRouter);
-
-
+app.use("/healthtopic", healthTopic);
 
 io.on('connection', (socket) => {
   socket.on('join', (roomId) => {
