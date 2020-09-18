@@ -42,7 +42,7 @@ connect();
 //미들 웨어 정리
 if (process.env.NODE_ENV === "production") { // Heroku 사용시, NODE_ENV가 production으로 바뀜
   app.use(morgan("combined"));
-  app.use(hpp());
+  // app.use(hpp());
 } else {
   app.use(morgan("dev"));
 }
