@@ -39,19 +39,9 @@ router.get('/step2', isLoggedIn, function(req, res, next) {
 router.post('/step2',isLoggedIn,function(req, res) {
     Step2.create(req.body, function(err, step2) {       // step2.ejs의 form태그에 적은 모든 내용들을 step2 컬렉션에 저장
         console.log('STEP 2의 db저장완료');
-        res.redirect('/question/step3');
+        console.log('내용 확인 페이지 출력합니다.');
+        res.redirect('../connect');
     });
-});
-
-/* -----------------STEP 3 ----------------- */
-router.get('/step3', isLoggedIn ,async(req, res,next)=>{
-    try {
-        const step1 = await Step1.findOne({p_id:res.locals.user});
-        const step2 = await Step2.findOne({p_id:step1.p_id}).sort('-write_date');       // 작성날짜를 최신순으로 정렬해서 최신 하나를 찾기
-        res.render('question/step3',{step1:step1,step2:step2});                 //STEP1 과 STEP2 컬렉션에서 해당 사용자의 정보를 모두 STEP3.ejs로 전송
-    } catch(err) {
-        next(err);
-    }
 });
 
 module.exports = router;

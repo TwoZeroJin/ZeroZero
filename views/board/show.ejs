@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <!-- web font -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <!-- jquery & bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="/js/boardscript.js"></script>
+        <style>
+          .comment-edit,
+          .comment-edit-enabled .comment-show {
+            display:none;
+          }
+
+          .comment-edit-enabled .comment-edit {
+            display:inherit;
+}
+        </style>
+      </head>
+  </head>
+  <body>
+    <div class="container mb-3">
+
+      <div class="card">
+        <h5 class="card-header p-2" data-search-highlight="title"><%= qna.numId %><%= qna.title %></h5>
+        <div class="row">
+
+          <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1"> <!-- 1 -->
+            <div class="qna-body p-2"><%= qna.content %></div>
+          </div>
+          <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2"> <!-- 1 -->
+            <div class="post-info card m-2 p-2"> 
+                <div class="border-bottom pb-1 mb-1"> <!-- 1 -->
+                  <div><span>Author</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %></div>
+                  <div><span>Views</span> : <span><%= qna.views %></span></div>
+                </div>
+              <div><span>Created</span> : <span data-date-time="<%= qna.createdAt %>"></span></div> <!-- 2 -->
+              <% if(qna.updatedAt) { %>
+                <div><span>Updated</span> : <span data-date-time="<%= qna.updatedAt %>"></span></div> <!-- 2 -->
+              <% } %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <a class="btn btn-primary" href="/qna">Back</a>
+        <% if(isAuthenticated && qna.reg_id && user.id == qna.reg_id.id){ %>
+        <a class="btn btn-primary" href="/qna/<%= qna._id %>/edit">Edit</a>
+        <form action="/qna/<%= qna._id %>?_method=delete" method="post" class="d-inline">
+          <a class="btn btn-primary" href="javascript:void(0)" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">Delete</a>
+        </form>
+        <% } %>
+      </div>
+
+      <!-- 댓글 show -->
+      <h4 class="mt-3">Comments</h4> <!-- 1 -->
+
+      <% if(comments.length){ %>
+        <div class="mt-3 border-bottom">
+          <% comments.forEach(function(comment) { %>
+            <div class="border-top pt-1 pb-1">
+   <!-- 4 --> <% if(comment.isDeleted){ %>
+                <div class="text-muted p-2">(Deleted Commnet)</div>
+              <% } else { %>
+              <div class="row">
+                <div class="col-3 col-md-2 col-lg-1 pl-4"><%= comment.commenter.p_id %></div>
+       <!-- 1 --> <div id="comment-<%= comment._id %>" class="col-9 col-md-10 col-lg-11 <%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>">
+                  <div class="comment-show">
+                    <div class="comment-text mb-3"><%= comment.text %></div>
+                    
+                    <small class="d-block">
+                      (Created: <span data-date-time="<%= comment.createdAt %>"></span>
+           <!-- 5 --> <% if(comment.updatedAt){ %>
+                          | Updated: <span data-date-time="<%= comment.updatedAt %>"></span>
+                      <% } %>
+                      )
+                    </small>
+
+                    <% if(isAuthenticated && comment.commenter && user.id == comment.commenter._id){ %>
+                      <small class="d-block">
+             <!-- 2 --> <a href="javascript:void(0)" onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')">Edit</a>
+                        |
+             <!-- 6 --> <form action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete" method="post" class="d-inline">
+                          <a href="javascript:void(0)" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">Delete</a>
+                        </form>
+                      </small>
+                    <% } %>
+                  </div>
+                 <div class="comment-edit">
+                    <%- include('./partials/comment-form', {
+                      actionUrl:'/comments/' + comment._id + '?postId=' + qna._id + '&_method=put',
+                      comment: comment,
+                      commentForm: commentForm,
+                      commentError: commentError,
+                    }); %>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <div class="mt-3">
+        <%- include('./partials/comment-form', {
+          actionUrl:'/comments?postId=' + qna._id,
+          comment: {},
+          commentForm: commentForm,
+          commentError: commentError,
+        }); %>
+      </div>
+
+    </div>
+  </body>
+</html>
