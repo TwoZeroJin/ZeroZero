@@ -41,7 +41,7 @@ router.post('/step2', function(req, res) {
     Step2.create(req.body, function(err, step2) {
         console.log('STEP 2의 db저장완료');
         console.log('내용 확인 페이지 출력합니다.');
-        res.redirect('/question/step3');
+        res.redirect('../connect');
     });
 });
 
@@ -68,6 +68,8 @@ router.get('/step3', isLoggedIn ,function(req, res){
         });
     });
 });
+
+
 
 
 module.exports = router;

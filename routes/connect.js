@@ -8,9 +8,8 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares/middlewares');
 router.get('/', isLoggedIn ,function(req, res){
     Step1.findOne({p_id : res.locals.user}, function(err, step1) {
         Step2.findOne({p_id : step1.p_id}, function(err, step2) {
-            const roomId = step1.p_id;
-            res.render('connect', { step1 : step1, step2: step2, roomId : roomId}); 
-            console.log(roomId);
+            res.render('connect', { step1 : step1, step2: step2}); 
+            
         });
     });
 });
