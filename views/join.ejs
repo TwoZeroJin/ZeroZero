@@ -75,12 +75,13 @@
                     <div class="int-area">
                       <input
                         type="password"
-                        class="int-area input"
+                        class="checkPass int-area input"
                         name="password"
                         id="password"
                         placeholder="8-16자 숫자와 영문자"
                         required
-                      /><label for="pw">비밀번호</label> <% if(errors.password){%>
+                      /><label for="pw">비밀번호</label><span style="color:red; font-size:10px" id="noPass"></span> 
+                      <% if(errors.password){%>
                       <span style="color: red; font-size: 10px"
                         ><%= errors.password %></span
                       >
@@ -89,12 +90,13 @@
                     <div class="int-area">
                       <input
                         type="password"
-                        class="int-area input"
+                        class="checkRePass int-area input"
                         name="rePass"
                         id="rePass"
                         placeholder="위와 동일하게 입력"
                         required
-                      /><label for="rePass">비밀번호 확인</label> <% if(errors.rePass){%>
+                      /><label for="rePass">비밀번호 확인</label><span style="color:red; font-size:10px" id="noRePass"></span>
+                      <% if(errors.rePass){%>
                       <span style="color: red; font-size: 10px"
                         ><%= errors.rePass %></span
                       >
@@ -112,22 +114,22 @@
                     <div class="int-area">
                       <input
                         type="text"
-                        class="int-area input"
+                        class="checkBirth int-area input"
                         name="birth"
                         id="birth"
                         placeholder="ex)19910101"
                         required
-                      /><label for="birth">생년월일</label>
+                      /><label for="birth">생년월일</label><span style="color:red; font-size:10px" id="noBirth"></span>
                     </div>
                     <div class="int-area">
                       <input
                         type="text"
-                        class="int-area input .social-placeholder"
+                        class="checkPhone int-area input .social-placeholder"
                         name="ph_no"
                         id="ph_no"
                         placeholder="-없이 입력해주세요"
                         required
-                      /><label for="ph_no">전화번호</label>
+                      /><label for="ph_no">전화번호</label><span style="color:red; font-size:10px" id="noPhone"></span>
                     </div>
                     <div class="int-area">
                       <input
@@ -141,11 +143,12 @@
                     <div class="int-area">
                       <input
                         type="email"
-                        class="int-area input"
+                        class="checkEmail int-area input"
                         name="email"
                         id="email"
                         required
-                      /><label for="email">이메일</label><% if(errors.email){%>
+                      /><label for="email">이메일</label><span style="color:red; font-size:10px" id="noEmail"></span>
+                      <% if(errors.email){%>
                         <span style="color: red; font-size: 10px"
                           ><%= errors.email %></span
                         >
