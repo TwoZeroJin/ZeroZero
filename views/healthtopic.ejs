@@ -55,7 +55,28 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
-              <h2>의학정보 페이지 입니다</h2>
+              <!-- 코로나 확진자 수 크롤링 -->
+              <h4 align="left">코로나 환자 실시간 현황</h4>
+              <table border="2px solid black">
+                <% coronaArr.forEach(function(element) { %>
+                  <tr>
+                    <td><%=element._text %></td>
+                    <td><%=element._num %> </td>
+                  </tr>
+                <% }) %>
+              </table>
+
+              <!-- 건강정보 크롤링 -->
+              <h4 align="left">이달의 건강소식</h4>
+              <table border="2px solid black" text-align="left">
+                <% infoArr.forEach(function(element, i) { %>
+                  <tr>
+                    <td><%= i+1 %></td>
+                    <td><a href="http://www.cdc.go.kr/<%=element._addr%>" target="_blank"><%= element._title %></a></td>
+                    </tr>
+                <%  }) %>
+              </table>
+              <p>출처: 질병관리청</p>
             </div>
           </div>
         </div>

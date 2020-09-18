@@ -32,8 +32,5 @@ router.get("/login", isNotLoggedIn, (req, res, next) => {
 router.get("/aboutus", (req, res, next) => {
   res.render("aboutus");
 });
-router.get("/healthtopic", (req, res, next) => {
-  res.render("healthtopic");
-});
 
 module.exports = router;

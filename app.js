@@ -17,6 +17,7 @@ const stepRouter = require("./routes/step");
 const mypageRouter = require("./routes/mypage");
 const qnaRouter = require("./routes/qna");
 const commentRouter = require("./routes/comments");
+const healthTopic = require("./routes/healthtopic");
 
 dotenv.config();
 
@@ -67,6 +68,7 @@ app.use("/question", stepRouter);
 app.use("/mypage", mypageRouter);
 app.use("/qna", qnaRouter); //게시판 이동 라우터
 app.use("/comments", commentRouter);
+app.use("/healthtopic", healthTopic);
 
 //에러 처리
 app.use((req, res, next) => {
