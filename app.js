@@ -27,7 +27,6 @@ const app = express();
 //http 서버 생성(추가본)
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const { v4: uuidV4 } = require('uuid');
 
 //view 엔진을 html(ejs)로 설정
 app.set('view engine','ejs');
@@ -69,14 +68,8 @@ app.use('/question', stepRouter);
 app.use('/mypage',mypageRouter);
 app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
-//app.use('/connect', connectRouter);
-app.use('/connect', (req, res) => {
-  res.render('connect');
-});
+app.use('/connect', connectRouter);
 
-app.use('/connect/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room });
-});
 
 
 io.on('connection', (socket) => {

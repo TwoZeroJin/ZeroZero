@@ -61,5 +61,13 @@ router.get('/step3', isLoggedIn ,function(req, res){
     });
 });
 
+router.get('/step3', isLoggedIn ,function(req, res){
+    Step1.findOne({p_id : res.locals.user}, function(err, step1) {
+        Step2.findOne({p_id : step1.p_id}, function(err, step2) {
+            res.render('question/step3', { step1 : step1, step2: step2}); 
+        });
+    });
+});
+
 
 module.exports = router;

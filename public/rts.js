@@ -41,6 +41,7 @@ socket.on('room_created', async () => {
 
   await setLocalStream(mediaConstraints)
   isRoomCreator = true
+  
 })
 
 socket.on('room_joined', async () => {
@@ -138,6 +139,9 @@ async function createOffer(rtcPeerConnection) {
   try {
     sessionDescription = await rtcPeerConnection.createOffer()
     rtcPeerConnection.setLocalDescription(sessionDescription)
+    if(user.p_id=="doctor"){
+      alert(roomId);
+    }
   } catch (error) {
     console.error(error)
   }
