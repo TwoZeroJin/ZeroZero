@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start app.js -i 0",
+    "start": "node app",
     "dev": "nodemon app.js"
   },
   "author": "",
@@ -32,9 +32,13 @@
     "moment": "^2.27.0",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
+    "node-static": "^0.7.11",
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
     "passport-local": "^1.0.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "uuid": "^8.3.0",
     "pm2": "^4.4.1",
     "redis": "^3.0.2",
     "sanitize-html": "^1.27.4",
