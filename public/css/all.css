@@ -1160,7 +1160,9 @@ a:hover {
   .social-placeholder {
     padding: 0;
   }
-
+  .visual > .container {
+    max-width: 680px;
+  }
   .visual {
     padding: 0;
     min-height: 760px;
