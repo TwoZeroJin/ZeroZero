@@ -27,6 +27,7 @@ const qnaRouter = require("./routes/qna");
 const commentRouter = require("./routes/comments");
 const connectRouter = require('./routes/connect');
 const healthTopic = require("./routes/healthtopic");
+const doctorRouter = require("./routes/doctor");
 dotenv.config();
 
 //dotenv보다 밑에 있어야함
@@ -92,6 +93,7 @@ app.use('/qna', qnaRouter);     //게시판 이동 라우터
 app.use('/comments', commentRouter);
 app.use('/connect', connectRouter);
 app.use("/healthtopic", healthTopic);
+app.use("/doctor", doctorRouter);
 
 io.on('connection', (socket) => {
   socket.on('join', (roomId) => {
