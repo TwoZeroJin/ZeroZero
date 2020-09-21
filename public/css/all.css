@@ -27,10 +27,11 @@ p {
 
 .btn-a {
   display: inline-block;
-  position: inherit;
-  margin: -90px 0 40px 0;
-  width: 100%;
-  width: 450px;
+  justify-content: center;
+  position: absolute;
+  margin: -200px;
+  letter-spacing: 0.8px;
+  width: 400px;
   height: 90px;
   border-radius: 5em;
   z-index: 1;
@@ -45,6 +46,7 @@ p {
 
 .btn-a a {
   text-align: center;
+  justify-content: center;
 }
 
 .btn,
@@ -92,6 +94,7 @@ a:hover {
 .step-btn {
   padding: 10px 0 0;
   text-align: center;
+  justify-content: center;
 }
 
 .btn-blue {
@@ -136,7 +139,7 @@ a:hover {
   float: right;
   margin: 2px 0 0 20px;
   height: 38px;
-  min-width: 100px;
+  width: 100px;
   padding: 7px;
   font-weight: bold;
   font-size: 15px;
@@ -257,7 +260,7 @@ a:hover {
 .visual .bg-stretch {
   width: auto;
   height: auto;
-  max-width: 100%;
+  max-width: 120%;
   max-height: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -414,6 +417,7 @@ a:hover {
 
 .main {
   padding: 47px 0;
+  justify-content: center;
 }
 .main .content {
   padding: 25px 15px 23px;
@@ -971,7 +975,11 @@ a:hover {
 @media only screen and (max-width: 992px) {
   .nav-opener {
     display: inline-block;
-    vertical-align: top;
+    margin-left: inherit;
+    position: relative;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 10px;
   }
 
   .opener-holder {
@@ -991,6 +999,23 @@ a:hover {
     bottom: -6px;
   }
 
+  .btn-a {
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    margin: -25% -15%;
+    letter-spacing: 0.8px;
+    width: 250px;
+    height: 90px;
+    border-radius: 5em;
+    z-index: 1;
+    font-size: 1.7rem;
+    background-color: rgba(75, 75, 75, 0.4);
+    color: white;
+    border: solid 3px #fff;
+    padding: 35px;
+  }
+
   #header {
     position: relative;
     padding: 0;
@@ -1003,13 +1028,20 @@ a:hover {
   }
   #header .btn {
     float: right;
-    height: 38px;
-    width: 100px;
-    font-size: 1.5rem;
-    line-height: 15px;
-    margin: 20px 20px 30px 0;
-    padding: 12px 19px;
-    vertical-align: top;
+    height: 35px;
+    width: 60px;
+    font-size: 1.1rem;
+    line-height: 10px;
+    margin: 5px;
+    padding: 11px;
+    align-items: center;
+  }
+
+  #header .btn:hover {
+    background: white;
+    border: none;
+    color: #3867d6;
+    font-weight: 400;
   }
 
   #header .btn a {
@@ -1141,6 +1173,7 @@ a:hover {
   }
   .visual .bg-stretch {
     bottom: -60px;
+    max-width: 150%;
   }
 
   .area {
@@ -1153,8 +1186,17 @@ a:hover {
     padding-bottom: 13px;
   }
 
+  .text-box p {
+    /* margin: 0 0 35px 0; */
+    max-width: 60%;
+    display: contents;
+    justify-content: center;
+    word-break: break-all;
+  }
+
   .main .text-box p {
     margin: 0 0 33px;
+    word-break: keep-all;
   }
 
   .text-box h2 {
@@ -1359,10 +1401,51 @@ a:hover {
   .testimonials li p {
     margin: 0 30px 36px;
   }
+
+  .text-box {
+    font-size: 1.5rem;
+    line-height: 1.285;
+  }
+
+  .text-box p {
+    width: 60%;
+    display: contents;
+    justify-content: center;
+    word-break: break-all;
+    display: inline-block;
+  }
 }
+
+/* responsive 핸드폰 */
+
 @media only screen and (max-width: 479px) {
   body {
     min-width: 320px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .visual p.tagline {
+    font-size: 15px;
+  }
+
+  .btn-a {
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    margin: -25%;
+    letter-spacing: 0.8px;
+    width: 200px;
+    height: 80px;
+    border-radius: 5em;
+    z-index: 1;
+    font-size: 1.5rem;
+    background-color: rgba(75, 75, 75, 0.4);
+    color: white;
+    border: solid 3px #fff;
+    padding: 30px;
   }
 
   #header > .container {
@@ -1374,13 +1457,18 @@ a:hover {
   }
 
   #header .btn {
-    height: 30px;
     margin: 8px 0 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 20px;
-    padding: 3px 20px;
+    padding: 3px 10px;
     min-width: 0;
   }
+
+  .btn-primary {
+    color: #4b7bec;
+    border: none;
+  }
+
   #header .logo {
     margin: 4px 0 10px 10px;
     width: 150px;
@@ -1399,8 +1487,9 @@ a:hover {
     line-height: 1.5;
   }
   .visual .bg-stretch {
-    max-width: 110%;
+    max-width: 125%;
   }
+
   .visual .info {
     background: rgba(255, 255, 255, 0.3);
     color: #bebcc3;
@@ -1449,7 +1538,7 @@ a:hover {
   .visual-container h2,
   .area h2 {
     margin: 0 0 20px;
-    font-size: 3.2rem;
+    font-size: 2.5rem;
     line-height: 1.125;
   }
 
@@ -1576,7 +1665,40 @@ a:hover {
     font-size: 1.4rem;
     line-height: 1.285;
   }
-}
+
+  /* board-table css */
+
+  .board-table th.title {
+    color: royalblue;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .board-table .author,
+  .board-table .date {
+    width: 20%;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .board-table .numId,
+  .board-table .views {
+    width: 20%;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .board-table .title {
+    width: 70%;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    color: #1b2637;
+    text-align: left;
+    overflow: hidden;
+    padding: 15px 0 15px 20px;
+  }
+} /* responsive 핸드폰 끝 */
+
 @media only screen and (min-width: 1025px) {
   [href^="tel:"] {
     cursor: default;
@@ -1704,6 +1826,7 @@ a:hover {
   z-index: 2;
   max-height: 1000px;
   margin-top: 100px;
+  justify-content: center;
 }
 .login-form h1 {
   font-size: 28px;
@@ -1711,6 +1834,10 @@ a:hover {
   text-align: center;
   margin: 0 0 37px 0;
 }
+.login-form form {
+  justify-content: center;
+}
+
 .login-form p {
   color: #778ca3;
   font-size: 20px;
@@ -1922,19 +2049,21 @@ a:hover {
 }
 .board-table .numId,
 .board-table .views {
-  width: 80px;
+  width: 20%;
   text-align: center;
   padding: 15px 0;
 }
 .board-table .author,
 .board-table .date {
-  width: 100px;
+  width: 20%;
   text-align: center;
   padding: 15px 0;
 }
 
 .board-table .title {
   padding: 15px 0;
+  width: 70%;
+  text-overflow: ellipsis;
 }
 
 #text {
@@ -2119,4 +2248,174 @@ body .no-padding {
   font-size: 12px;
   color: #888;
   margin-bottom: 20px;
+}
+
+/* 마이페이지 상단 탭 */
+
+.tab_comm.seven {
+  max-width: 800px;
+  padding: 0 131px;
+}
+
+.mac_os .tab_comm {
+  background: 0 0;
+}
+
+.tab_comm {
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: 45px;
+  border-bottom: black solid 1px;
+}
+
+.tab_comm ul {
+  list-style: none;
+  display: block;
+}
+
+.clfix:after,
+.clfix:before {
+  line-height: 0;
+  display: table;
+  content: "";
+}
+
+.tab_comm.seven li {
+  width: 177px;
+}
+.tab_comm li:first-child {
+  margin-left: 0;
+}
+.tab_comm li {
+  list-style: none;
+  float: left;
+  margin-left: -1px;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.tab_comm.seven li:first-child {
+  width: 177px;
+}
+
+.tab_comm li.on a {
+  position: relative;
+  z-index: 2;
+  height: 44px;
+  color: #fff;
+  background-color: #537dde;
+  border: 2px solid #fff;
+  border-bottom: 0;
+  margin-right: -10px;
+  /* border-radius: 3px; */
+  border-radius: 15px 15px 0 0;
+}
+
+.mac_os .tab_comm li.on a {
+  border: 1px solid #000;
+  background: 0 0;
+}
+
+.mac_os .tab_comm li a {
+  line-height: 43px;
+  border-color: #ddd;
+}
+
+.tab_comm li a {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 41px;
+  position: relative;
+  display: block;
+  height: 43px;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: border-color 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  text-align: center;
+  color: #797d84;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+}
+
+.mac_os .tab_comm li a:after {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: "";
+  background: #000;
+}
+
+.mac_os .tab_comm li.on a:after {
+  background: #fff;
+}
+
+.hide_txt {
+  font-size: 1px;
+  line-height: 0;
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  width: 1px;
+  height: 1px;
+}
+
+.heading-holder {
+  justify-content: center;
+  display: block;
+  text-align: -webkit-center;
+}
+
+.heading-holder h3 {
+  margin: 40px;
+}
+
+/* 마이페이지 테이블 */
+.mypage-table {
+  display: table;
+  margin: 20px 0 200px 0;
+  padding: 10px;
+}
+
+.mypage-table th {
+  min-width: 120px;
+  font-size: 18px;
+  border: none;
+  color: #4b6584;
+  line-height: 1.4;
+  background-color: transparent;
+}
+
+.mypage-table table,
+th,
+td {
+  padding: 15px;
+}
+
+.mypage-table td {
+  color: #333;
+  font-size: 15px;
+  width: 300px;
+}
+
+.mypage-table tr {
+  border-bottom: 0.7px solid #888;
+  height: 70px;
+}
+
+.mypage-table .btn-primary-1 {
+  color: #fff;
+  background-color: #4b7bec;
+  font-size: 13px;
+  margin: 0 15px 0 0;
+  float: right;
+}
+
+.mypage-table p {
+  font-size: 13px;
+  font-weight: bold;
+  color: #ababab;
+  text-align: center;
+  margin: 17px;
 }

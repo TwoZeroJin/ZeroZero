@@ -60,20 +60,19 @@
           </div>
         </div>
         <img src="images/main-banner.jpg" alt="" class="bg-stretch" />
+        <div class="step-btn">
+          <a href="/question/step1" class="btn-a">예진표 작성하기</a>
+        </div>
       </section>
       <section class="main">
         <div class="container">
-          <div class="step-btn">
-            <a href="/question/step1" class="btn-a">예진표 작성하기</a>
-          </div>
-
           <!--<div class="step-btn">
             <a href="/question/step1">
               <button class="btn-a">예진표 작성하기</button>
             </a>
           </div>-->
 
-          <div class="row" style="margin-top: 100px">
+          <div class="row" style="margin-top: 50px">
             <div class="text-box col-md-offset-1 col-md-10">
               <h3>비대면 진료 서비스, 아만닥</h3>
               <p>
@@ -279,28 +278,13 @@
             <div class="row">
               <div class="col-md-4">
                 <h3>의학정보</h3>
-                <h4>
-                  Fully Available: Live Preview Support for Multiple Browsers
-                </h4>
-                <p>
-                  Morbi faucibus ante ipsum, a tincidunt libero posuere et.
-                  Etiam tempor tortor at odio condimentum, sit amet fringilla
-                  ligula maximus. Mauris venenatis nisl nisi, et dictum dui
-                  aliquet nec. Sed erat, nec aliquam vel, aliquam ac felis.
-                </p>
-                <h4>Improved Support for Typing</h4>
-                <p>
-                  Nulla purus quam, pulvinar sed ante et, feugiat maximus velit.
-                  Donec eu elit mauris.
-                </p>
-                <h4>Improved Stability</h4>
-                <p>
-                  Proin id ligula eget massa tincidunt molestie. Morbi urna
-                  lectus, molestie vel quam vel, iaculis fermentum nunc. Morbi
-                  imperdiet, leo in interdum pretium.
-                </p>
+                <% for ( let i=0; i < 5; i++ ) { %>
+                  <h4><a href="http://www.cdc.go.kr/<%=infoArr[i]._addr%>" target="_blank"><%= infoArr[i]._title %></a></h4>
+                <% } %>
                 <div class="btn-holder">
-                  <a href="#" class="btn btn-link">Go to Release Log</a>
+                  <a href="/healthtopic" class="btn btn-link"
+                    >더 많은 의학정보 보러가기</a
+                  >
                 </div>
               </div>
               <div class="col-md-4">
@@ -324,7 +308,7 @@
                   et.
                 </p>
                 <div class="btn-holder">
-                  <a href="#" class="btn btn-link">Go to Marketplace</a>
+                  <a href="#" class="btn btn-link">공지사항</a>
                 </div>
               </div>
               <div class="col-md-4">
