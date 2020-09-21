@@ -15,7 +15,7 @@ router.post("/login", (req, res, next) => {
     Patient.findOne({p_id : req.body.p_id}, function(err, patient) {
         console.log(patient);
         if(patient.gubun == 1) {
-            return res.redirect("/doctor");
+            return res.redirect("/");
         }
         else {
             passport.authenticate("local", (authError, user, info) => {
