@@ -11,8 +11,6 @@ const connect = require('./models');
 const flash = require('connect-flash');
 
 const hpp = require("hpp");
-const redis = require("redis");
-const RedisStore = require("connect-redis")(session);
 const logger = require("./logger");
 
 // const sanitizeHtml = require('sanitize-html');
