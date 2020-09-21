@@ -7,7 +7,6 @@ const Patients = require('../models/patients');
 const moment = require('moment');
 const Step1 = require('../models/Step1');
 const Step2 = require('../models/Step2');
-
 //Date format 사용
 router.get('/',isLoggedIn,async(req,res,next)=>{
   await Step1.findOne({p_id:res.locals.user})
@@ -42,7 +41,7 @@ router.route('/myPharmacy')
     next(err);
   }
 });
-// 그동안 받은 진료 이력 출력하긔
+// 그동안 받은 진료 이력 출력하기
 router.get('/mytreat',isLoggedIn,async(req,res,next)=>{
   try{
     let page = Math.max(1, parseInt(req.query.page));

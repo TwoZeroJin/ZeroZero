@@ -11,7 +11,7 @@ module.exports = () => {
   }, async (p_id, password, done) => {
     try {
       const patient = await Patient.findOne({p_id:p_id})
-      .select('password')
+      .select('password gubun');
       if (patient) {
         const result = await bcrypt.compare(password, patient.password);
         if (result) {

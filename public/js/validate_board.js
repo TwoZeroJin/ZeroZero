@@ -23,7 +23,7 @@ $(function(){
     }})
     $("#canSubmit").click(function(e){
         if(!(flag1&&flag2)){
-            alert('메시지를 확인해주세요 ㅎㅎ;');
+            alert('메시지를 확인해주세요.');
             e.preventDefault();
         }
     })
