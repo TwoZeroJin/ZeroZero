@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const Patient = require("../models/patients");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 
