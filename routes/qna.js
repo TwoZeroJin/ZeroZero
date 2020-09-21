@@ -16,21 +16,57 @@ router.get("/", async (req, res, next) => {
     const skip = (page - 1) * limit;
     const count = await Qna.countDocuments({});
     const maxPage = Math.ceil(count / limit);
-    const qna = await Qna.find()
-      .sort("-createdAt")
-      .populate("reg_id")
-      .skip(skip)
-      .limit(limit)
-      .exec();
+    // const qna = await Qna.find()
+    //   .sort("-createdAt")
+    //   .populate("reg_id")
+    //   .skip(skip)
+    //   .limit(limit)
+    //   .exec();
+    // res.render("board", {
+    //   qna: qna,
+    //   currentPage: page,
+    //   maxPage: maxPage,
+    //   limit: limit,
+    // });
+
+    const qna = await Qna.aggregate([ 
+      { $lookup: {
+          from: 'patients',
+          localField: 'reg_id',
+          foreignField: '_id',
+          as: 'reg_id'
+      } },
+      { $unwind: '$reg_id' }, 
+      { $sort : { createdAt: -1 } },
+      { $skip: skip }, 
+      { $limit: limit },
+      { $lookup: { 
+          from: 'comments',
+          localField: '_id',
+          foreignField: 'post',
+          as: 'comments'
+      } },
+      { $project: { 
+          title: 1,
+          reg_id: {
+            p_id: 1,
+          },
+          views: 1,
+          numId: 1,
+          createdAt: 1,
+          commentCount: { $size: '$comments'}
+      } },
+    ]).exec();
     res.render("board", {
       qna: qna,
       currentPage: page,
       maxPage: maxPage,
       limit: limit,
     });
+
   } catch (err) {
     console.error(err);
-    nexr(err);
+    next(err);
   }
 });
 
