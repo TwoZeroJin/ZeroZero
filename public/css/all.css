@@ -1186,6 +1186,14 @@ a:hover {
     padding-bottom: 13px;
   }
 
+  .text-box p {
+    /* margin: 0 0 35px 0; */
+    max-width: 60%;
+    display: contents;
+    justify-content: center;
+    word-break: break-all;
+  }
+
   .main .text-box p {
     margin: 0 0 33px;
     word-break: keep-all;
@@ -1392,6 +1400,19 @@ a:hover {
   }
   .testimonials li p {
     margin: 0 30px 36px;
+  }
+
+  .text-box {
+    font-size: 1.5rem;
+    line-height: 1.285;
+  }
+
+  .text-box p {
+    width: 60%;
+    display: contents;
+    justify-content: center;
+    word-break: break-all;
+    display: inline-block;
   }
 }
 
@@ -2227,4 +2248,174 @@ body .no-padding {
   font-size: 12px;
   color: #888;
   margin-bottom: 20px;
+}
+
+/* 마이페이지 상단 탭 */
+
+.tab_comm.seven {
+  max-width: 800px;
+  padding: 0 131px;
+}
+
+.mac_os .tab_comm {
+  background: 0 0;
+}
+
+.tab_comm {
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: 45px;
+  border-bottom: black solid 1px;
+}
+
+.tab_comm ul {
+  list-style: none;
+  display: block;
+}
+
+.clfix:after,
+.clfix:before {
+  line-height: 0;
+  display: table;
+  content: "";
+}
+
+.tab_comm.seven li {
+  width: 177px;
+}
+.tab_comm li:first-child {
+  margin-left: 0;
+}
+.tab_comm li {
+  list-style: none;
+  float: left;
+  margin-left: -1px;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.tab_comm.seven li:first-child {
+  width: 177px;
+}
+
+.tab_comm li.on a {
+  position: relative;
+  z-index: 2;
+  height: 44px;
+  color: #fff;
+  background-color: #537dde;
+  border: 2px solid #fff;
+  border-bottom: 0;
+  margin-right: -10px;
+  /* border-radius: 3px; */
+  border-radius: 15px 15px 0 0;
+}
+
+.mac_os .tab_comm li.on a {
+  border: 1px solid #000;
+  background: 0 0;
+}
+
+.mac_os .tab_comm li a {
+  line-height: 43px;
+  border-color: #ddd;
+}
+
+.tab_comm li a {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 41px;
+  position: relative;
+  display: block;
+  height: 43px;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: border-color 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  text-align: center;
+  color: #797d84;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+}
+
+.mac_os .tab_comm li a:after {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: "";
+  background: #000;
+}
+
+.mac_os .tab_comm li.on a:after {
+  background: #fff;
+}
+
+.hide_txt {
+  font-size: 1px;
+  line-height: 0;
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  width: 1px;
+  height: 1px;
+}
+
+.heading-holder {
+  justify-content: center;
+  display: block;
+  text-align: -webkit-center;
+}
+
+.heading-holder h3 {
+  margin: 40px;
+}
+
+/* 마이페이지 테이블 */
+.mypage-table {
+  display: table;
+  margin: 20px 0 200px 0;
+  padding: 10px;
+}
+
+.mypage-table th {
+  min-width: 120px;
+  font-size: 18px;
+  border: none;
+  color: #4b6584;
+  line-height: 1.4;
+  background-color: transparent;
+}
+
+.mypage-table table,
+th,
+td {
+  padding: 15px;
+}
+
+.mypage-table td {
+  color: #333;
+  font-size: 15px;
+  width: 300px;
+}
+
+.mypage-table tr {
+  border-bottom: 0.7px solid #888;
+  height: 70px;
+}
+
+.mypage-table .btn-primary-1 {
+  color: #fff;
+  background-color: #4b7bec;
+  font-size: 13px;
+  margin: 0 15px 0 0;
+  float: right;
+}
+
+.mypage-table p {
+  font-size: 13px;
+  font-weight: bold;
+  color: #ababab;
+  text-align: center;
+  margin: 17px;
 }

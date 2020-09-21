@@ -23,14 +23,7 @@
       type="text/css"
     />
   </head>
-  <style>
-    table,
-    th,
-    td {
-      border: solid 1px black;
-      border-collapse: collapse;
-    }
-  </style>
+
   <body>
     <div id="wrapper">
       <header id="header">
@@ -62,174 +55,232 @@
           </nav>
         </div>
       </header>
-      <div>
-        <h1>마이페이지</h1>
-        <table>
-          <tr>
-            <th>이름</th>
-            <td><%= user.name %></td>
-            <th>신장</th>
-            <% if (step1) {%>
-            <td><%= step1.height %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>생년월일</th>
-            <td><%= user.birth %></td>
-            <th>몸무게</th>
-            <% if (step1) {%>
-            <td><%= step1.weight %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>전화번호</th>
-            <td><%= user.ph_no %></td>
-            <th>과거 병력</th>
-            <% if (step1) {%>
-            <td><%= step1.history %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>주소</th>
-            <td><%= user.addr %></td>
-            <th>가족력</th>
-            <% if (step1) {%>
-            <td>
-              관계 : <%= step1.family_member %> 병명 : <%=
-              step1.family_disease%>
-            </td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <td><%= user.email %></td>
-            <th>복용중인 약물</th>
-            <% if (step1) {%>
-            <td><%= step1.drug %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>가입날짜</th>
-            <td>
-              <span
-                ><%= moment(user.reg_date).format('YYYY년 MM월 DD일') %></span
-              >
-            </td>
-            <th>음주</th>
-            <% if (step1) {%>
-            <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-          <tr>
-            <th>MY 약국</th>
-            <% if (user.myPharmacy) {%>
-            <td>
-              <span
-                ><%= user.myPharmacy %><button class="myPharmacy">
-                  MY약국 변경하기
-                </button></span
-              >
-            </td>
-            <%}else{%>
-            <td><button class="myPharmacy">MY약국 등록하기</button></td>
-            <%}%>
-            <th>흡연</th>
-            <% if (step1) {%>
-            <td><%= step1.smoke_cnt %></td>
-            <%}else{%>
-            <td></td>
-            <%}%>
-          </tr>
-        </table>
-      </div>
-      <div>
-        <h1>내 정보 변경하기</h1>
-        <table>
-          <tr>
-            <th>전화번호 변경</th>
-          </tr>
-          <tr>
-            <th>새 전화번호</th>
-          </tr>
-          <tr>
-            <form method="post" action="/mypage/<%=user.p_id%>/phone">
-              <td>
-                <input
-                  type="text"
-                  name="ph_no"
-                  id="ph_no"
-                  class="checkPhone"
-                  value="<%= user.ph_no %>"
-                /><input type="submit" id="canSubmit" value="변경하기" />
-              </td>
-              <span style="color: red; font-size: 10px" id="noPhone"></span>
-            </form>
-          </tr>
-          <tr>
-            <th>주소 변경</th>
-          </tr>
-          <tr>
-            <th>새 주소</th>
-          </tr>
-          <tr>
-            <form method="post" action="/mypage/<%=user.p_id%>/address">
-              <td>
-                <input type="text" name="addr" value="<%= user.addr %>" /><input
-                  type="submit"
-                  value="변경하기"
-                />
-              </td>
-            </form>
-          </tr>
-          <tr>
-            <th>이메일 변경</th>
-          </tr>
-          <tr>
-            <th>새 이메일</th>
-          </tr>
-          <tr>
-            <form method="post" action="/mypage/<%=user.p_id%>/email">
-              <td>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value="<%= user.email %>"
-                  class="checkEmail"
-                /><input type="submit" id="canSubmit" value="변경하기" />
-              </td>
-              <span style="color: red; font-size: 10px" id="noEmail"></span>
-            </form>
-          </tr>
-        </table>
-      </div>
-      <div>
-        <h1>탈퇴하기</h1>
-        <form method="post" action="/mypage/<%=user.p_id%>">
-          <h4>비밀번호 입력</h4>
-          <input type="hidden" name="p_id" value="<%= user.p_id %>" />
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="비밀번호가 일치하면 탈퇴됩니다."
-            />
+      <section class="visual">
+        <div class="container">
+          <div class="text-block">
+            <div class="heading-holder">
+              <ul class="tab_comm seven clfix">
+                <li class="on">
+                  <a href="#myInfo"
+                    >내 정보
+                    <span class="hide_txt">선택됨</span>
+                  </a>
+                </li>
+                <li class="on">
+                  <a href="#changeMyInfo"
+                    >내 정보 변경하기
+                    <span class="hide_txt">선택됨</span>
+                  </a>
+                </li>
+                <li class="on">
+                  <a href="#deleteMyId"
+                    >탈퇴하기
+                    <span class="hide_txt">선택됨</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="mypage-table" id="myInfo">
+                <h3>내 정보</h3>
+                <table>
+                  <tr>
+                    <th>이름</th>
+                    <td><%= user.name %></td>
+                    <th>신장</th>
+                    <% if (step1) {%>
+                    <td><%= step1.height %> cm</td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>생년월일</th>
+                    <td><%= user.birth %></td>
+                    <th>몸무게</th>
+                    <% if (step1) {%>
+                    <td><%= step1.weight %> kg</td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>전화번호</th>
+                    <td><%= user.ph_no %></td>
+                    <th>과거 병력</th>
+                    <% if (step1) {%>
+                    <td><%= step1.history %></td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>주소</th>
+                    <td><%= user.addr %></td>
+                    <th>가족력</th>
+                    <% if (step1) {%>
+                    <td>
+                      관계 : <%= step1.family_member %> 병명 : <%=
+                      step1.family_disease%>
+                    </td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>이메일</th>
+                    <td><%= user.email %></td>
+                    <th>복용중인 약물</th>
+                    <% if (step1) {%>
+                    <td><%= step1.drug %></td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>가입날짜</th>
+                    <td>
+                      <span
+                        ><%= moment(user.reg_date).format('YYYY년 MM월 DD일')
+                        %></span
+                      >
+                    </td>
+                    <th>음주</th>
+                    <% if (step1) {%>
+                    <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                  <tr>
+                    <th>MY 약국</th>
+                    <% if (user.myPharmacy) {%>
+                    <td>
+                      <span style="line-height: 35px;"
+                        ><%= user.myPharmacy %><button
+                          id="btn btn-primary-1"
+                          class="btn btn-primary-1 myPharmacy"
+                        >
+                          MY약국 변경
+                        </button></span style="line-height: 35px;"
+                      >
+                    </td>
+                    <%}else{%>
+                    <td>
+                      <button class="btn btn-primary-1 myPharmacy">
+                        MY약국 등록
+                      </button>
+                    </td>
+                    <%}%>
+                    <th>흡연</th>
+                    <% if (step1) {%>
+                    <td><%= step1.smoke_cnt %></td>
+                    <%}else{%>
+                    <td></td>
+                    <%}%>
+                  </tr>
+                </table>
+                <p> * 신체정보 및 기타정보는 다음 예진표 작성시 변경됩니다. </p>
+              </div>
+              <!-- 내 정보 div 끝 -->
+
+              <div class="mypage-table" id="changeMyInfo">
+                <h3>내 정보 변경하기</h3>
+                <table>
+                  <tr>
+                    <th>전화번호 변경</th>
+                  </tr>
+                  <tr>
+                    <th>새 전화번호</th>
+                  </tr>
+                  <tr>
+                    <form method="post" action="/mypage/<%=user.p_id%>/phone">
+                      <td>
+                        <input
+                          type="text"
+                          name="ph_no"
+                          id="ph_no"
+                          class="checkPhone"
+                          value="<%= user.ph_no %>"
+                        /><input
+                          type="submit"
+                          id="canSubmit"
+                          value="변경하기"
+                        />
+                      </td>
+                      <span
+                        style="color: red; font-size: 10px"
+                        id="noPhone"
+                      ></span>
+                    </form>
+                  </tr>
+                  <tr>
+                    <th>주소 변경</th>
+                  </tr>
+                  <tr>
+                    <th>새 주소</th>
+                  </tr>
+                  <tr>
+                    <form method="post" action="/mypage/<%=user.p_id%>/address">
+                      <td>
+                        <input
+                          type="text"
+                          name="addr"
+                          value="<%= user.addr %>"
+                        /><input type="submit" value="변경하기" />
+                      </td>
+                    </form>
+                  </tr>
+                  <tr>
+                    <th>이메일 변경</th>
+                  </tr>
+                  <tr>
+                    <th>새 이메일</th>
+                  </tr>
+                  <tr>
+                    <form method="post" action="/mypage/<%=user.p_id%>/email">
+                      <td>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          value="<%= user.email %>"
+                          class="checkEmail"
+                        /><input
+                          type="submit"
+                          id="canSubmit"
+                          value="변경하기"
+                        />
+                      </td>
+                      <span
+                        style="color: red; font-size: 10px"
+                        id="noEmail"
+                      ></span>
+                    </form>
+                  </tr>
+                </table>
+              </div>
+              <!--내 정보 변경 div의 끝-->
+
+              <div class="mypage-table" id="deleteMyId">
+                <h3>탈퇴하기</h3>
+                <form method="post" action="/mypage/<%=user.p_id%>">
+                  <h4>비밀번호 입력</h4>
+                  <input type="hidden" name="p_id" value="<%= user.p_id %>" />
+                  <div>
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="비밀번호가 일치하면 탈퇴됩니다."
+                    />
+                  </div>
+                  <input type="submit" value="탈퇴하기" />
+                </form>
+              </div>
+              <!--회원 탈퇴하기 div의 끝 -->
+            </div>
           </div>
-          <input type="submit" value="탈퇴하기" />
-        </form>
-      </div>
+        </div>
+      </section>
+
       <a href="/mypage">개인 정보</a>
       <a href="/mypage/mytreat">진료 기록</a>
       <a href="/">메인으로</a>
@@ -295,6 +346,17 @@
             "width=900,height=510,left=300,top=50"
           );
         });
+      });
+    </script>
+    <script>
+      $("a").click(function () {
+        $("html, body").animate(
+          {
+            scrollTop: $($.attr(this, "href")).offset().top,
+          },
+          500
+        );
+        return false;
       });
     </script>
   </body>
