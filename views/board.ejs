@@ -85,6 +85,10 @@
                 <td class="numId"><%= qna.numId %></td>
                 <td class="title">
                   <a href="/qna/<%= qna._id %>"><div><%= qna.title %></div></a>
+                  <% if(qna.commentCount){ %>
+                    <small>(<%= qna.commentCount %>)</small>
+                  <% } %>
+                
                 </td>
                 <td class="views"><%= qna.views %></td>
                 <td class="author"> <!-- 2 -->

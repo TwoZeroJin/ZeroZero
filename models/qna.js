@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Counter = require("./counter");
+const autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
 
 //schema
 const { Schema } = mongoose;
@@ -35,6 +37,14 @@ const qnaSchema = new Schema({
   updatedAt: { type: Date },
 });
 
+qnaSchema.plugin(autoIncrement.plugin, {
+  model:'qna',
+  field: 'numId', // auto-increment할 field
+  startAt: 1, // 0에서 부터
+  increment: 1 // 1씩 증가
+ });
+
+
 qnaSchema.pre("save", async function (next) {
   let qna = this;
   if (qna.isNew) {
@@ -42,7 +52,7 @@ qnaSchema.pre("save", async function (next) {
     if (!counter) counter = await Counter.create({ name: "qnas" });
     counter.count++;
     counter.save();
-    qna.numId = counter.count;
+    //qna.numId = counter.count;
   }
   return next();
 });

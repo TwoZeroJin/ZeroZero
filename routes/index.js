@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Patient = require("../models/patients");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
+const Qna = require("../models/qna");
 
 //api를 통해 환자 정보를 모두 가져옴
 router.get("/api/patients", (req, res) => {
@@ -17,8 +18,14 @@ router.get("/api/patients", (req, res) => {
     });
 });
 //메인화면을 렌더링하는 함수
-router.get("/", (req, res, next) => {
-  res.render("index");
+router.get("/", async (req, res, next) => {
+  const qna = await Qna.find()
+    .sort("-createdAt")
+    .populate("reg_id")
+    .limit(5)
+    .exec();
+
+  res.render("index",{qna:qna});
 });
 
 //회원가입으로 들어오는 경로 처리
