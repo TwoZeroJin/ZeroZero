@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>원격 의료 매칭 서비스, 아만닥</title>
+    
+    <meta name="msapplication-TileColor" content="#3867d6" />
+
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="../fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../css/all.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style type="text/css">
+      form div { margin-bottom: 20px;}
+      input.error, select.error{
+          border: 1px solid red;
+      }
+      label.error {
+          margin-left:10px;
+          color:red;
+      }
+      body {
+        position: relative;
+        margin: 0;
+        font-size: 20px;
+      }
+    </style>
+    <!-- 카메라 css -->
+    <style type="text/css">
+      .centered {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .video-position {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #video-chat-container {
+        width: 100%;
+        background-color: black;
+      }
+      #local-video {
+        position: absolute;
+        height: 30%;
+        width: 30%;
+        bottom: 0px;
+        left: 0px;
+      }
+      #remote-video {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+      </head>
+<body>
+    <div>
+      <header id="header">
+        <div class="container">
+          <div class="logo">
+            <a href="/"><img src="/images/logo.svg" alt="아만닥" /></a>
+          </div>
+          <nav id="nav">
+            <a href="#" class="nav-opener"><span></span></a>
+            <div class="opener-holder">
+              <% if (user) { %>
+              <p>반갑습니다! <%= user.name %> 님</p>
+              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
+              <a href="/auth/logout" class="btn btn-primary rounded"
+                >로그아웃</a>
+              <% }else{ %>
+              <a href="/login" class="btn btn-primary rounded">로그인</a>
+              <a href="/join" class="btn btn-primary rounded">회원가입</a>
+              <% } %>
+            </div>
+            <div class="nav-drop">
+              <ul>
+                <li><a href="/aboutus">소개</a></li>
+                <li><a href="/healthtopic">의학정보</a></li>
+                <li><a href="/qna">게시판</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <div id="room-selection-container" class="centered">
+      <input id="room-input" type="hidden" value="1234"/>
+      <button id="connect-button">의사와 연결하기</button>
+    </div>
+
+    <div id="video-chat-container" class="video-position" style="display: none">
+        <div>
+          <b><%=user.p_id %>님의 화면 </b>
+        </div>
+        <video id="local-video" autoplay="autoplay"></video>
+        <h5>의사화면</h5>
+        <video id="remote-video" autoplay="autoplay"></video>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="../rts.js"></script>
+</body>
+</html>
