@@ -1,14 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
+const cheerio = require("cheerio");
 const passport = require("passport");
 const Patient = require("../models/patients");
 const Step1 = require("../models/Step1");
 const Step2 = require("../models/Step2");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
+const healthInfo = "http://www.cdc.go.kr/gallery.es?mid=a20509000000&bid=0007"; //질병관리청 페이지
 
 //메인화면을 렌더링하는 함수
 router.get("/", (req, res, next) => {
-  res.render("index");
+  axios.get(healthInfo).then(html2 => {
+     
+    /* 질병관리청 이달의 건강소식 */
+     const infoArr = [];
+     let $ = cheerio.load(html2.data);
+     const infoTag = $("div.galleryList ul li");
+     infoTag.each(function(i, elem) {
+         let infoObj = {
+             _title : $(this).find("a").attr("title"),
+             _addr : $(this).find("a").attr("href")
+         }
+         infoArr.push(infoObj);
+     })
+    res.render('index',{ infoArr : infoArr});
+  });
 });
 
 //회원가입으로 들어오는 경로 처리
