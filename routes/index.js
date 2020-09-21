@@ -3,19 +3,6 @@ const router = express.Router();
 const Patient = require("../models/patients");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 
-//api를 통해 환자 정보를 모두 가져옴
-router.get("/api/patients", (req, res) => {
-  Patient.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
 //메인화면을 렌더링하는 함수
 router.get("/", (req, res, next) => {
   res.render("index");

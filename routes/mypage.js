@@ -33,7 +33,7 @@ router.route('/myPharmacy')
     }else{
       await Patient.findOneAndUpdate({p_id:res.locals.user.p_id},{myPharmacy:myPharmacy},{upsert:true});
       return res.send(`<script> 
-          alert('변경되었습니다..ㅎ;');
+          alert('변경되었습니다.');
           opener.parent.location.reload();
           window.close();
           </script>`);
@@ -76,7 +76,7 @@ router.post('/:p_id/phone',isLoggedIn,async(req,res,next)=>{
   try{
     await Patient.findOneAndUpdate({p_id:req.params.p_id},{ph_no:req.body.ph_no});
     return res.send(`<script> 
-        alert('변경되었습니다..ㅎ;');
+        alert('변경되었습니다.');
         location.href="/mypage";
         </script>`);
   }catch(err){
@@ -88,7 +88,7 @@ router.post('/:p_id/address',isLoggedIn,async(req,res,next)=>{
   try{
     await Patient.findOneAndUpdate({p_id:req.params.p_id},{addr:req.body.addr});
     return res.send(`<script> 
-        alert('변경되었습니다..ㅎ;');
+        alert('변경되었습니다.');
         location.href="/mypage";
         </script>`);
   }catch(err){
@@ -100,7 +100,7 @@ router.post('/:p_id/email',isLoggedIn,async(req,res,next)=>{
   try{
     await Patient.findOneAndUpdate({p_id:req.params.p_id},{email:req.body.email});
     return res.send(`<script> 
-        alert('변경되었습니다..ㅎ;');
+        alert('변경되었습니다.');
         location.href="/mypage";
         </script>`);
   }catch(err){
@@ -117,12 +117,12 @@ router.post('/:p_id',isLoggedIn,async(req,res,next)=>{
       if(result){
         await Patients.deleteOne({p_id:req.params.p_id});
         return res.send(`<script> 
-        alert('탈퇴되었습니다..ㅋ');
+        alert('탈퇴되었습니다.');
         location.href="/";
         </script>`)
       }else{
         return res.send(`<script> 
-        alert('비밀번호가 맞지 않습니다..ㅋ');
+        alert('비밀번호가 맞지 않습니다.');
         window.history.back();
         </script>`)
       }
