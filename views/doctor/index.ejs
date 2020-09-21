@@ -12,13 +12,15 @@
     </head>
     <body>
         <div class="opener-holder">
-            <% if (user) { %>
+            <% if (user.gubun === 2) { %>
             <p>반갑습니다! 의사 <%= user.name %> 님</p>
             <a href="/doctor/logout" class="btn btn-primary rounded"
-            >로그아웃</a>
-                
+            >로그아웃</a> 
             <a href="/doctor/call"><h1>화상통화하러가기</h1></a>
         </div>
+        <% }else if(user.gubun !== 2){%>
+            <script>alert('해당 페이지를 이용하실 수 없습니다.')
+            location.href="/"</script>
         <% }else{ %>
         <section class="login-form">
             <p>로그인</p>

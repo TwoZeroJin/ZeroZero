@@ -24,12 +24,12 @@ router.post("/login", async(req, res, next) => {
               req.flash("message", info.message);
               return res.redirect("/login");
             }
-            // if(user.gubun === 1) { // user의 gubun 값을 가져오기 위해서 passport/LocalStrategy 14번 줄에 gubun 추가
-            //   return res.send(`<script>
-            //   alert('의사 전용페이지입니다.');
-            //   location.href='/doctor';
-            //   </script>`);
-            // }
+            if(user.gubun === 1) { // user의 gubun 값을 가져오기 위해서 passport/LocalStrategy 14번 줄에 gubun 추가
+              return res.send(`<script>
+              alert('의사 전용페이지입니다.');
+              location.href='/doctor';
+              </script>`);
+            }
             return req.login(user, (loginError) => {
               if (loginError) {
                 console.error(loginError);
