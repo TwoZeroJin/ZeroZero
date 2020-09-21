@@ -49,7 +49,7 @@
         transform: translate(-50%, -50%);
       }
       #video-chat-container {
-        width: 100%;
+        width: 49%;
         background-color: black;
       }
       #local-video {
@@ -135,9 +135,9 @@
 
     <div id="room-selection-container" class="centered">
       <input id="room-input" type="hidden" value="1234"/>
+      <input name="p_id" type="hidden" value="<%=user._id%>"/>
       <button id="connect-button">의사와 연결하기</button>
     </div>
-
     <div id="video-chat-container" class="video-position" style="display: none">
         <div>
           <b><%=user.p_id %>님의 화면 </b>
@@ -146,7 +146,7 @@
         <h5>의사화면</h5>
         <video id="remote-video" autoplay="autoplay"></video>
     </div>
-
+    <button><a href="/">메인으로</a></button>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script type="text/javascript" src="rts.js"></script>

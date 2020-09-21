@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const Patient = require("../models/patients");
+const Step1 = require("../models/Step1");
+const Step2 = require("../models/Step2");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 
 //메인화면을 렌더링하는 함수
@@ -34,6 +36,16 @@ router.get("/aboutus", (req, res, next) => {
 
 router.get("/aboutus", (req, res, next) => {
   res.render("aboutus");
+});
+
+router.get('/connect', isLoggedIn ,async(req, res,next)=>{
+  try{
+      const step1 = await Step1.findOne({p_id:res.locals.user});
+      const step2 = await Step2.findOne({p_id:step1.p_id}).sort('-write_date');
+      res.render('connect',{step1:step1,step2:step2});
+  }catch(err){
+      next(err);
+  }
 });
 
 module.exports = router;

@@ -24,7 +24,7 @@
     <div>
         <h1>내 진료 이력</h1>
         
-            <% if (step2) {%>
+            <% if (step2 !== null && step2.length !== 0) {%>
                 <p>내가 받은 진료 이력입니다.</p>
             <% for(i=0;i< step2.length;i++) { %>
             <table>
@@ -35,12 +35,12 @@
                 <tr>
                     <th>진료 날짜</th>
                     <td><%=moment(step2[i].write_date).format('YYYY년 MM월 DD일')%></td>
-                    <th colspan="2">전문의 공선생</th>
+                    <th colspan="2">전문의 <%=step2[i].Dname ? step2[i].Dname : "기록없음" %></th>
                 </tr>
                 <tr>
                     <th>초진 여부</th>
                     <td><%=step2[i].treat_time%></td>
-                    <th colspan="2" rowspan="2">&nbsp;스트레스를 줄이시고 7-8시간 수면을 취하시고<br>아침 점심 저녁 꼭 챙겨드시길 바랍니다.</th>
+                    <th colspan="2" rowspan="2"><%=step2[i].description ? step2[i].description : "기록없음" %></th>
                 </tr>
                 <tr>
                     <th>진료 과목</th>
@@ -54,8 +54,9 @@
                 </tr>
             </table>
             <br><br>
-                <%}}else{%>
-                    <h2>나띵</h2>
+                <%} %>
+                <%}else{%>
+                    <h2>진료기록이 없습니다.</h2>
                 <%}%>
         <nav class="col-8">
             <% 

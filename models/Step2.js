@@ -15,6 +15,12 @@ var step2Schema = mongoose.Schema({
       type: String,
       required : [true,'*(필수) 증상내용을 적어주세요.'],
     },
+    Dname:{
+      type:String,
+  },
+    description:{
+      type:String
+    },
     write_date : { type: Date, default:Date.now }
 });
 

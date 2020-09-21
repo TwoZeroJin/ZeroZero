@@ -16,7 +16,7 @@ const RedisStore = require("connect-redis")(session);
 const logger = require("./logger");
 
 // const sanitizeHtml = require('sanitize-html');
-// const html = "<script>location.href='나중에 사용할 주소'</script>"
+// const html = "<script>TEST</script>";
 
 // Router
 const indexRouter = require("./routes");
