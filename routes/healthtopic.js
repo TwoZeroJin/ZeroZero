@@ -15,8 +15,9 @@ router.get('/', function(req, res, next) {
 
             coronaTag.each(function(i, elem){                     // li의 갯수만큼 반복
                 let coronaObj = { 
-                    _text : $(this).find("strong").text(),      //<strong>태그의 텍스트를 가져오고
-                    _num :$(this).find("span").text()           //<span>태그의 텍스트를 가져와서
+                    _text   : $(this).find("strong").text(),      //<strong>태그의 텍스트를 가져오고
+                    _num    : $(this).find("span.num").text(),       //<span>태그의 텍스트를 가져와서
+                    _before : $(this).find("span.before").text()
                 }
                 coronaArr.push(coronaObj);          // 배열로 만듦
             });
