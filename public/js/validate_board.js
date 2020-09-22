@@ -5,7 +5,7 @@ $(function () {
     blur: function () {
       let title = $("#title").val();
       if (title.length === 0 || title === null) {
-        $("#noTitle").css({ color: "red" }).text("제목을 작성해 주세요");
+        $("#noTitle").css({ color: "red" }).text("제목을 작성해 주세요.");
         flag1 = false;
       }
     },
@@ -18,7 +18,7 @@ $(function () {
     blur: function () {
       let content = $("#content").val();
       if (content.length === 0 || content === null) {
-        $("#noContent").css({ color: "red" }).text("내용을 작성해 주세요");
+        $("#noContent").css({ color: "red" }).text("내용을 작성해 주세요.");
         flag2 = false;
       }
     },
@@ -29,7 +29,7 @@ $(function () {
   });
   $("#canSubmit").click(function (e) {
     if (!(flag1 && flag2)) {
-      alert("메시지를 확인해주세요");
+      alert("메시지를 확인해주세요.");
       e.preventDefault();
     }
   });

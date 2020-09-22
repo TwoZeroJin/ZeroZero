@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 // 몽고디비에 연결
 const connect = () => {
   if (process.env.NODE_ENV !== 'production') {

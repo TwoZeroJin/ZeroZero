@@ -4,12 +4,23 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const passport = require("passport");
 const Patient = require("../models/patients");
+const Step1 = require("../models/Step1");
+const Step2 = require("../models/Step2");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
+const Qna = require("../models/qna");
 const healthInfo = "http://www.cdc.go.kr/gallery.es?mid=a20509000000&bid=0007"; //질병관리청 페이지
 
 //메인화면을 렌더링하는 함수
-router.get("/", (req, res, next) => {
-  axios.get(healthInfo).then(html2 => {
+router.get("/", async (req, res, next) => {
+  const qna = await Qna.find()
+    .sort("-createdAt")
+    .populate("reg_id")
+    .limit(5)
+    .exec();
+
+  axios
+  .get(healthInfo)
+  .then(html2 => {
      
     /* 질병관리청 이달의 건강소식 */
      const infoArr = [];
@@ -22,7 +33,7 @@ router.get("/", (req, res, next) => {
          }
          infoArr.push(infoObj);
      })
-    res.render('index',{ infoArr : infoArr});
+    res.render('index',{qna:qna, infoArr : infoArr});
   });
 });
 
@@ -51,6 +62,16 @@ router.get("/aboutus", (req, res, next) => {
 
 router.get("/aboutus", (req, res, next) => {
   res.render("aboutus");
+});
+
+router.get('/connect', isLoggedIn ,async(req, res,next)=>{
+  try{
+      const step1 = await Step1.findOne({p_id:res.locals.user});
+      const step2 = await Step2.findOne({p_id:step1.p_id}).sort('-write_date');
+      res.render('connect',{step1:step1,step2:step2});
+  }catch(err){
+      next(err);
+  }
 });
 
 module.exports = router;

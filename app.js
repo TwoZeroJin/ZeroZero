@@ -10,14 +10,11 @@ const passport = require("passport");
 const connect = require("./models");
 const flash = require("connect-flash");
 
-const helmet = require("helmet");
 const hpp = require("hpp");
-const redis = require("redis");
-const RedisStore = require("connect-redis")(session);
 const logger = require("./logger");
 
 // const sanitizeHtml = require('sanitize-html');
-// const html = "<script>location.href='나중에 사용할 주소'</script>"
+// const html = "<script>TEST</script>";
 
 // Router
 const indexRouter = require("./routes");
@@ -48,9 +45,8 @@ app.set("view engine", "ejs");
 connect();
 
 //미들 웨어 정리
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") { // Heroku 사용시, NODE_ENV가 production으로 바뀜
   app.use(morgan("combined"));
-  app.use(helmet());
   app.use(hpp());
 } else {
   app.use(morgan("dev"));

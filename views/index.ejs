@@ -313,35 +313,24 @@
               </div>
               <div class="col-md-4">
                 <h3>게시판</h3>
-                <h4>
-                  <a href="#">Morbi imperdiet, leo in interdum pretium.</a>
-                </h4>
-                <time class="date" datetime="2015-02-18"
-                  >February 18, 2015</time
-                >
-                <h4>
-                  <a href="#"
-                    >Donec orci ante, porta vel nulla quis, aliquet hendrerit
-                    leo.</a
-                  >
-                </h4>
-                <time class="date" datetime="2015-02-12"
-                  >February 12, 2015</time
-                >
-                <h4><a href="#">Suspendisse egestas vulputate luctus.</a></h4>
-                <time class="date" datetime="2015-02-06">February 6, 2015</time>
-                <h4>
-                  <a href="#"
-                    >Quisque varius ante lorem, eget pretium purus hendrerit a
-                    egestas.
-                  </a>
-                </h4>
-                <time class="date" datetime="2015-02-02">February 2, 2015</time>
-                <h4><a href="#">Phasellus in augue risus. </a></h4>
-                <time class="date" datetime="2015-01-23">January 23, 2015</time>
-                <div class="btn-holder">
-                  <a href="/qna" class="btn btn-link">게시판</a>
-                </div>
+
+                <% if(qna == null || qna.length == 0){ %>
+                  <tr>
+                    <td colspan=5> 게시글이 없습니다. </td>
+                  </tr>
+                <% } %>
+                <% qna.forEach(function(qna) { %>
+                  <tr>
+                    <td>
+                      <a href="/qna/<%= qna._id %>"><div><%= qna.title %></div></a>   
+                      <!-- <div class="ellipsis">작성자 : <%= qna.reg_id ? qna.reg_id.p_id : "" %></div> -->
+                    </td>
+                    <td class="date">
+                      <span data-date="<%= qna.createdAt %>"></span>
+                    </td>
+                  </tr>
+                <% }) %> 
+
               </div>
             </div>
           </div>
