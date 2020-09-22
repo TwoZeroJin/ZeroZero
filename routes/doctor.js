@@ -35,7 +35,6 @@ router.post("/login", async(req, res, next) => {
                 console.error(loginError);
                 return next(loginError);
               }
-              console.log(user);
               return res.redirect("/doctor");
             });
           })(req, res, next);
