@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>원격 의료 매칭 서비스, 아만닥</title>
@@ -113,15 +112,16 @@
 
         체중: <%= step1.weight %> <br>
         
-        <% if (step1.history == '') { %> 과거병력: 해당없음
+        <% if (step1.history == '' || step1.history == ' ') { %> 과거병력: 해당없음
         <% } else { %> 과거병력: <%= step1.history %> <% } %> <br> 
 
-        <% if (step1.family_member == '') { %> 가족력: 해당없음
+        <% if (step1.family_member == '' || step1.family_member == ' ') { %> 가족력: 해당없음
         <% } else { %> 가족력: <%= step1.family_member %> <%= step1.family_disease %> <% } %> <br>
 
-        <% if (step1.drug == '') { %> 복용약: 해당없음
+        <% if (step1.drug == '' || step1.drug == ' ') { %> 복용약: 해당없음
         <% } else { %> 복용약: <%= step1.drug %> <% } %> <br> 
-        음주: <%= step1.drink_week %> <%= step1.drink_cnt %> <br>
+        <% if (step1.drink_week == '해당없음') { %> 음주: <%= step1.drink_week %> <br>
+        <% } else {%> 음주: <%= step1.drink_week %> <%= step1.drink_cnt %> <br> <% } %>
         담배: <%= step1.smoke_cnt %>
       </div>
       <div>
@@ -132,7 +132,6 @@
       </div>
     <% } %>
     </div>
-    <a href="javascript:history.back();">뒤로가기</a>
     <div id="room-selection-container" class="centered">
       <input id="room-input" type="hidden" value="1234"/>
       <input name="p_id" type="hidden" value="<%=user._id%>"/>
@@ -146,6 +145,7 @@
         <h5>의사화면</h5>
         <video id="remote-video" autoplay="autoplay"></video>
     </div>
+    <button><a href="javascript:history.back();">뒤로가기</a></button>
     <button><a href="/">메인으로</a></button>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
