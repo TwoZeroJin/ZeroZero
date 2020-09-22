@@ -93,6 +93,9 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
         console.error(loginError);
         return next(loginError);
       }
+      if (user.gubun === 2){
+        return res.redirect("/doctor");
+      }
       return res.redirect("/");
     });
   })(req, res, next);
