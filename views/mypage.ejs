@@ -182,16 +182,17 @@
               </div>
               <!-- 내 정보 div 끝 -->
 
-              <div class="mypage-table" id="changeMyInfo">
+              <!-- 내 정보 변경하기 div -->
+              <div class="changeInfo-table" id="changeMyInfo">
                 <h3>내 정보 변경하기</h3>
                 <table>
                   <tr>
                     <th>전화번호 변경</th>
                   </tr>
                   <tr>
-                    <th>새 전화번호</th>
+                    <td>새 전화번호</td>
                   </tr>
-                  <tr>
+                  <tr colspan="2">
                     <form method="post" action="/mypage/<%=user.p_id%>/phone">
                       <td>
                         <input
@@ -200,7 +201,7 @@
                           id="ph_no"
                           class="checkPhone"
                           value="<%= user.ph_no %>"
-                        /><input
+                        /><input class="btn btn-primary-1"
                           type="submit"
                           id="canSubmit"
                           value="변경하기"
@@ -212,28 +213,30 @@
                       ></span>
                     </form>
                   </tr>
+
                   <tr>
                     <th>주소 변경</th>
                   </tr>
                   <tr>
-                    <th>새 주소</th>
+                    <td>새 주소</td>
                   </tr>
-                  <tr>
+                  <tr colspan="2">
                     <form method="post" action="/mypage/<%=user.p_id%>/address">
                       <td>
                         <input
                           type="text"
                           name="addr"
                           value="<%= user.addr %>"
-                        /><input type="submit" value="변경하기" />
+                        /><input type="submit" class="btn btn-primary-1" value="변경하기" />
                       </td>
                     </form>
                   </tr>
+
                   <tr>
                     <th>이메일 변경</th>
                   </tr>
                   <tr>
-                    <th>새 이메일</th>
+                    <td>새 이메일</td>
                   </tr>
                   <tr>
                     <form method="post" action="/mypage/<%=user.p_id%>/email">
@@ -245,6 +248,7 @@
                           value="<%= user.email %>"
                           class="checkEmail"
                         /><input
+                        class="btn btn-primary-1"
                           type="submit"
                           id="canSubmit"
                           value="변경하기"
@@ -276,14 +280,13 @@
                 </form>
               </div>
               <!--회원 탈퇴하기 div의 끝 -->
+              <a href="/mypage">개인 정보</a>
+              <a href="/mypage/mytreat">진료 기록</a>
             </div>
           </div>
         </div>
       </section>
 
-      <a href="/mypage">개인 정보</a>
-      <a href="/mypage/mytreat">진료 기록</a>
-      <a href="/">메인으로</a>
       <script src="js/jquery-1.11.2.min.js"></script>
       <script src="js/jquery.main.js"></script>
       <script src="js/validate.js"></script>

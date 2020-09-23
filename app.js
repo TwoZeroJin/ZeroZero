@@ -26,7 +26,6 @@ const commentRouter = require("./routes/comments");
 const connectRouter = require("./routes/connect");
 const healthTopic = require("./routes/healthtopic");
 const doctorRouter = require("./routes/doctor");
-const youtube = require("./routes/youtube");
 dotenv.config();
 
 //dotenv보다 밑에 있어야함
@@ -45,7 +44,8 @@ app.set("view engine", "ejs");
 connect();
 
 //미들 웨어 정리
-if (process.env.NODE_ENV === "production") { // Heroku 사용시, NODE_ENV가 production으로 바뀜
+if (process.env.NODE_ENV === "production") {
+  // Heroku 사용시, NODE_ENV가 production으로 바뀜
   app.use(morgan("combined"));
   app.use(hpp());
 } else {
@@ -93,7 +93,6 @@ app.use("/comments", commentRouter);
 app.use("/connect", connectRouter);
 app.use("/healthtopic", healthTopic);
 app.use("/doctor", doctorRouter);
-app.use("/youtube", youtubeRouter);
 
 io.on("connection", (socket) => {
   socket.on("join", (roomId) => {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>원격 의료 매칭 서비스, 아만닥</title>
+    <link rel="stylesheet" href="/css/all.css" />
 </head>
 <style>
     table,th,td{
@@ -22,10 +23,10 @@
 </style>
 <body>
     <div>
-        <h1>내 진료 이력</h1>
+        <h2>내 진료 이력</h2>
         
             <% if (step2 !== null && step2.length !== 0) {%>
-                <p>내가 받은 진료 이력입니다.</p>
+                <h5>내가 받은 진료 이력입니다.</h5>
             <% for(i=0;i< step2.length;i++) { %>
             <table>
                 <tr>
@@ -90,7 +91,7 @@
         $(function(){
             $("#print").click(e=>{
                 e.preventDefault();
-                alert('처방전이 출력되었습니다!');
+                alert('등록된 MY약국으로 처방전을 보냈습니다.');
             })
         })
     </script>

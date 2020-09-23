@@ -58,6 +58,7 @@
             <div class="heading-holder">
           <div class="ellipsis">
             <h3>게시판</h3>
+            <h5>글 작성 및 댓글 기능은 로그인 후 이용하실 수 있습니다.</h5>
             <colgroup>
               <col style="width: 8%;">
               <col style="width: 74%;">
@@ -74,17 +75,17 @@
               <th scope="col" class="date">작성일</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style="margin : 20px 0;">
             <% if(qna == null || qna.length == 0){ %>
               <tr>
-                <td colspan=5> 게시글이 없습니다. </td>
+                <td colspan=5 style="text-align : center"> 게시글이 없습니다. </td>
               </tr>
             <% } %>
             <% qna.forEach(function(qna) { %>
               <tr>
                 <td class="numId"><%= qna.numId %></td>
                 <td class="title">
-                  <a href="/qna/<%= qna._id %>"><div><%= qna.title %></div></a>
+                  <a href="/qna/<%= qna._id %>"><%= qna.title %></a>
                   <% if(qna.commentCount){ %>
                     <small>(<%= qna.commentCount %>)</small>
                   <% } %>
