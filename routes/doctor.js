@@ -65,7 +65,7 @@ router.post("/description",async(req,res,next)=>{
   },{upsert:true});
   return res.send(`<script>
   alert('진료가 완료되었습니다.');
-  location.href="/";
+  location.href="/doctor";
   </script>`);
 });
 // 로그아웃

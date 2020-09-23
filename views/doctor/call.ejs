@@ -113,18 +113,18 @@
     <br><br><br>
     <div>
     <h2>의사 소견 입력란</h2>
-    <form action="/doctor/description" method="post">
+   <form action="/doctor/description" method="post">
       <textarea name="description"></textarea>
       <input type="hidden" name="Dname" value="<%=user.name%>"/>
       <% if (step2) {%>
       <input type="hidden" id="_id" name="_id" value="<%=step2._id%>"/>
       <% } %>
-      <input type="submit" class="isCheck" value="소견 작성하기"/>
+      <input type="submit" class="isCheck" value="소견 작성하기"/> 
     </form>
   </div>
     <div>
       <form action="/doctor/call" method="post">
-        환자명 : <input type="text" name="p_id">
+        환자 아이디 : <input type="text" name="p_id">
         <button type="submit">조회</button>
       </form>
       <%if (step2){%>
