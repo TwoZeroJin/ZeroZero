@@ -107,7 +107,8 @@
                     <td><%= user.ph_no %></td>
                     <th>과거 병력</th>
                     <% if (step1) {%>
-                    <td><%= step1.history %></td>
+                      <% if (step1.history == '' || step1.history == '') { %> <td>해당없음</td>
+                        <% } else { %> <td><%= step1.history %> </td><% } %> 
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -117,10 +118,8 @@
                     <td><%= user.addr %></td>
                     <th>가족력</th>
                     <% if (step1) {%>
-                    <td>
-                      관계 : <%= step1.family_member %> 병명 : <%=
-                      step1.family_disease%>
-                    </td>
+                      <% if (step1.family_member == '' || step1.family_member == ' ' ) { %> <td>해당없음</td>
+                        <% } else { %> <td><%= step1.family_member %> <%= step1.family_disease %> </td><% } %> 
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -130,7 +129,8 @@
                     <td><%= user.email %></td>
                     <th>복용중인 약물</th>
                     <% if (step1) {%>
-                    <td><%= step1.drug %></td>
+                      <% if (step1.drug == '' || step1.drug == ' ') { %> <td> 해당없음 </td>
+                        <% } else { %> <td> <%= step1.drug %> <% } %> </td>
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -145,7 +145,8 @@
                     </td>
                     <th>음주</th>
                     <% if (step1) {%>
-                    <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
+                      <% if (step1.drink_week == '해당없음') { %> <td><%= step1.drink_week %> </td>
+                      <% } else {%>  <td> <%= step1.drink_week %> <%= step1.drink_cnt %> </td> <% } %>
                     <%}else{%>
                     <td></td>
                     <%}%>
