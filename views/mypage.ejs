@@ -265,23 +265,23 @@
               </div>
               <!--내 정보 변경 div의 끝-->
 
-              <div class="mypage-table" id="deleteMyId">
+              <div class="deleteId" id="deleteMyId">
                 <h3>탈퇴하기</h3>
                 <form method="post" action="/mypage/<%=user.p_id%>">
-                  <h4>비밀번호 입력</h4>
+                  <h4>현재 비밀번호를 입력하시면 탈퇴됩니다.</h4>
                   <input type="hidden" name="p_id" value="<%= user.p_id %>" />
-                  <div>
+                  <div style="display: inline-flex;"
+                >
                     <input
                       type="password"
                       name="password"
-                      placeholder="비밀번호가 일치하면 탈퇴됩니다."
+                      placeholder="비밀번호 입력"
                     />
+                    <input type="submit" class="btn btn-primary-1" value="탈퇴하기" />
                   </div>
-                  <input type="submit" value="탈퇴하기" />
                 </form>
               </div>
               <!--회원 탈퇴하기 div의 끝 -->
-              <a href="/mypage">개인 정보</a>
               <a href="/mypage/mytreat">진료 기록</a>
             </div>
           </div>
