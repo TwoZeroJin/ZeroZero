@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>원격 의료 매칭 서비스, 아만닥</title>
-    <link rel="stylesheet" href="/css/all.css" />
 </head>
 <style>
     table,th,td{
@@ -23,10 +22,10 @@
 </style>
 <body>
     <div>
-        <h2>내 진료 이력</h2>
+        <h1>내 진료 이력</h1>
         
             <% if (step2 !== null && step2.length !== 0) {%>
-                <h5>내가 받은 진료 이력입니다.</h5>
+                <p>내가 받은 진료 이력입니다.</p>
             <% for(i=0;i< step2.length;i++) { %>
             <table>
                 <tr>
@@ -41,7 +40,7 @@
                 <tr>
                     <th>초진 여부</th>
                     <td><%=step2[i].treat_time%></td>
-                    <th colspan="2" rowspan="2"><%=step2[i].description ? step2[i].description : "기록없음" %></th>
+                    <th colspan="2" rowspan="2"><p class="desc"><%=step2[i].description ? step2[i].description : "기록없음" %></p></th>
                 </tr>
                 <tr>
                     <th>진료 과목</th>
@@ -51,7 +50,7 @@
                     <th>증상</th>
                     <td><%=step2[i].disease_desc%></td>
                     <th>처방전</th>
-                    <td style="text-align: center;"><button id="print">처방전 출력</button></td>
+                    <td style="text-align: center;"><button class="print">처방전 출력</button></td>
                 </tr>
             </table>
             <br><br>
@@ -89,9 +88,17 @@
     <script src="/js/jquery.main.js"></script>
     <script>
         $(function(){
-            $("#print").click(e=>{
-                e.preventDefault();
-                alert('등록된 MY약국으로 처방전을 보냈습니다.');
+            $(".print").click(e=>{
+                let desc = {};
+                desc = $('.desc').text();
+                console.log(desc);
+                if(desc !== '기록없음'){
+                    e.preventDefault();
+                    alert('처방전이 출력되었습니다!');
+                }else{
+                    e.preventDefault();
+                    alert('처방전이 없습니다.');
+                }    
             })
         })
     </script>
