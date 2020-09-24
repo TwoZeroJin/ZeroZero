@@ -4,7 +4,6 @@ const Qna = require("../models/qna");
 const util = require("../util");
 const Comment = require("../models/comment");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
-const { post } = require("./comments");
 
 // Index
 router.get("/", async (req, res, next) => {
@@ -16,18 +15,6 @@ router.get("/", async (req, res, next) => {
     const skip = (page - 1) * limit;
     const count = await Qna.countDocuments({});
     const maxPage = Math.ceil(count / limit);
-    // const qna = await Qna.find()
-    //   .sort("-createdAt")
-    //   .populate("reg_id")
-    //   .skip(skip)
-    //   .limit(limit)
-    //   .exec();
-    // res.render("board", {
-    //   qna: qna,
-    //   currentPage: page,
-    //   maxPage: maxPage,
-    //   limit: limit,
-    // });
 
     const qna = await Qna.aggregate([ 
       { $lookup: {
@@ -102,10 +89,11 @@ router.get("/:id", function (req, res) {
     errors: {},
   };
 
-  Promise.all([
+  Promise.all([ 
     Qna.findOne({ _id: req.params.id }).populate({
       path: "reg_id",
       select: "p_id",
+      commentCount: { $size: '$comments'}
     }),
     Comment.find({ post: req.params.id })
       .sort("createdAt")
@@ -126,6 +114,7 @@ router.get("/:id", function (req, res) {
       return res.json(err);
     });
 });
+
 //edit
 router.get("/:id/edit", isLoggedIn, async (req, res, next) => {
   const qna = await Qna.findOne({ _id: req.params.id }, function (err, post) {

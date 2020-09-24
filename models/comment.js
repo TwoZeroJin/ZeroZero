@@ -24,13 +24,6 @@ const commentSchema = new Schema({
     isDeleted:{type:Boolean},
     createdAt:{type:Date, default:Date.now},
     updatedAt:{type:Date},
-    },{
-        toObject:{virtuals:true}
 });
-
-commentSchema.virtual('childComments') //4
-  .get(function(){ return this._childComments; })
-  .set(function(value){ this._childComments=value; });
-
 
 module.exports = mongoose.model('Comment', commentSchema);
