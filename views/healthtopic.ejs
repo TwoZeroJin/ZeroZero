@@ -57,6 +57,7 @@
         <div class="container">
           <div class="text-block">
             <div class="heading-holder">
+              <<<<<<< HEAD
               <!-- 코로나 확진자 수 크롤링 -->
               <div class="ht-board">
                 <h3>코로나 환자 실시간 현황</h3>
@@ -69,12 +70,7 @@
                     <td class="healthtopic-gr"><%=element._text %></td>
                     <td
                       colspan="2"
-                      style="
-                        width: 200px;
-                        display: inline;
-                        color: #333;
-                        font-weight: 900;
-                      "
+                      style="display: inline; color: #333; font-weight: 900"
                     >
                       <%=element._num %>&nbsp;<span
                         style="
@@ -99,6 +95,20 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
+
+              <!-- 코로나 확진자 수 크롤링 -->
+              <h3>코로나 환자 실시간 현황</h3>
+              <table class="board-table">
+                <% coronaArr.forEach(function(element) { %>
+                <tr>
+                  <td><%=element._text %></td>
+                  <td>
+                    <%=element._num %>
+                    <span style="font-size: small"><%=element._before %></span>
+                  </td>
+                </tr>
+                <% }) %>
+              </table>
 
               <!-- 건강정보 크롤링 -->
               <div>

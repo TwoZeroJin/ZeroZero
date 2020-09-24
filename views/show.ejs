@@ -142,10 +142,15 @@
     
 
             <!-- 여기부터 댓글 show -->
+<<<<<<< HEAD
+            <div>
+            <h4>댓글</h4><small>(<%= qna.commentCount %>)</small>
+=======
             
             <div class="comment">
             <h4>댓글</h4>
             <div class="comment-each">
+>>>>>>> e950b881c433b27be1a686162753699be6a85ce2
             <% if(comments.length){ %>
               <div class="show-comment">
                 <hr>
@@ -175,6 +180,8 @@
                         <% if(isAuthenticated && comment.commenter && user.id ==
                         comment.commenter._id){ %>
                           <small>
+<<<<<<< HEAD
+=======
                           <a
                             href="javascript:void(0)"
                             onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
@@ -185,11 +192,23 @@
                             action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
                             method="post" style="display: contents;"
                           >
+>>>>>>> e950b881c433b27be1a686162753699be6a85ce2
                             <a
                               href="javascript:void(0)"
-                              onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
-                              >삭제</a>
-                          </form>
+                              onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
+                              $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
+                              >수정</a>
+                            |
+                            <form
+                              action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
+                              method="post"
+                              class="d-inline"
+                            >
+                              <a
+                                href="javascript:void(0)"
+                                onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
+                                >삭제</a>
+                            </form>
                           </small>
                         <% } %>
                       </div>

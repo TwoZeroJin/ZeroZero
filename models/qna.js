@@ -35,6 +35,8 @@ const qnaSchema = new Schema({
   updatedAt: { type: Date },
 });
 
+
+//조회수 증가 및 글넘버 counter 모델에 저장. 
 qnaSchema.pre("save", async function (next) {
   let qna = this;
   if (qna.isNew) {
