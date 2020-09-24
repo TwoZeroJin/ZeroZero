@@ -93,7 +93,7 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
         console.error(loginError);
         return next(loginError);
       }
-      if (user.gubun === 2){
+      if (user.gubun === 2) {
         return res.redirect("/doctor");
       }
       return res.redirect("/");
@@ -110,7 +110,7 @@ router.post("/findId", async (req, res, next) => {
     if (patient) {
       let findId = patient.p_id;
       let message = `찾으시는 아이디는 \'${findId}\' 입니다.`;
-      return res.render("findId", { message: message });
+      return res.render("logjoin/findId", { message: message });
     } else {
       return res.send(`<script>
             alert('일치하는 회원이 없습니다.');
@@ -126,7 +126,7 @@ router.post("/findPwd", async (req, res, next) => {
   try {
     const patient = await Patient.findOne({ p_id: p_id, ph_no: ph_no });
     if (patient) {
-      return res.render("newPwd", { p_id: patient.p_id });
+      return res.render("logjoin/newPwd", { p_id: patient.p_id });
     } else {
       return res.send(`<script>
             alert('일치하는 회원이 없습니다.');
