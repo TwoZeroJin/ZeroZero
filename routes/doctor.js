@@ -9,6 +9,11 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 
 router.get('/', (req, res, next) => {
     const message = req.flash("message");
+    if(res.locals.user.gubun !== 2){
+      return res.send(`
+            <script>alert('해당 페이지를 이용하실 수 없습니다.')
+            location.href="/"</script>`)
+    }
     res.render("doctor/index", {message : message});
 });
 

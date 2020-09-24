@@ -108,7 +108,7 @@ $(function(){
             flag6 = true;
         }
 })
-    $("#canSubmit").click(function(e){
+    $(".canSubmit").click(function(e){
         if(!(flag1&&flag2&&flag3&&flag4&&flag5&&flag6)){
             alert('메시지를 확인해주세요.');
             e.preventDefault();
