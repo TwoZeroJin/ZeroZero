@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body>
+    <section class="visual">
+      <div class="container">
+        <div class="text-block3">
+          <section class="login-form">
+            <h1><img src="/images/logo.svg" style="width: 260px" /></h1>
+            <h2>아이디 찾기</h2>
+            <%if (!message) {%>
+            <form action="auth/findId" method="post">
+              <div class="int-area">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  autocomplete="off"
+                  required
+                /><label for="name">이름</label>
+              </div>
+              <div class="int-area">
+                <input
+                  type="text"
+                  name="ph_no"
+                  id="ph_no"
+                  autocomplete="off"
+                  required
+                /><label for="ph_no">전화번호</label>
+              </div>
+              <div class="btn-area">
+                <button id="btn" type="submit">아이디 찾기</button>
+              </div>
+              <%}else{%>
+              <p><%=message%></p>
+              <button id="close">닫기</button>
+              <%}%>
+            </form>
+          </section>
+        </div>
+      </div>
+    </section>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script>
+      $(function () {
+        $("#close").click((e) => {
+          e.preventDefault();
+          window.close();
+        });
+      });
+    </script>
+  </body>
+</html>

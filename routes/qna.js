@@ -16,24 +16,29 @@ router.get("/", async (req, res, next) => {
     const count = await Qna.countDocuments({});
     const maxPage = Math.ceil(count / limit);
 
-    const qna = await Qna.aggregate([ 
-      { $lookup: {
-          from: 'patients',
-          localField: 'reg_id',
-          foreignField: '_id',
-          as: 'reg_id'
-      } },
-      { $unwind: '$reg_id' }, 
-      { $sort : { createdAt: -1 } },
-      { $skip: skip }, 
+    const qna = await Qna.aggregate([
+      {
+        $lookup: {
+          from: "patients",
+          localField: "reg_id",
+          foreignField: "_id",
+          as: "reg_id",
+        },
+      },
+      { $unwind: "$reg_id" },
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
       { $limit: limit },
-      { $lookup: { 
-          from: 'comments',
-          localField: '_id',
-          foreignField: 'post',
-          as: 'comments'
-      } },
-      { $project: { 
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "post",
+          as: "comments",
+        },
+      },
+      {
+        $project: {
           title: 1,
           reg_id: {
             p_id: 1,
@@ -41,8 +46,9 @@ router.get("/", async (req, res, next) => {
           views: 1,
           numId: 1,
           createdAt: 1,
-          commentCount: { $size: '$comments'}
-      } },
+          commentCount: { $size: "$comments" },
+        },
+      },
     ]).exec();
     res.render("board", {
       qna: qna,
@@ -50,7 +56,6 @@ router.get("/", async (req, res, next) => {
       maxPage: maxPage,
       limit: limit,
     });
-
   } catch (err) {
     console.error(err);
     next(err);
@@ -59,7 +64,7 @@ router.get("/", async (req, res, next) => {
 
 //new
 router.get("/new", isLoggedIn, function (req, res) {
-  res.render("new");
+  res.render("board/new");
 });
 
 //create
@@ -89,11 +94,11 @@ router.get("/:id", function (req, res) {
     errors: {},
   };
 
-  Promise.all([ 
+  Promise.all([
     Qna.findOne({ _id: req.params.id }).populate({
       path: "reg_id",
       select: "p_id",
-      commentCount: { $size: '$comments'}
+      commentCount: { $size: "$comments" },
     }),
     Comment.find({ post: req.params.id })
       .sort("createdAt")
@@ -102,7 +107,7 @@ router.get("/:id", function (req, res) {
     .then(([qna, comments]) => {
       qna.views++;
       qna.save();
-      res.render("show", {
+      res.render("board/show", {
         qna: qna,
         comments: comments,
         commentForm: commentForm,
@@ -120,7 +125,7 @@ router.get("/:id/edit", isLoggedIn, async (req, res, next) => {
   const qna = await Qna.findOne({ _id: req.params.id }, function (err, post) {
     if (err) return res.json(err);
   });
-  res.render("edit", { qna });
+  res.render("board/edit", { qna });
 });
 
 // update
@@ -136,7 +141,7 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
   res.redirect("/qna/" + req.params.id);
 });
 
-// destroy
+// destroyc
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   const qna = await Qna.deleteOne({ _id: req.params.id }, function (err) {
     if (err) return res.json(err);

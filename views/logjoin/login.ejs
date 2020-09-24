@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/head') %>
+  <body>
+    <div id="wrapper">
+      <%- include('../partials/nav') %>
+      <section class="visual">
+        <div class="container">
+          <div class="text-block3">
+            <section class="login-form">
+              <h1><img src="images/logo.svg" style="width: 260px" /></h1>
+              <p>로그인</p>
+              <form method="post" action="/auth/login">
+                <div class="int-area" style="display: inline-grid">
+                  <input
+                    type="text"
+                    name="p_id"
+                    id="p_id"
+                    autocomplete="off"
+                    required
+                  /><label for="id">아이디</label>
+                </div>
+                <div class="int-area" style="display: inline-grid">
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    autocomplete="off"
+                    required
+                  /><label for="password">비밀번호</label>
+                </div>
+                <div>
+                  <% if(message) {%>
+                  <p>
+                    <span style="color: red; font-size: 12px"
+                      ><%=message%></span
+                    >
+                  </p>
+                  <% }%>
+                </div>
+                <div class="col-md-12 form-group" style="display: inline-block">
+                  <label for="f-option" style="font-size: small"
+                    >로그인 정보 기억하기</label
+                  >
+                  <input type="checkbox" id="f-option" name="selector" />
+                </div>
+                <div class="btn-area">
+                  <button id="btn" type="submit">로그인</button>
+                  <br />
+                  <hr />
+                  <a href="/auth/kakao"
+                    ><img
+                      src="images/kakao_login_medium_wide.jpg"
+                      width="300px"
+                      height="45px"
+                  /></a>
+                </div>
+                <div class="caption">
+                  <a href="" class="findId">아이디를 잊으셨나요?</a> |
+                  <a href="" class="findPwd">비밀번호를 잊으셨나요?</a> |
+                  <a href="/join">회원가입</a>
+                </div>
+              </form>
+            </section>
+            <script>
+              let id = $("#p_id");
+              let pw = $("#password");
+              let btn = $("#btn");
+              $(btn).on("click", function () {
+                if ($(id).val() == "") {
+                  $(id).next("label").addClass("warning");
+                  setTimeout(function () {
+                    $("label").removeClass("warning");
+                  }, 1500);
+                } else if ($(pw).val() == "") {
+                  $(pw).next("label").addClass("warning");
+                }
+              });
+            </script>
+          </div>
+        </div>
+      </section>
+      <%- include('../partials/footer') %>
+    </div>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.main.js"></script>
+    <script>
+      $(function () {
+        $(".findId").click((e) => {
+          e.preventDefault;
+          window.open(
+            "findId",
+            "findId",
+            "width=510,height=610,left=300,top=50"
+          );
+        });
+        $(".findPwd").click((e) => {
+          e.preventDefault;
+          window.open(
+            "findPwd",
+            "findPwd",
+            "width=510,height=610,left=300,top=50"
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

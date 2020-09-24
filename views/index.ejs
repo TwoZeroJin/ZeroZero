@@ -1,55 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>원격 의료 매칭 서비스, 아만닥</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <meta name="msapplication-TileColor" content="#3867d6" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link
-      rel="stylesheet"
-      href="fonts/font-awesome-4.3.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="css/all.css" />
-    <link
-      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
+  <%- include('./partials/head') %>
   <body>
     <div id="wrapper">
-      <header id="header">
-        <div class="container">
-          <div class="logo">
-            <a href="/"><img src="images/logo.svg" alt="아만닥" /></a>
-          </div>
-          <nav id="nav">
-            <a href="#" class="nav-opener"><span></span></a>
-            <div class="opener-holder">
-              <% if (user) { %>
-              <p>반갑습니다! <%= user.name %> 님</p>
-              <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
-              <a href="/auth/logout" class="btn btn-primary rounded"
-                >로그아웃</a
-              >
-              <% }else{ %>
-              <a href="/login" class="btn btn-primary rounded">로그인</a>
-              <a href="/join" class="btn btn-primary rounded">회원가입</a>
-              <% } %>
-            </div>
-            <div class="nav-drop">
-              <ul>
-                <li><a href="/aboutus">소개</a></li>
-                <li><a href="/healthtopic">의학정보</a></li>
-                <li><a href="/qna">게시판</a></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </header>
+      <%- include('./partials/nav') %>
       <section class="visual">
         <div class="container">
           <div class="text-block">
@@ -66,12 +20,6 @@
       </section>
       <section class="main">
         <div class="container">
-          <!--<div class="step-btn">
-            <a href="/question/step1">
-              <button class="btn-a">예진표 작성하기</button>
-            </a>
-          </div>-->
-
           <div class="row" style="margin-top: 50px">
             <div class="text-box col-md-offset-1 col-md-10">
               <h3>비대면 진료 서비스, 아만닥</h3>
@@ -279,7 +227,13 @@
               <div class="col-md-4">
                 <h3>의학정보</h3>
                 <% for ( let i=0; i < 5; i++ ) { %>
-                  <h4><a href="http://www.cdc.go.kr/<%=infoArr[i]._addr%>" target="_blank"><%= infoArr[i]._title %></a></h4>
+                <h4>
+                  <a
+                    href="http://www.cdc.go.kr/<%=infoArr[i]._addr%>"
+                    target="_blank"
+                    ><%= infoArr[i]._title %></a
+                  >
+                </h4>
                 <% } %>
                 <div class="btn-holder">
                   <a href="/healthtopic" class="btn btn-link"
@@ -315,68 +269,28 @@
                 <h3>게시판</h3>
 
                 <% if(qna == null || qna.length == 0){ %>
-                  <tr>
-                    <td colspan=5> 게시글이 없습니다. </td>
-                  </tr>
-                <% } %>
-                <% qna.forEach(function(qna) { %>
-                  <tr>
-                    <td>
-                      <a href="/qna/<%= qna._id %>"><div><%= qna.title %></div></a>   
-                      <!-- <div class="ellipsis">작성자 : <%= qna.reg_id ? qna.reg_id.p_id : "" %></div> -->
-                    </td>
-                    <td class="date">
-                      <span data-date="<%= qna.createdAt %>"></span>
-                    </td>
-                  </tr>
-                <% }) %> 
-
+                <tr>
+                  <td colspan="5">게시글이 없습니다.</td>
+                </tr>
+                <% } %> <% qna.forEach(function(qna) { %>
+                <tr>
+                  <td>
+                    <a href="/qna/<%= qna._id %>"
+                      ><div><%= qna.title %></div></a
+                    >
+                    <!-- <div class="ellipsis">작성자 : <%= qna.reg_id ? qna.reg_id.p_id : "" %></div> -->
+                  </td>
+                  <td class="date">
+                    <span data-date="<%= qna.createdAt %>"></span>
+                  </td>
+                </tr>
+                <% }) %>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <footer id="footer">
-        <div class="container">
-          <div class="footer-holder">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="logo">
-                  <a href="#"><img src="images/logo.svg" alt="amandoc" /></a>
-                </div>
-                <p>아무때나 만나는 내 손 안의 닥터</p>
-              </div>
-              <div class="col-md-2">
-                <h4>Navigation</h4>
-                <ul>
-                  <li><a href="/aboutus">소개</a></li>
-                  <li><a href="/healthtopic">의학정보</a></li>
-                  <li><a href="/qna">게시판</a></li>
-                </ul>
-              </div>
-              <div class="col-md-3">
-                <div class="text-holder">
-                  <strong class="phone"
-                    ><a href="tel:0282821111">02 8282 1111</a></strong
-                  >
-                  <span class="available">고객상담시간 : 12PM - 18PM</span>
-                  <h4>아만닥</h4>
-                  <address>
-                    아만빌딩 10F, <br />
-                    서울특별시 종로구 종로 55 종로 55
-                  </address>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="text-frame">
-                  <h4>Info</h4>
-                  <p>COPYRIGHT(C) 2020 AMANDOC. <br />ALL RIGHTS RESERVED.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <%- include('./partials/footer') %>
     </div>
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/bootstrap.js"></script>
