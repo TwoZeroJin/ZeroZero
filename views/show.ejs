@@ -117,7 +117,8 @@
                 </div>
 
             </div> <!-- Heading-holder의 끝 -->
-            
+          
+
             <!-- 목록 / 수정 / 삭제 button show -->
             <div class="show-btn">
               <a class="btn btn-primary-1" href="/qna">목록으로</a>
@@ -139,7 +140,7 @@
 
             <!-- 여기부터 댓글 show -->
             <div>
-            <h4>댓글</h4>
+            <h4>댓글</h4><small>(<%= qna.commentCount %>)</small>
             <% if(comments.length){ %>
               <div class="show-comment">
                 <% comments.forEach(function(comment) { %>
@@ -169,22 +170,22 @@
                         <% if(isAuthenticated && comment.commenter && user.id ==
                         comment.commenter._id){ %>
                           <small>
-                          <a
-                            href="javascript:void(0)"
-                            onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
-                            $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
-                            >수정</a>
-                          |
-                          <form
-                            action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
-                            method="post"
-                            class="d-inline"
-                          >
                             <a
                               href="javascript:void(0)"
-                              onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
-                              >삭제</a>
-                          </form>
+                              onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
+                              $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
+                              >수정</a>
+                            |
+                            <form
+                              action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
+                              method="post"
+                              class="d-inline"
+                            >
+                              <a
+                                href="javascript:void(0)"
+                                onclick="confirm('삭제하시겠습니까?')?this.parentElement.submit():null;"
+                                >삭제</a>
+                            </form>
                           </small>
                         <% } %>
                       </div>

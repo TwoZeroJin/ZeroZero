@@ -1,4 +1,4 @@
-// DOM elements.
+// DOM 객체 선언
 const roomSelectionContainer = document.getElementById('room-selection-container')
 const roomInput = document.getElementById('room-input')
 const connectButton = document.getElementById('connect-button')
@@ -7,7 +7,7 @@ const videoChatContainer = document.getElementById('video-chat-container')
 const localVideoComponent = document.getElementById('local-video')
 const remoteVideoComponent = document.getElementById('remote-video')
 
-// Variables.
+// 변수 선언
 const socket = io()
 const mediaConstraints = {
   audio: true,
@@ -19,7 +19,7 @@ let isRoomCreator
 let rtcPeerConnection // Connection between the local device and the remote peer.
 let roomId
 
-// Free public STUN servers provided by Google.
+// STUN 서버 iceCandidate 설정 (메인 p2p 접속 실패시 STUN 서버 사용하여 연결)
 const iceServers = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
@@ -30,12 +30,12 @@ const iceServers = {
   ],
 }
 
-// BUTTON LISTENER ============================================================
+// 버튼 리스너
 connectButton.addEventListener('click', () => {
   joinRoom(roomInput.value)
 })
 
-// SOCKET EVENT CALLBACKS =====================================================
+// 룸 생성 콜백 함수
 socket.on('room_created', async () => {
   console.log('Socket event callback: room_created')
 
@@ -44,6 +44,7 @@ socket.on('room_created', async () => {
   
 })
 
+//룸 참가 콜백 함수
 socket.on('room_joined', async () => {
   console.log('Socket event callback: room_joined')
 
@@ -51,12 +52,14 @@ socket.on('room_joined', async () => {
   socket.emit('start_call', roomId)
 })
 
+//룸에 인원 가득 찼을시 함수_ 2명
 socket.on('full_room', () => {
   console.log('Socket event callback: full_room')
 
   alert('The room is full, please try another one')
 })
 
+//연결 접수 신청
 socket.on('start_call', async () => {
   console.log('Socket event callback: start_call')
 
@@ -69,6 +72,7 @@ socket.on('start_call', async () => {
   }
 })
 
+//webrtc 연결 요청
 socket.on('webrtc_offer', async (event) => {
   console.log('Socket event callback: webrtc_offer')
 
@@ -82,16 +86,18 @@ socket.on('webrtc_offer', async (event) => {
   }
 })
 
+//webrtc 연결 응답
 socket.on('webrtc_answer', (event) => {
   console.log('Socket event callback: webrtc_answer')
 
   rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
 })
 
+//webrtc ice_candidate 연결
 socket.on('webrtc_ice_candidate', (event) => {
   console.log('Socket event callback: webrtc_ice_candidate')
 
-  // ICE candidate configuration.
+  // ICE candidate 설정
   var candidate = new RTCIceCandidate({
     sdpMLineIndex: event.label,
     candidate: event.candidate,

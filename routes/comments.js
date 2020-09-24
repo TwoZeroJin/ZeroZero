@@ -53,7 +53,7 @@ router.delete('/:id', isLoggedIn, checkPermission, checkPostId, function(req, re
 
 module.exports = router;
 
-// private functions
+// private functions ( 댓글 입력자와 로그인 유저와 일치 하는지 확인)
 function checkPermission(req, res, next){ // 1
   Comment.findOne({_id:req.params.id}, function(err, comment){
     if(err) return res.json(err);
@@ -64,7 +64,7 @@ function checkPermission(req, res, next){ // 1
   });
 }
 
-// private functions
+// private functions ( postId 일치 여부 확인)
 function checkPostId(req, res, next){ // 1
   Qna.findOne({_id:req.query.postId},function(err, post){
     if(err) return res.json(err);
