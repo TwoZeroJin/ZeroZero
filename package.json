@@ -1,7 +1,7 @@
 {
-  "name": "kin",
+  "name": "cheerio-httpcli",
   "version": "1.0.0",
-  "description": "",
+  "description": "<<<<<<< HEAD \"# amandoc\"  \"# amandoc\"  ======= # amandoc >>>>>>> 1fbfa51ec3b47328b79339ee9d10f3e2e1959948",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,6 @@
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "connect-flash": "^0.1.1",
-    "connect-redis": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.2",
     "csurf": "^1.11.0",
@@ -40,5 +39,14 @@
     "socket.io-client": "^2.3.0",
     "uuid": "^8.3.0",
     "winston": "^3.3.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amandoc/amandoc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Amandoc/amandoc/issues"
+  },
+  "homepage": "https://github.com/Amandoc/amandoc#readme"
 }

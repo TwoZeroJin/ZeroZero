@@ -49,11 +49,17 @@ type="text/css"
     <div class="widget-area no-padding blank">
       <div class="status-upload">
         <form>
-        <textarea placeholder="댓글을 작성하세요" name="text"><%= (commentForm._id == comment._id)?commentForm.form.text:comment.text %></textarea>
+        <textarea placeholder="댓글을 작성하세요" name="text" style="border: none;"><%= (commentForm._id == comment._id)?commentForm.form.text:comment.text %></textarea>
           <div>
             <% if(comment._id){ %>
-              <button type="submit" class="btn btn-primary-1">수정</button>
-              <a href="javascript:void(0)" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">삭제</a>
+              <button type="submit" class="btn btn-primary-1" style="
+              float: left;
+              margin-bottom: 10px;
+          ">수정</button>
+              <button class="btn btn-primary-1" style="
+              float: left;
+              margin-bottom: 10px;
+          "><a href="javascript:void(0)" style="color: white;" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">삭제</a></button>
               <% } else { %>
                 <button type="submit" class="btn btn-success green">등록하기</button>
                 <% } %>

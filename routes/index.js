@@ -4,6 +4,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const passport = require("passport");
 const Patient = require("../models/patients");
+const Step1 = require("../models/Step1");
+const Step2 = require("../models/Step2");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 const Qna = require("../models/qna");
 const healthInfo = "http://www.cdc.go.kr/gallery.es?mid=a20509000000&bid=0007"; //질병관리청 페이지
@@ -15,7 +17,6 @@ router.get("/", async (req, res, next) => {
     .populate("reg_id")
     .limit(5)
     .exec();
-
   axios
   .get(healthInfo)
   .then(html2 => {

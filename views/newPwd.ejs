@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>새 비밀번호</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <meta name="msapplication-TileColor" content="#3867d6" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="/fonts/font-awesome-4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/all.css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
+    <section class="visual">
+        <div class="container">
+            <div class="text-block3">
+                <section class="login-form">
+                    <h1><img src="/images/logo.svg" style="width: 260px"/></h1>
+                    <h2>새 비밀번호</h2>
+                    <form action="/auth/newPwd" method="post">
+                        <div class="int-area">
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                autocomplete="off"
+                                required
+                            /><label for="password">새 비밀번호</label>
+                            <div class="int-area">
+                                <input
+                                  type="password"
+                                  name="rePass"
+                                  id="rePass"
+                                  autocomplete="off"
+                                  required
+                                /><label for="rePass">새 비밀번호 확인</label>
+                            </div>
+                            <div class="btn-area">
+                                <input type="hidden" name="p_id" value="<%=p_id%>">
+                                <button id="btn" type="submit">비밀번호 변경</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
     <h2>새 비밀번호</h2>
         <form action="/auth/newPwd" method="post">
         새 비밀번호 : <input type="password" name="password" id="password"><br>

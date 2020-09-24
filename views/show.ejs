@@ -29,13 +29,18 @@
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
         <script src="/js/boardscript.js"></script>
         <style>
-          .comment-edit,
           .comment-edit-enabled .comment-show {
             display: none;
           }
-          .comment-edit-enabled .comment-edit {
+
+          .comment-edit {
+            display : none;
+          }
+
+          .comment-edit-enabled {
             display: inherit;
           }
+
         </style>
     </head>
     <body>
@@ -77,8 +82,6 @@
             <div class="heading-holder">
               <div class="ellipsis">
                 <h3>게시판</h3>
-
-
                 <table class="show-table">
                   <colgroup>
                     <col style="width: 80%;">
@@ -88,19 +91,18 @@
                     <tr>
                       <td class="tit">
                         <span><%= qna.title %></span>
+                          <div style="font-size : 14px; display:contents; color:#888">
+                         &nbsp; <span >조회</span>  <span><%= qna.views %></span></div> <!-- 제목 상단 조회수-->
                       </td>
-                      <td class="data"><p wrap="virtual"> <span data-date-time="<%= qna.createdAt %>"></p></span></td>
+                      <td class="data"><p wrap="virtual"> <span data-date-time="<%= qna.createdAt %>"></span></p></td>
                     </tr>
+                    <tr>
                       <td class="textus" colspan="2">
-                        <p>
-                        <%= qna.content %></td>
-                        </p>
+                        <p><%= qna.content %></p>
                         <td class="show-user">
                           <span>작성자</span> : <%= qna.reg_id ? qna.reg_id.p_id : "" %>
-                          <span>조회수</span> : <span><%= qna.views %></span>
-                          </td>
-                      <tr>
-                        
+                        </td>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -126,8 +128,8 @@
               <a class="btn btn-primary-1" href="/qna/<%= qna._id %>/edit">수정</a>
               <form
                 action="/qna/<%= qna._id %>?_method=delete"
-                method="post"
-                class="d-inline">
+                method="post" 
+                >
                 <a
                   class="btn btn-primary-1"
                   href="javascript:void(0)"
@@ -137,39 +139,60 @@
               </form>
               <% } %>
             </div>
+    
 
             <!-- 여기부터 댓글 show -->
+<<<<<<< HEAD
             <div>
             <h4>댓글</h4><small>(<%= qna.commentCount %>)</small>
+=======
+            
+            <div class="comment">
+            <h4>댓글</h4>
+            <div class="comment-each">
+>>>>>>> e950b881c433b27be1a686162753699be6a85ce2
             <% if(comments.length){ %>
               <div class="show-comment">
+                <hr>
                 <% comments.forEach(function(comment) { %>
-                <div class="border-top">
+                <div class="show-comment">
                   <% if(comment.isDeleted){ %>
-                  <div>(삭제된 댓글입니다.)</div>
+                  <p style="color: rgb(175, 175, 175); margin: 20px 0;">(삭제된 댓글입니다.)</p>
                   <% } else { %>
-
                     <!-- 삭제가 안됐으면 댓글 보여줌( id, 내용, 날짜, 수정 / 삭제 버튼) -->
                     <div class="show-comment">
-                      <%= comment.commenter.p_id %></div>
+                      작성자 : <%= comment.commenter.p_id %></div>
                       <div id="comment-<%= comment._id %>">
                       <!-- class="<%= (commentError._id == comment._id)?'comment-edit-enabled':'' %>" --> 
                       
                       <div class="comment-show">
                         <p><%= comment.text %></p>
-
+                        <br>
                         <!-- 댓글 작성 시간 -->
-                        <small>(
+                        <small>
                         <span data-date-time=" <%= comment.createdAt %>"></span>
-                        <% if(comment.updatedAt){ %> |(수정됨):
+                        <% if(comment.updatedAt){ %> | 수정됨:
                           <span data-date-time="<%= comment.updatedAt %>"></span>
-                          <% } %> )
+                          <% } %> 
                         </small>
-
+                        
                         <!-- small 수정 / 삭제 -->
                         <% if(isAuthenticated && comment.commenter && user.id ==
                         comment.commenter._id){ %>
                           <small>
+<<<<<<< HEAD
+=======
+                          <a
+                            href="javascript:void(0)"
+                            onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
+                            $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')"
+                            >수정</a>
+                          |
+                          <form
+                            action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
+                            method="post" style="display: contents;"
+                          >
+>>>>>>> e950b881c433b27be1a686162753699be6a85ce2
                             <a
                               href="javascript:void(0)"
                               onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
@@ -210,7 +233,7 @@
 
 
       <!-- 댓글 입력창 -->
-      <div class="widget-area no-padding blank">
+      <div class="widget-area blank">
         <div class="status-upload">
           <%- include('./comment-form', { actionUrl:'/comments?postId=' + qna._id,
           comment: {}, commentForm: commentForm, commentError: commentError, });

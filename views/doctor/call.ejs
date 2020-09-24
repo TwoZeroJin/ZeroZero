@@ -48,7 +48,7 @@
         transform: translate(-50%, -50%);
       }
       #video-chat-container {
-        width: 100%;
+        width: 46%;
         background-color: black;
       }
       #local-video {
@@ -110,9 +110,49 @@
         <h5>의사화면</h5>
         <video id="remote-video" autoplay="autoplay"></video>
     </div>
+    <br><br><br>
+    <div>
+    <h2>의사 소견 입력란</h2>
+   <form action="/doctor/description" method="post">
+      <textarea name="description"></textarea>
+      <input type="hidden" name="Dname" value="<%=user.name%>"/>
+      <% if (step2) {%>
+      <input type="hidden" id="_id" name="_id" value="<%=step2._id%>"/>
+      <% } %>
+      <input type="submit" class="isCheck" value="소견 작성하기"/> 
+    </form>
+  </div>
+    <div>
+      <form action="/doctor/call" method="post">
+        환자 아이디 : <input type="text" name="p_id">
+        <button type="submit">조회</button>
+      </form>
+      <%if (step2){%>
+    <h2>환자 정보</h2>
+    초진 여부 : <%=step2.treat_time%><br>
+    진료 과목 : <%=step2.treat_div%><br>
+    증상 : <%=step2.disease_desc%><br>
+    <%} else {%>
+    <h2>진료 대기중입니다.</h2>
+    <%}%>
+    </div>
+    <button><a href="/doctor/call">나가기</a></button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script type="text/javascript" src="../rts.js"></script>
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/jquery.main.js"></script>
+    <script>
+      $(function(){
+        $('.isCheck').click(e=>{
+          let p_id = $('#_id').val();
+          if(!p_id){
+            e.preventDefault();
+            alert('환자를 검색해주세요');
+          }
+        })
+      })
+    </script>
 </body>
 </html>

@@ -107,7 +107,8 @@
                     <td><%= user.ph_no %></td>
                     <th>과거 병력</th>
                     <% if (step1) {%>
-                    <td><%= step1.history %></td>
+                      <% if (step1.history == '' || step1.history == '') { %> <td>해당없음</td>
+                        <% } else { %> <td><%= step1.history %> </td><% } %> 
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -117,10 +118,8 @@
                     <td><%= user.addr %></td>
                     <th>가족력</th>
                     <% if (step1) {%>
-                    <td>
-                      관계 : <%= step1.family_member %> 병명 : <%=
-                      step1.family_disease%>
-                    </td>
+                      <% if (step1.family_member == '' || step1.family_member == ' ' ) { %> <td>해당없음</td>
+                        <% } else { %> <td><%= step1.family_member %> <%= step1.family_disease %> </td><% } %> 
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -130,7 +129,8 @@
                     <td><%= user.email %></td>
                     <th>복용중인 약물</th>
                     <% if (step1) {%>
-                    <td><%= step1.drug %></td>
+                      <% if (step1.drug == '' || step1.drug == ' ') { %> <td> 해당없음 </td>
+                        <% } else { %> <td> <%= step1.drug %> <% } %> </td>
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -145,7 +145,8 @@
                     </td>
                     <th>음주</th>
                     <% if (step1) {%>
-                    <td><%= step1.drink_week%> <%= step1.drink_cnt %></td>
+                      <% if (step1.drink_week == '해당없음') { %> <td><%= step1.drink_week %> </td>
+                      <% } else {%>  <td> <%= step1.drink_week %> <%= step1.drink_cnt %> </td> <% } %>
                     <%}else{%>
                     <td></td>
                     <%}%>
@@ -182,16 +183,17 @@
               </div>
               <!-- 내 정보 div 끝 -->
 
-              <div class="mypage-table" id="changeMyInfo">
+              <!-- 내 정보 변경하기 div -->
+              <div class="changeInfo-table" id="changeMyInfo">
                 <h3>내 정보 변경하기</h3>
                 <table>
                   <tr>
                     <th>전화번호 변경</th>
                   </tr>
                   <tr>
-                    <th>새 전화번호</th>
+                    <td>새 전화번호</td>
                   </tr>
-                  <tr>
+                  <tr colspan="2">
                     <form method="post" action="/mypage/<%=user.p_id%>/phone">
                       <td>
                         <input
@@ -200,40 +202,42 @@
                           id="ph_no"
                           class="checkPhone"
                           value="<%= user.ph_no %>"
-                        /><input
+                        /><input class="btn btn-primary-1"
                           type="submit"
                           id="canSubmit"
                           value="변경하기"
-                        />
-                      </td>
-                      <span
+                        /><br>
+                        <span
                         style="color: red; font-size: 10px"
                         id="noPhone"
                       ></span>
+                      </td>
                     </form>
                   </tr>
+
                   <tr>
                     <th>주소 변경</th>
                   </tr>
                   <tr>
-                    <th>새 주소</th>
+                    <td>새 주소</td>
                   </tr>
-                  <tr>
+                  <tr colspan="2">
                     <form method="post" action="/mypage/<%=user.p_id%>/address">
                       <td>
                         <input
                           type="text"
                           name="addr"
                           value="<%= user.addr %>"
-                        /><input type="submit" value="변경하기" />
+                        /><input type="submit" class="btn btn-primary-1" value="변경하기" />
                       </td>
                     </form>
                   </tr>
+                  <br>
                   <tr>
                     <th>이메일 변경</th>
                   </tr>
                   <tr>
-                    <th>새 이메일</th>
+                    <td>새 이메일</td>
                   </tr>
                   <tr>
                     <form method="post" action="/mypage/<%=user.p_id%>/email">
@@ -245,15 +249,16 @@
                           value="<%= user.email %>"
                           class="checkEmail"
                         /><input
+                        class="btn btn-primary-1"
                           type="submit"
                           id="canSubmit"
                           value="변경하기"
-                        />
-                      </td>
-                      <span
+                        /><br>
+                        <span
                         style="color: red; font-size: 10px"
                         id="noEmail"
                       ></span>
+                      </td>
                     </form>
                   </tr>
                 </table>
@@ -276,14 +281,13 @@
                 </form>
               </div>
               <!--회원 탈퇴하기 div의 끝 -->
+              <a href="/mypage">개인 정보</a>
+              <a href="/mypage/mytreat">진료 기록</a>
             </div>
           </div>
         </div>
       </section>
 
-      <a href="/mypage">개인 정보</a>
-      <a href="/mypage/mytreat">진료 기록</a>
-      <a href="/">메인으로</a>
       <script src="js/jquery-1.11.2.min.js"></script>
       <script src="js/jquery.main.js"></script>
       <script src="js/validate.js"></script>

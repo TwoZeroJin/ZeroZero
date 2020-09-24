@@ -20,7 +20,7 @@ $(function(){
                         $("#noId").css({"color":"red"}).text("6자 이상, 숫자와 영문자만 됩니다.");
                         flag1 = false;
                     }else{
-                        $("#noId").css({"color":"green"}).text("어썸하네여! ㅎ;");
+                        $("#noId").css({"color":"green"}).text("사용가능한 아이디입니다.");
                         flag1 = true;
                     }
                 },error:(error)=>{
@@ -39,7 +39,7 @@ $(function(){
             $("#noPass").css({"color":"red"}).text("8-16자 숫자와 영문자");
             flag2 = false;
         }else{
-            $("#noPass").css({"color":"green"}).text("사용 가능한 비밀번호 입니다 ~.~");
+            $("#noPass").css({"color":"green"}).text("사용 가능한 비밀번호 입니다.");
             flag2 = true;
         }
     },
@@ -52,7 +52,7 @@ $(function(){
         let password = $("#password").val();
         let rePass = $("#rePass").val();
         if(password != rePass){
-            $("#noRePass").text("비밀번호를 확인해주셈");
+            $("#noRePass").text("비밀번호를 확인해주세요.");
             flag3 = false;
         }
     },
@@ -67,7 +67,7 @@ $(function(){
                 $("#noPhone").css({"color":"red"}).text("올바른 전화번호를 입력하세요.");
                 flag4 = false;
             }else{
-                $("#noPhone").css({"color":"green"}).text("당신의 번호는 이제 제겁니다. zㅅz;");
+                $("#noPhone").css({"color":"green"}).text("");
                 flag4 = true;
         }
     },
@@ -83,7 +83,7 @@ $(function(){
                 $("#noEmail").css({"color":"red"}).text("올바른 이메일을 입력해주세요.");
                 flag5 =  false;
             }else{
-                $("#noEmail").css({"color":"green"}).text("사용 가능한 이메일입니다. ㅎㅅㅎ;");
+                $("#noEmail").css({"color":"green"}).text("");
                 flag5 = true;
             }
         },
@@ -99,7 +99,7 @@ $(function(){
                 $("#noBirth").css({"color":"red"}).text("올바른 생년월일을 입력해주세요.");
                 flag6 =  false;
             }else{
-                $("#noBirth").css({"color":"green"}).text("ㅋ 나이좀 있으시네..");
+                $("#noBirth").css({"color":"green"}).text("");
                 flag6 = true;
             }
         },
@@ -108,9 +108,9 @@ $(function(){
             flag6 = true;
         }
 })
-    $("#canSubmit").click(function(e){
+    $(".canSubmit").click(function(e){
         if(!(flag1&&flag2&&flag3&&flag4&&flag5&&flag6)){
-            alert('메시지를 확인해주세요 ㅎㅎ;');
+            alert('메시지를 확인해주세요.');
             e.preventDefault();
         }
     })
