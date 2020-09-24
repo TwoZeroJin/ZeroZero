@@ -58,7 +58,7 @@
               <h1><img src="images/logo.svg" style="width: 260px" /></h1>
               <p>로그인</p>
               <form method="post" action="/auth/login">
-                <div class="int-area">
+                <div class="int-area" style="display: inline-grid">
                   <input
                     type="text"
                     name="p_id"
@@ -67,7 +67,7 @@
                     required
                   /><label for="id">아이디</label>
                 </div>
-                <div class="int-area">
+                <div class="int-area" style="display: inline-grid">
                   <input
                     type="password"
                     name="password"
@@ -85,7 +85,7 @@
                   </p>
                   <% }%>
                 </div>
-                <div class="col-md-12 form-group" style="float: left">
+                <div class="col-md-12 form-group" style="display: inline-block">
                   <label for="f-option" style="font-size: small"
                     >로그인 정보 기억하기</label
                   >
