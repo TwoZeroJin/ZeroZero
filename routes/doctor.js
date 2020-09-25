@@ -7,7 +7,7 @@ const Step1 = require("../models/Step1");
 const Step2 = require("../models/Step2");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares/middlewares");
 
-router.get('/', (req, res, next) => {
+router.get('/',isLoggedIn,(req, res, next) => {
     const message = req.flash("message");
     if(res.locals.user.gubun !== 2){
       return res.send(`
@@ -56,7 +56,7 @@ router.route('/call')
     const {p_id} = req.body;
     const patient = await Patient.findOne({p_id:p_id});
     const step2 = await Step2.findOne({p_id:patient._id}).sort('-write_date'); 
-    return res.render("doctor/call",{step2:step2});
+    return res.json({step2:step2});
   }catch(err){
     next(err);
   }
