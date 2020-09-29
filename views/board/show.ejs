@@ -32,50 +32,17 @@
           .comment-edit-enabled .comment-show {
             display: none;
           }
-
           .comment-edit {
             display : none;
           }
-
           .comment-edit-enabled {
             display: inherit;
           }
-
         </style>
     </head>
     <body>
       <div id="wrapper">
-        <header id="header">
-          <div class="container">
-            <div class="logo">
-              <a href="/"><img src="/images/logo.svg" alt="아만닥" /></a>
-            </div>
-            <nav id="nav">
-              <a href="#" class="nav-opener"><span></span></a>
-              <div class="opener-holder">
-                <% if (user) { %>
-                <p>반갑습니다! <%= user.name %> 님</p>
-                <a href="/mypage" class="btn btn-primary rounded">마이페이지</a>
-                <a href="/auth/logout" class="btn btn-primary rounded"
-                  >로그아웃</a
-                >
-                <% }else{ %>
-                <a href="/login" class="btn btn-primary rounded">로그인</a>
-                <a href="/join" class="btn btn-primary rounded">회원가입</a>
-                <% } %>
-              </div>
-              <div class="nav-drop">
-                <ul>
-                  <li><a href="/aboutus">소개</a></li>
-                  <li><a href="/healthtopic">의학정보</a></li>
-                  <li><a href="/qna">게시판</a></li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </header>
-
-
+        <%- include('../partials/nav') %>
       <section class="visual">
         <div class="container">
           <div class="text-block">
@@ -142,15 +109,10 @@
     
 
             <!-- 여기부터 댓글 show -->
-<<<<<<< HEAD
-            <div>
-            <h4>댓글</h4><small>(<%= qna.commentCount %>)</small>
-=======
             
             <div class="comment">
             <h4>댓글</h4>
             <div class="comment-each">
->>>>>>> e950b881c433b27be1a686162753699be6a85ce2
             <% if(comments.length){ %>
               <div class="show-comment">
                 <hr>
@@ -180,8 +142,6 @@
                         <% if(isAuthenticated && comment.commenter && user.id ==
                         comment.commenter._id){ %>
                           <small>
-<<<<<<< HEAD
-=======
                           <a
                             href="javascript:void(0)"
                             onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
@@ -192,7 +152,6 @@
                             action="/comments/<%= comment._id %>?postId=<%= qna._id %>&_method=delete"
                             method="post" style="display: contents;"
                           >
->>>>>>> e950b881c433b27be1a686162753699be6a85ce2
                             <a
                               href="javascript:void(0)"
                               onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled');
@@ -224,14 +183,9 @@
                     </div> <!-- show comment div 끝-->
                     <% } %>
                   </div> <!-- 댓글 show 첫번쨰 div 끝 -->
-
                   <!-- 여기까지 댓글 show -->
-
-
                 </div>
               </div>
-
-
       <!-- 댓글 입력창 -->
       <div class="widget-area blank">
         <div class="status-upload">
@@ -243,52 +197,8 @@
     </div>
 
   </section>
-    <footer id="footer">
-      <div class="container">
-        <div class="footer-holder">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="logo">
-                <a href="#"><img src="/images/logo.svg" alt="amandoc" /></a>
-              </div>
-              <p>아무때나 만나는 내 손 안의 닥터</p>
-            </div>
-            <div class="col-md-2">
-              <h4>Navigation</h4>
-              <ul>
-                <li><a href="/">메인페이지</a></li>
-                <li><a href="./aboutus">소개</a></li>
-                <li><a href="/healthtopic">의학정보</a></li>
-                <li><a href="/qna">게시판</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <div class="text-holder">
-                <strong class="phone"
-                  ><a href="tel:0282821111">02 8282 1111</a></strong
-                >
-                <span class="available">고객상담시간 : 12PM - 18PM</span>
-                <h4>아만닥</h4>
-                <address>
-                  아만빌딩 10F, <br />
-                  서울특별시 종로구 종로 55 종로 55
-                </address>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="text-frame">
-                <h4>Info</h4>
-                <p>
-                  Wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper suscipit lobortis nisl ut aliquip ex commodo
-                  consequat. Autem vel hendrerit iriure dolor in hendrerit.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-    </footer>
-  </div>
+  <%- include('../partials/footer') %>
+</div>
   <script src="/js/jquery-1.11.2.min.js"></script>
   <script src="/js/bootstrap.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
