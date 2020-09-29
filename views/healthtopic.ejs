@@ -46,20 +46,6 @@
                 allowfullscreen
               ></iframe>
 
-              <!-- 코로나 확진자 수 크롤링 -->
-              <h3>코로나 환자 실시간 현황</h3>
-              <table class="board-table">
-                <% coronaArr.forEach(function(element) { %>
-                <tr>
-                  <td><%=element._text %></td>
-                  <td>
-                    <%=element._num %>
-                    <span style="font-size: small"><%=element._before %></span>
-                  </td>
-                </tr>
-                <% }) %>
-              </table>
-
               <!-- 건강정보 크롤링 -->
               <div>
                 <h3>이달의 건강소식</h3>
