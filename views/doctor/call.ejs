@@ -116,25 +116,20 @@
    <form action="/doctor/description" method="post">
       <textarea name="description"></textarea>
       <input type="hidden" name="Dname" value="<%=user.name%>"/>
-      <% if (step2) {%>
-      <input type="hidden" id="_id" name="_id" value="<%=step2._id%>"/>
-      <% } %>
+      <input type="hidden" id="_id" name="_id" value=""/>
       <input type="submit" class="isCheck" value="소견 작성하기"/> 
     </form>
   </div>
     <div>
-      <form action="/doctor/call" method="post">
-        환자 아이디 : <input type="text" name="p_id">
-        <button type="submit">조회</button>
-      </form>
-      <%if (step2){%>
-    <h2>환자 정보</h2>
-    초진 여부 : <%=step2.treat_time%><br>
-    진료 과목 : <%=step2.treat_div%><br>
-    증상 : <%=step2.disease_desc%><br>
-    <%} else {%>
-    <h2>진료 대기중입니다.</h2>
-    <%}%>
+        환자 아이디 : <input type="text" id="p_id" name="p_id">
+        <button type="submit" class="userSearch">조회</button>
+        <div>
+          <h2 id="patient_info"></h2>
+          <p id="treat_time"></p><br>
+          <p id="treat_div"></p><br>
+          <p id="disease_desc"></p><br>
+          <h2 id="patient_waiting">진료 대기중입니다.</h2>
+        </div>
     </div>
     <button><a href="/doctor/call">나가기</a></button>
 
@@ -151,6 +146,26 @@
             e.preventDefault();
             alert('환자를 검색해주세요');
           }
+        })
+        $('.userSearch').click(e=>{
+          e.preventDefault();
+          const p_id = $("#p_id").val();
+          $.ajax({
+            url:'/doctor/call',
+            type:'post',
+            data:{p_id:p_id},
+            success:(result)=>{
+              $('#_id').val(result.step2._id);
+              $('#patient_info').text('환자 정보');
+              $('#patient_waiting').text('');
+              $('#treat_time').text('초진 여부 : ' + result.step2.treat_time);
+              $('#treat_div').text('진료 과목 : ' + result.step2.treat_div);
+              $('#disease_desc').text('증상 : ' + result.step2.disease_desc);
+            },
+            error:(error)=>{
+              alert('존재하지 않는 아이디입니다.');
+            }
+          })
         })
       })
     </script>
